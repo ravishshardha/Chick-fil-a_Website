@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+import Menu from './Menu';
+import Customer from './Customer';
 
 function App() {
   return (
@@ -15,10 +17,21 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learning react now 
         </a>
       </header>
+      <div className= "Menupage">
+        <div>
+          <Menu />
+        </div>
+      </div>
+      <div className='Customerpage'>
+        <div>
+          <Customer/>
+        </div>
+      </div>
     </div>
+    
   );
 }
 
