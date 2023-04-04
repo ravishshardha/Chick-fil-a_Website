@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Menu from './Menu';
 import Customer from './Customer';
+import Manager from './Manager';
 
 function App() {
   return (
@@ -29,6 +30,9 @@ function App() {
         <div>
           <Customer/>
         </div>
+      </div>
+      <div className='Managerpage'>
+          <Manager/>
       </div>
     </div>
     
