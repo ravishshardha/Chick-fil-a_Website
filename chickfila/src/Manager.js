@@ -41,7 +41,7 @@ function Extras(){
 
 export default function Manager(){
     return (
-        <div>
+        <div className='manager'>
             <h1>Manager</h1>
             <Orders/>
             <Menu/>

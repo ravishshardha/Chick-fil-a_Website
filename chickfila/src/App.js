@@ -3,6 +3,7 @@ import './App.css';
 import Menu from './Menu';
 import Customer from './Customer';
 import Manager from './Manager';
+import Server from './Server';
 
 function App() {
   return (
@@ -33,6 +34,9 @@ function App() {
       </div>
       <div className='Managerpage'>
           <Manager/>
+      </div>
+      <div className='Serverpage'>
+          <Server/>
       </div>
     </div>
     
