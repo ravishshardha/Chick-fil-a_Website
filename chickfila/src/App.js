@@ -1,8 +1,8 @@
 import './App.css';
-import Menu from './Menu';
-import Customer from './Customer';
-import Manager from './Manager';
-import Server from './Server';
+import Menu from './components/Menu';
+import Customer from './components/Customer';
+import Manager from './components/Manager';
+import Server from './components/Server';
 
 function App() {
   return (

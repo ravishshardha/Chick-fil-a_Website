@@ -2,7 +2,7 @@
 //import './App.css';
 import React from 'react'
 import Table from './MenuTable'
-import './Menu.css';
+import '../css/Menu.css';
 
 
 function Menuheader({title}){

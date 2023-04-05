@@ -1,5 +1,5 @@
 import React from 'react';
-import './Manager.css'
+import '../css/Manager.css'
 
 function Orders(){
     return(

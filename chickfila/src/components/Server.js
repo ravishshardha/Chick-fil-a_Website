@@ -1,5 +1,5 @@
 import React from 'react'
-import './Server.css'
+import '../css/Server.css'
 
 
 export default function Server(){

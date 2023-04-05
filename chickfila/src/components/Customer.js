@@ -1,5 +1,5 @@
 import React from 'react'
-import './Customer.css';
+import '../css/Customer.css';
 
 function Customer() {
     return (
