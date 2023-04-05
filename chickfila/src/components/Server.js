@@ -19,34 +19,47 @@ const menuitems = [
     }
 ]
 
+function SidePanel() {
+    return (
+        <nav className="side-panel">
+            <ul>
+                <li><a href="#">Entrees</a></li>
+                <li><a href="#">Sides</a></li>
+                <li><a href="#">Drinks</a></li>
+                <li><a href="#">Extras</a></li>
+            </ul>
+        </nav>
+    );
+}
+
 // this is our order information
 let order = []
 let total = 0.00;
 
-function addToOrder(id, name, price){
-    let temp = {id: id, name: name, price: price};
+function addToOrder(id, name, price) {
+    let temp = { id: id, name: name, price: price };
     total += price;
     order.push(temp);
     updateAddOrderList(name, price);
 }
 
-function OrderSummary(){
+function OrderSummary() {
     const listItems = order.map(item =>
-        <li key= {item.id}>
+        <li key={item.id}>
             <p>{item.name}......{item.price}</p>
         </li>
     )
 
-    return(
+    return (
         <div className='ServerOrderSummary'>
             <ul id='ServerOrderList'>{listItems}</ul>
         </div>
     );
 }
 
-function updateAddOrderList(name, price){
+function updateAddOrderList(name, price) {
     // update total
-    document.getElementById('OrderTotal').innerHTML = "TOTAL = $" + Math.round(total * 100)/100;
+    document.getElementById('OrderTotal').innerHTML = "TOTAL = $" + Math.round(total * 100) / 100;
 
     var ul = document.getElementById("ServerOrderList");
     var li = document.createElement("li");
@@ -54,12 +67,12 @@ function updateAddOrderList(name, price){
     ul.appendChild(li);
 }
 
-function ServerButton(){
+function ServerButton() {
     const listItems = menuitems.map(item =>
         <button key= {item.id} className='ServerButton'
-           onClick={() => addToOrder(item.id, item.text, item.price)}
+        onClick={() => addToOrder(item.id, item.text, item.price)}
         >
-                {item.text} ${item.price}
+            {item.text} ${item.price}
         </button>
     )
     return (
@@ -77,23 +90,21 @@ function clearOrder(){
     ul.innerHTML = '';
 }
 
-function ScrollingButtons(){
+function ScrollingButtons() {
     return (
         <div className='ServerScrollingButtons'>
             <p>TODO, make buttons capable of being dynamically allocated</p>
             <div>
-                <ServerButton
-                    text={'Testbutton'}
-                    price={5.99}
-                />
+                <ServerButton/>
             </div>
         </div>
     );
 }
 
 
-export default function Server(){
-    return(
+
+export default function Server() {
+    return (
         <div className='ServerMain'>
             <h1>Server</h1>
             <div>Order Summary:</div>
@@ -102,6 +113,7 @@ export default function Server(){
             <ScrollingButtons/>
             <button className='ServerClearOrder' onClick={clearOrder}>Clear Order</button>
             <button className='ServerFinishAndPay'>Finish & Pay</button>
+            <SidePanel/>
         </div>
     );
 }
