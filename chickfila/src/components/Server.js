@@ -14,8 +14,6 @@ export default function Server(){
             <p>Type type type type</p>
             <p>Type type type type</p>
             <p>Finally there are enough rows so you can see the scroll.</p>
-
-
         </div>
     );
 }
