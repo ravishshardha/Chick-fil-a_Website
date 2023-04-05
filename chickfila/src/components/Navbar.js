@@ -1,5 +1,7 @@
 import React from 'react'
 import chickfilalogo from '../resources/chickfilalogo.png'
+import { Nav, NavLink, NavMenu } 
+    from "./NavbarElements";
 // import {
 //     Nav,
 //     NavLink,
@@ -27,7 +29,9 @@ export default function Navbar (){
                     height={60}
                 ></img>
                 <button>accessibility</button>
-                <button>home</button>
+                <NavLink to="/" activeStyle>
+                    Home
+                </NavLink>
             </div> 
         </nav>
     );
