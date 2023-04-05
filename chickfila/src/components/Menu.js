@@ -26,11 +26,19 @@ function Menu() {
     <div className="MenuMain">
       <header className="Menu-header">
         <Menuheader title={"Chick-fil-a menu"}/>
-        <p>Here you can find all items on the chick-fil-a menu</p>
+      </header>
+      <div className='MenuMainContent'>
+        <h3>Here you can find all items on the chick-fil-a menu</h3>
         <Menutable>
+          {/* This is filler table until we get it hooked up to the backend */}
+          <Table/>
+          <Table/>
+          <Table/>
+          <Table/>
+          <Table/>
           <Table/>
         </Menutable>
-      </header>
+      </div>
     </div>
   );
 }

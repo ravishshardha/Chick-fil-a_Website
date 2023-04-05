@@ -1,5 +1,8 @@
 .ManagerMain {
-    height: 300px;
+    height: 40vw;
     overflow-y: scroll;
     background-color: white;
+    outline-style: solid;
+    outline-width: 3px;
+    outline-color: black;
 }

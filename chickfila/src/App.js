@@ -3,10 +3,12 @@ import Menu from './components/Menu';
 import Customer from './components/Customer';
 import Manager from './components/Manager';
 import Server from './components/Server';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <div className="App">
+      <div> <Navbar/> </div>
       <div className= "Menupage">
         <div>
           <Menu />

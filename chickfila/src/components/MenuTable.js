@@ -27,8 +27,8 @@ export default function MenuTable(){
         </li>
     )
     return(
-      <p>
-        return <ul>{listItems}</ul>
-      </p>
+      <div className='MenuTable'>
+        <ul>{listItems}</ul>
+      </div>
     );
   }
