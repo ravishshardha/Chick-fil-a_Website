@@ -107,13 +107,19 @@ export default function Server() {
     return (
         <div className='ServerMain'>
             <h1>Server</h1>
-            <div>Order Summary:</div>
-            <OrderSummary/>
-            <p id='OrderTotal'>TOTAL = $0.00</p>
-            <ScrollingButtons/>
-            <button className='ServerClearOrder' onClick={clearOrder}>Clear Order</button>
-            <button className='ServerFinishAndPay'>Finish & Pay</button>
-            <SidePanel/>
+            <div className='ServerMain orderSummary'>
+                <div>Order Summary:</div>
+                <OrderSummary/>
+                <p id='OrderTotal'>TOTAL = $0.00</p>
+            </div>
+            <div className='ServerMain buttons'>
+                <ScrollingButtons/>
+                <button className='ServerClearOrder' onClick={clearOrder}>Clear Order</button>
+                <button className='ServerFinishAndPay'>Finish & Pay</button>
+            </div>
+            <div className='ServerMain sidePanel'>
+                <SidePanel/>
+            </div>
         </div>
     );
 }

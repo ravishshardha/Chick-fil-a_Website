@@ -1,10 +1,26 @@
 .ServerMain {
+    width: 100%;
     height: 40vw;
     overflow-y: scroll;
     background-color: white;
     outline-style: solid;
     outline-width: 3px;
     outline-color: black;
+}
+
+.ServerMain.orderSummary {
+    width: 30%;
+    float: right;
+}
+
+.ServerMain.buttons {
+    width: 50%;
+    float:right;
+}
+
+.ServerMain.sidePanel {
+    width: 20%;
+    float: left;
 }
 
 .side-panel {
