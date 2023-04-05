@@ -2,7 +2,7 @@
 //import './App.css';
 import React from 'react'
 import Table from './MenuTable'
-
+import './Menu.css';
 
 
 function Menuheader({title}){
@@ -23,7 +23,7 @@ function Menutable({children}){
 
 function Menu() {
   return (
-    <div className="Menu">
+    <div className="MenuMain">
       <header className="Menu-header">
         <Menuheader title={"Chick-fil-a menu"}/>
         <p>Here you can find all items on the chick-fil-a menu</p>

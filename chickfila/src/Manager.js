@@ -1,4 +1,5 @@
 import React from 'react';
+import './Manager.css'
 
 function Orders(){
     return(
@@ -41,7 +42,7 @@ function Extras(){
 
 export default function Manager(){
     return (
-        <div className='manager'>
+        <div className='ManagerMain'>
             <h1>Manager</h1>
             <Orders/>
             <Menu/>
