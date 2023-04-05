@@ -1,7 +1,5 @@
 import React from 'react'
 import '../css/Server.css'
-import chickfilalogo from '../resources/chickfilalogo.png'
-
 // hardcoded for now
 const menuitems = [
     {
@@ -23,24 +21,43 @@ const menuitems = [
 
 // this is our order information
 let order = []
+let total = 0.00;
+
+function addToOrder(id, name, price){
+    let temp = {id: id, name: name, price: price};
+    total += price;
+    order.push(temp);
+    updateAddOrderList(name, price);
+}
 
 function OrderSummary(){
-    const listItems = menuitems.map(item =>
+    const listItems = order.map(item =>
         <li key= {item.id}>
             <p>{item.name}......{item.price}</p>
         </li>
     )
+
     return(
         <div className='ServerOrderSummary'>
-            <ul>{listItems}</ul>
+            <ul id='ServerOrderList'>{listItems}</ul>
         </div>
     );
 }
 
+function updateAddOrderList(name, price){
+    // update total
+    document.getElementById('OrderTotal').innerHTML = "TOTAL = $" + Math.round(total * 100)/100;
+
+    var ul = document.getElementById("ServerOrderList");
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode(name + '......' + price));
+    ul.appendChild(li);
+}
+
 function ServerButton(){
     const listItems = menuitems.map(item =>
-        <button className='ServerButton'
-           // onClick={}
+        <button key= {item.id} className='ServerButton'
+           onClick={() => addToOrder(item.id, item.text, item.price)}
         >
                 {item.text} ${item.price}
         </button>
@@ -50,6 +67,14 @@ function ServerButton(){
             {listItems}
         </div>
     );
+}
+
+function clearOrder(){
+    order = [];
+    total = 0.00;
+    document.getElementById('OrderTotal').innerHTML = "TOTAL = $0.00"; 
+    var ul = document.getElementById("ServerOrderList");
+    ul.innerHTML = '';
 }
 
 function ScrollingButtons(){
@@ -66,22 +91,17 @@ function ScrollingButtons(){
     );
 }
 
+
 export default function Server(){
     return(
         <div className='ServerMain'>
             <h1>Server</h1>
-            <p>This is some filler code so we can see how this cool scroll deal works. </p>
-            <p>Pretty rad. Anyways, filler filler filler filler filler, fill fill fill fill fill</p>
-            <p>La la la la words words words. Typed Typed blah blah blah</p>
-            <p>Writing here, and there, and over here, and over there.</p>
-            <p>Type type type type</p>
-            <p>Type type type type</p>
-            <p>Type type type type</p>
-            <p>Finally there are enough rows so you can see the scroll.</p>
             <div>Order Summary:</div>
             <OrderSummary/>
+            <p id='OrderTotal'>TOTAL = $0.00</p>
             <ScrollingButtons/>
-            
+            <button className='ServerClearOrder' onClick={clearOrder}>Clear Order</button>
+            <button className='ServerFinishAndPay'>Finish & Pay</button>
         </div>
     );
 }
