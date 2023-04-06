@@ -14,10 +14,17 @@
     color:white;
 }
 
+.scrollingTable {
+    width:70%;
+    height: 20vw;
+    overflow-y: scroll;
+    margin: auto;
+}
+
 /*---------------------managerOrders section----------------------------*/
 
 .managerOrders {
-    height: 15vw;
+    height: 40vw;
 }
 
 .managerOrders.manage {
@@ -33,7 +40,7 @@
 /*---------------------managerMenu section----------------------------*/
 
 .managerMenu {
-    height: 15vw;
+    height: 40vw;
 }
 
 .managerMenu.manage {
@@ -49,7 +56,7 @@
 /*---------------------managerInventory section----------------------------*/
 
 .managerInventory {
-    height: 15vw;
+    height: 40vw;
 }
 
 .managerInventory.manage {
@@ -65,7 +72,7 @@
 /*---------------------managerExtras section----------------------------*/
 
 .managerExtras {
-    height: 15vw;
+    height: 40vw;
 }
 
 .managerExtras.manage {
