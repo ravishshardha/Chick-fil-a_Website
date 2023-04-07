@@ -1,5 +1,6 @@
 import React from 'react';
 import '../css/Manager.css'
+//import './connectToDB'
 
 function Orders(){
     return(
