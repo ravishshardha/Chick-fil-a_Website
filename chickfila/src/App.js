@@ -1,24 +1,45 @@
-import logo from './logo.svg';
 import './App.css';
+import Menu from './components/Menu';
+import Customer from './components/Customer';
+import Manager from './components/Manager';
+import Server from './components/Server';
+import Navbar from './components/Navbar';
+import HomePage from './components/Homepage';
+import { BrowserRouter as Router, Routes, Route}
+    from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+    <Navbar />
+    <Routes>
+        <Route exact path='/' exact element={<HomePage />} />
+        <Route path='/customer' element={<Customer/>} />
+        <Route path='/manager' element={<Manager/>} />
+        <Route path='/menu' element={<Menu/>} />
+        <Route path='/server' element={<Server/>} />
+    </Routes>
+    </Router>
+      {/* <div> <Navbar/> </div>
+      <div className= "Menupage">
+        <div>
+          <Menu />
+        </div>
+      </div>
+      <div className='Customerpage'>
+        <div>
+          <Customer/>
+        </div>
+      </div>
+      <div className='Managerpage'>
+          <Manager/>
+      </div>
+      <div className='Serverpage'>
+          <Server/>
+      </div> */}
     </div>
+    
   );
 }
 

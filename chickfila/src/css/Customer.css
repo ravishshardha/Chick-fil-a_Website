@@ -1,0 +1,60 @@
+.CustomerMain {
+    width: 100%;
+    height: 40vw;
+    overflow-y: scroll;
+    background-color: white;
+    outline-style: solid;
+    outline-width: 3px;
+    outline-color: black;
+}
+
+.CustomerMain.orderSummary {
+    width: 30%;
+    float: right;
+}
+
+.CustomerMain.buttons {
+    width: 50%;
+    float:right;
+}
+
+.CustomerMain.sidePanel {
+    width: 20%;
+    float: left;
+}
+
+.side-panel {
+    top: 0;
+    left: 0;
+    width: 25vw;
+    height: 40vw;
+    background-color: #F8F8F8;
+    border-right: 1px solid #CCCCCC;
+}
+
+.side-panel ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.side-panel li {
+    margin: 0;
+    padding: 0;
+}
+
+/*buttons on side panel*/
+.side-panel li a {
+display: block;
+    padding: 2vw;
+    margin-bottom: 0px;
+    width: 25vw;
+    text-align: center;
+    color: #333333;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.side-panel li a:hover {
+    background-color: #CCCCCC;
+}
