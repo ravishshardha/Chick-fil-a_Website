@@ -101,8 +101,6 @@ function ScrollingButtons() {
     );
 }
 
-
-
 export default function Server() {
     return (
         <div className='ServerMain'>
