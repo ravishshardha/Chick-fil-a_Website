@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-scroll";
-import chickfilalogo from "../../resources/chickfilalogo.png";
 import Container from "react-bootstrap/esm/Container";
 
 
@@ -33,7 +32,7 @@ function NavBar() {
       <nav className="customer-nav-bar">
         <div className="customer-nav-bar-menu-items">
           {menuItems.map((it) => (
-            <span className="customer-nav-bar-menu-item">
+            <span key={it.name} className="customer-nav-bar-menu-item">
               <Link to={it.link} smooth={true} duration={1000}>
                 {it.name}
               </Link>
