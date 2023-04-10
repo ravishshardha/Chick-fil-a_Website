@@ -1,14 +1,15 @@
 .ManagerMain {
     width:100%;
     height: 40vw;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     background-color: white;
     outline-style: solid;
-    outline-width: 3px;
     outline-color: black;
 }
 
 .ManagerMain.header {
+    margin-top: 0vw;
+    margin-bottom:0vw;
     background-color:#E51636;
     height:3vw;
     color:white;
@@ -24,12 +25,13 @@
 /*---------------------managerOrders section----------------------------*/
 
 .managerOrders {
-    height: 40vw;
+    height: 30vw;
 }
 
 .managerOrders.manage {
     width:50%;
     float:right;
+    background-color:rgba(200, 200, 200, .6)
 }
 
 .managerOrders.viewTable {
@@ -40,12 +42,13 @@
 /*---------------------managerMenu section----------------------------*/
 
 .managerMenu {
-    height: 40vw;
+    height: 30vw;
 }
 
 .managerMenu.manage {
     width:50%;
     float:right;
+    background-color:rgba(200, 200, 200, .6)
 }
 
 .managerMenu.viewTable {
@@ -56,12 +59,13 @@
 /*---------------------managerInventory section----------------------------*/
 
 .managerInventory {
-    height: 40vw;
+    height: 30vw;
 }
 
 .managerInventory.manage {
     width:50%;
     float:right;
+    background-color:rgba(200, 200, 200, .6)
 }
 
 .managerInventory.viewTable {
@@ -72,12 +76,13 @@
 /*---------------------managerExtras section----------------------------*/
 
 .managerExtras {
-    height: 40vw;
+    height: 30vw;
 }
 
 .managerExtras.manage {
     width:50%;
     float:right;
+    background-color:rgba(200, 200, 200, .6)
 }
 
 .managerExtras.viewTable {

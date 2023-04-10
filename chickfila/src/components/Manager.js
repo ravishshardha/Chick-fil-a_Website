@@ -81,6 +81,12 @@ function Orders(){
             <div className='managerOrders manage'>
                 <h2>Orders</h2>
                 <p>[TODO: should be able to view x and z reports]</p>
+                <label>Start Date: </label>
+                <input type="datetime-local"></input> <br></br> <br></br>
+                <label>End Date: </label>
+                <input type="datetime-local"></input> <br></br><br></br>
+                <button>Generate z report</button>
+                <button>Generate x report</button>
                 <p>[TODO: should be able to manage orders here]</p>
             </div>
                 <div className='managerOrders viewTable'>
@@ -102,6 +108,9 @@ function Menu(){
             <div className='managerMenu manage'>
                 <h2>Menu Items</h2>
                 <p>[TODO: Manager should be able to edit the menu over here]</p>
+                <h3>Add Seasonal Item</h3>
+                <label>Item Name: </label><input type="textbox"></input> <br></br> <br></br>
+                <label>Ingredients: </label><input type="textbox"></input>
             </div>
             <div className='managerMenu viewTable'>
                 <p>[TODO fill with table of menu items, similar to menu view, but populated with more information]</p>
@@ -140,6 +149,8 @@ function Extras(){
             <div className='managerExtras manage'>
                 <h2>Extra Controls</h2>
                 <p>[TODO: Manager has access to extra controls here]</p>
+                <button>Generate What Sales Together</button> <br></br> <br></br>
+                <button>Generate Restock Report</button>
             </div>
             <div className='managerExtras viewTable'>
                 <p>Extra controls for manager, on previous project this was What sales together and Excess report.</p>
