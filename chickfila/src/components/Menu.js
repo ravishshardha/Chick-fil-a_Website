@@ -113,6 +113,8 @@ const menuitems = [
   },
 ];
 
+var showOrderButton = false;
+
 const MenuItem = ({menuTitle, menuItems, menuId, addToOrder}) => {
   return (
     <div>
@@ -122,7 +124,7 @@ const MenuItem = ({menuTitle, menuItems, menuId, addToOrder}) => {
       <Row className="row-style">
         {menuItems.map((item) => (
           <Col key={item.id} sm={4} className="col-style">
-            <Product product={item} indId={menuId} addProduct={addToOrder} />
+            <Product product={item} indId={menuId} addProduct={addToOrder} flag={showOrderButton}/>
           </Col>
         ))}
       </Row>

@@ -150,6 +150,8 @@ const menuitems = [
 //   );
 // }
 
+var showOrderButton = true;
+
 const Menu = ({menuTitle, menuItems, menuId, addToOrder}) => {
   return (
     <div>
@@ -159,7 +161,7 @@ const Menu = ({menuTitle, menuItems, menuId, addToOrder}) => {
       <Row className="row-style">
         {menuItems.map((item) => (
           <Col key={item.id} sm={4} className="col-style">
-            <Product product={item} indId={menuId} addProduct={addToOrder} />
+            <Product product={item} indId={menuId} addProduct={addToOrder} flag={showOrderButton}/>
           </Col>
         ))}
       </Row>
@@ -176,6 +178,7 @@ function Customer() {
   const [drinks, setDrinks] = useState([]);
   const [extras, setExtras] = useState([]);
   const [seasonal, setSeasonal] = useState([]);
+
 
 useEffect(() => {
   //my changes

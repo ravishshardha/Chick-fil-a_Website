@@ -9,7 +9,7 @@ function getTotal(order)
     order?.forEach(element => {
         total += element.price;
     });
-    return total;
+    return Math.round(total * 100) / 100;
 }
 
 function ShoppingCart({ order, setOrder, setShowModal }) {
