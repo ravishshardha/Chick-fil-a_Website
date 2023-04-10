@@ -8,7 +8,19 @@ import HomePage from './components/Homepage';
 import { BrowserRouter as Router, Routes, Route}
     from 'react-router-dom';
 
+// retrieve API Packages
+//import React, { useState, useEffect } from 'react';
+
 function App() {
+  // const [data, setData] = useState([]);
+
+  // useEffect(() => {
+  //   fetch('/api/data')
+  //     .then(response => response.json())
+  //     .then(data => setData(data))
+  //     .catch(error => console.error(error));
+  // }, []);
+
   return (
     <div className="App">
       <Router>

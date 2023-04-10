@@ -1,33 +1,37 @@
-import React from 'react';
+//import React from 'react';
 import '../css/Manager.css'
 import Table from './GeneralTable'
 
-const orderData = [
-    {
-        orderid: 1,
-        time: "Monday",
-        price: 20.0,
-        star_sign: "Taurus",
-    },
-    {
-        orderid: 2,
-        time: "Tuesday",
-        price: 30.0,
-        star_sign: "Cancer",
-    },
-    {
-        orderid: 3,
-        time: "Wednesday",
-        price: 40.0,
-        star_sign: "Pickles"
-    },
-    {
-        orderid: 3,
-        time: "Wednesday",
-        price: 40.0,
-        star_sign: "Virgo",
-    },
-]
+import React, { useState, useEffect } from 'react';
+
+
+
+// const orderData = [
+//     {
+//         orderid: 1,
+//         time: "Monday",
+//         price: 20.0,
+//         star_sign: "Taurus",
+//     },
+//     {
+//         orderid: 2,
+//         time: "Tuesday",
+//         price: 30.0,
+//         star_sign: "Cancer",
+//     },
+//     {
+//         orderid: 3,
+//         time: "Wednesday",
+//         price: 40.0,
+//         star_sign: "Pickles"
+//     },
+//     {
+//         orderid: 3,
+//         time: "Wednesday",
+//         price: 40.0,
+//         star_sign: "Virgo",
+//     },
+// ]
 
 const menuItems = [
     {
@@ -76,6 +80,20 @@ const inventory = [
 ]
 
 function Orders(){
+    // API FETCH
+    const [orderData, setData] = useState([]);  
+
+    fetch('/api/data')
+        .then(response => response.json())
+        .then(data => {
+            console.log(orderData);
+            // Do something with the data, such as render it in the UI
+        })
+        .catch(error => {
+            console.error(error);
+            // Handle errors
+        });
+
     return(
         <div className='managerOrders'>
             <div className='managerOrders manage'>
@@ -88,13 +106,21 @@ function Orders(){
                 <p>[order table]</p>
                 <p>[Needs a table, and this table will be filled with orders.]</p>
                 <div className='scrollingTable'>
-                    <Table data={orderData}/>
+
+                {orderData.map(item => (
+                <div key={item.orderid}>
+                <p>{item.itemlist}</p>
+                <p>{item.price}</p>
                 </div>
-            </div>
+                ))}
+                </div>
+                </div>
+            
             <hr></hr>
         </div> 
     );
 }
+
 
 function Menu(){
     return (
