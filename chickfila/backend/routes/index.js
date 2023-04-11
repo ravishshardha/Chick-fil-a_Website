@@ -32,7 +32,7 @@ client.connect((err) => {
 // });
 
 
-// get request
+// get request for orders
 app.get('/api/data', (req, res) => {
   client.query('SELECT * FROM orderslog1', (error, results) => {
     if (error) {
@@ -43,6 +43,19 @@ app.get('/api/data', (req, res) => {
     res.json(results.rows);
   });
 });
+
+// get request for menu
+app.get('/api/menu', (req, res) => {
+  client.query('SELECT * FROM menu', (error, results) => {
+    if (error) {
+      console.log("unable to connect");
+      throw error;
+    }
+    console.log("sent");
+    res.json(results.rows);
+  });
+});
+
 
 app.listen(5000, () => {
   console.log('Server started on port 5000');
