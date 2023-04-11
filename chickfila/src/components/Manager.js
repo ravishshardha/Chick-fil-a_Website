@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from "react";
 import '../css/Manager.css'
 import Table from './GeneralTable'
+import ManagerMenuNavBar from './manager-components/ManagerMenuNavBar.jsx';
 
 const orderData = [
     {
@@ -75,6 +76,56 @@ const inventory = [
     },
 ]
 
+function setActiveTab(tabName) {
+    // Get all the tab content elements
+    const tabContents = document.querySelectorAll(".tab-content");
+  
+    // Get the tab content element for the clicked tab
+    const activeTabContent = document.getElementById(`${tabName}-content`);
+  
+    // Toggle the active state of the clicked tab
+    const isActive = activeTabContent.classList.contains("active");
+    if (isActive) {
+      activeTabContent.classList.remove("active");
+      return;
+    }
+  
+    // Hide all the tab content elements
+    tabContents.forEach((tabContent) => {
+      tabContent.classList.remove("active");
+    });
+  
+    // Show the tab content element for the clicked tab
+    activeTabContent.classList.add("active");
+}
+
+
+function TabMenu() {
+    // const [activeTab, setActiveTab] = React.useState("orders");
+    
+      return (
+        <div class="tab-container">
+            <button class="tab-button" onClick={() => setActiveTab("orders")}>Orders</button>
+            <div class="tab-content" id="orders-content">
+                <Orders/>
+            </div>
+            <button class="tab-button" onClick={() => setActiveTab("menu")}>Menu</button>
+            <div class="tab-content" id="menu-content">
+                <Menu/>
+            </div>
+            <button class="tab-button" onClick={() => setActiveTab("inventory")}>Inventory</button>
+            <div class="tab-content" id="inventory-content">
+                <Inventory/>
+            </div>
+            <button class="tab-button" onClick={() => setActiveTab("extras")}>Extras</button>
+            <div class="tab-content" id="extras-content">
+                <Extras/>
+            </div>
+        </div>
+
+      );
+}
+
 function Orders(){
     return(
         <div className='managerOrders'>
@@ -106,11 +157,8 @@ function Menu(){
     return (
         <div className='managerMenu'>
             <div className='managerMenu manage'>
-                <h2>Menu Items</h2>
-                <p>[TODO: Manager should be able to edit the menu over here]</p>
-                <h3>Add Seasonal Item</h3>
-                <label>Item Name: </label><input type="textbox"></input> <br></br> <br></br>
-                <label>Ingredients: </label><input type="textbox"></input>
+                <h2>Menu Management</h2>
+                <ManagerMenuNavBar />
             </div>
             <div className='managerMenu viewTable'>
                 <p>[TODO fill with table of menu items, similar to menu view, but populated with more information]</p>
@@ -143,6 +191,51 @@ function Inventory(){
     );
 }
 
+function Review() {
+    return (
+        <div class="card">
+            <div class="stars">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="star">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+            </svg>
+
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="star">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+            </svg>
+
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="star">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+            </svg>
+
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="star">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+            </svg>
+
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="star">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+            </svg>
+            </div>
+
+            <div class="infos">
+            <p class="date-time">
+                2 days ago
+            </p>
+            <p class="description">
+            This is a very busy location, but they seem to really have their act together. 
+            Friendly, courteous servers and hosts make this restaurant a very enjoyable experience. 
+            Nice touches including people who walk around the room asking if you want your drink 
+            refilled or want your trash removed for you. Other fast food chains can learn a thing or 
+            two from Chick-Fil-A.  I would say this is one of the better run Chick-Fil-As in the area.
+            </p>
+        </div>
+        <div class="author">
+            — Claire D
+        </div>
+        </div>
+
+    );
+}
+
 function Extras(){
     return (
         <div className='managerExtras'>
@@ -163,11 +256,18 @@ function Extras(){
 export default function Manager(){
     return (
         <div className='ManagerMain'>
-            <h1 class="ManagerMain header">Manager</h1>
-            <Orders/>
-            <Menu/>
-            <Inventory/>
-            <Extras/>
+            <h1 class="ManagerMain header">Manager Dashboard</h1> <br></br>
+            <p><b>"To glorify God by being a faithful steward of all that is entrusted to us. </b>
+                <b>To have a positive influence on all who come in contact with Chick-fil-A."</b></p> <br></br>
+            <div class="managerdashboardright">
+                <h4>Most Recent Review:</h4>
+                <Review />
+            </div>
+            <div class="managerdashboardleft">
+                <img class="managerFoodImage" src="https://www.longislandpress.com/wp-content/uploads/2013/12/Chick-fil-A.png" alt="chickfila food"></img>
+            </div>
+            <br></br><br></br>
+            <TabMenu/>
         </div>
     );
 }
