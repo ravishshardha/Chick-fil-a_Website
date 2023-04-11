@@ -8,25 +8,13 @@ import HomePage from './components/Homepage';
 import { BrowserRouter as Router, Routes, Route}
     from 'react-router-dom';
 
-// retrieve API Packages
-//import React, { useState, useEffect } from 'react';
-
 function App() {
-  // const [data, setData] = useState([]);
-
-  // useEffect(() => {
-  //   fetch('/api/data')
-  //     .then(response => response.json())
-  //     .then(data => setData(data))
-  //     .catch(error => console.error(error));
-  // }, []);
-
   return (
     <div className="App">
       <Router>
     <Navbar />
     <Routes>
-        <Route exact path='/' exact element={<HomePage />} />
+        <Route exact path='/' element={<HomePage />} />
         <Route path='/customer' element={<Customer/>} />
         <Route path='/manager' element={<Manager/>} />
         <Route path='/menu' element={<Menu/>} />

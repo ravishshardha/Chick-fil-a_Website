@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .ManagerMain {
     width:100%;
     height: 40vw;
@@ -85,3 +86,93 @@
     float:left;
 }
 
+=======
+.ManagerMain {
+    height: 40vw;
+    background-color: white;
+}
+
+.ManagerMain.header {
+    margin-top: 0vw;
+    margin-bottom:0vw;
+    background-color:#E51636;
+    height:3vw;
+    color:white;
+}
+
+.scrollingTable {
+    width:70%;
+    height: 20vw;
+    overflow-y: scroll;
+    margin: auto;
+}
+
+/*---------------------managerOrders section----------------------------*/
+
+.managerOrders {
+    height: 30vw;
+}
+
+.managerOrders.manage {
+    width:50%;
+    float:right;
+    background-color:rgba(200, 200, 200, .6)
+}
+
+.managerOrders.viewTable {
+    width:50%;
+    float:left;
+}
+
+/*---------------------managerMenu section----------------------------*/
+
+.managerMenu {
+    height: 30vw;
+}
+
+.managerMenu.manage {
+    width:50%;
+    float:right;
+    background-color:rgba(200, 200, 200, .6)
+}
+
+.managerMenu.viewTable {
+    width:50%;
+    float:left;
+}
+
+/*---------------------managerInventory section----------------------------*/
+
+.managerInventory {
+    height: 30vw;
+}
+
+.managerInventory.manage {
+    width:50%;
+    float:right;
+    background-color:rgba(200, 200, 200, .6)
+}
+
+.managerInventory.viewTable {
+    width:50%;
+    float:left;
+}
+
+/*---------------------managerExtras section----------------------------*/
+
+.managerExtras {
+    height: 30vw;
+}
+
+.managerExtras.manage {
+    width:50%;
+    float:right;
+    background-color:rgba(200, 200, 200, .6)
+}
+
+.managerExtras.viewTable {
+    width:50%;
+    float:left;
+}
+
+>>>>>>> 7ad9aeaeb5cea559c3fb49952cc26392a5009c21
