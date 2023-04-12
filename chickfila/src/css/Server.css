@@ -11,6 +11,13 @@
 .ServerMain.orderSummary {
     width: 30%;
     float: right;
+    color: black;
+    
+}
+
+#OrderTotal {
+    text-decoration-line: underline;
+    text-decoration-color: rgb(0, 0, 0);
 }
 
 .ServerMain.buttons {
@@ -58,3 +65,18 @@ display: block;
 .side-panel li a:hover {
     background-color: #CCCCCC;
 }
+
+.ServerButton {
+    padding: 10px;
+    margin: 0.2%;
+    color:white;
+    background-color: #bf2222;
+    border-radius: 10px;
+}
+
+.ServerClearOrder, .ServerFinishAndPay{
+    border-radius: 3px;
+    margin: 0.2%;
+    margin-top: 2vh;
+}
+
