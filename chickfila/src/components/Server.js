@@ -42,14 +42,14 @@ const menuitems = [
       id: 6,
       text: "Side salad",
       price: 3.99,
-      type: "sides",
+      type: "side",
       url: "https://www.cfacdn.com/img/order/menu/Online/Salads%26wraps/sswSalad_spicyGrilled_pdp.png",
     },
     {
       id: 7,
       text: "Brownie",
       price: 3.99,
-      type: "Extra",
+      type: "extra",
       url: "https://www.cfacdn.com/img/order/COM/Menu_Refresh/Treats/Treats%20PDP/031717_FudgeChunkBrownie_PDP.png",
     },
     {
@@ -77,76 +77,6 @@ function SidePanel({setChoice}) {
 }
 
 
-
-/*
-function addToOrder(id, name, price) {
-    let temp = { id: id, name: name, price: price };
-    total += price;
-    order.push(temp);
-    updateAddOrderList(name, price);
-}
-
-function OrderSummary() {
-    const listItems = order.map(item =>
-        <li key={item.id}>
-            <p>{item.name}......{item.price}</p>
-        </li>
-    )
-
-    return (
-        <div className='ServerOrderSummary'>
-            <ul id='ServerOrderList'>{listItems}</ul>
-        </div>
-    );
-}
-
-function updateAddOrderList(name, price) {
-    // update total
-    document.getElementById('OrderTotal').innerHTML = "TOTAL = $" + Math.round(total * 100) / 100;
-
-    var ul = document.getElementById("ServerOrderList");
-    var li = document.createElement("li");
-    li.appendChild(document.createTextNode(name + '......' + price));
-    ul.appendChild(li);
-}
-
-function ServerButton() {
-    const listItems = menuitems.map(item =>
-        <button key= {item.id} className='ServerButton'
-        onClick={() => addToOrder(item.id, item.text, item.price)}
-        >
-            {item.text} ${item.price}
-        </button>
-    )
-    return (
-        <div className='ServerButtonBar'>
-            {listItems}
-        </div>
-    );
-}
-
-function clearOrder(){
-    order = [];
-    total = 0.00;
-    document.getElementById('OrderTotal').innerHTML = "TOTAL = $0.00"; 
-    var ul = document.getElementById("ServerOrderList");
-    ul.innerHTML = '';
-}
-
-function ScrollingButtons() {
-    return (
-        <div className='ServerScrollingButtons'>
-            <p>TODO, make buttons capable of being dynamically allocated</p>
-            <div>
-                <ServerButton/>
-            </div>
-        </div>
-    );
-}
-*/
-
-
-
 function OrderSummary({_order, total}){
     const listItems = _order.map(item =>
         <li>
@@ -163,18 +93,6 @@ function OrderSummary({_order, total}){
 
 function ServerButton({item, addToOrder}){
     
-    // const listItems = menuitems.map(item =>
-    //     <button key= {item.id} className='ServerButton'
-    //     onClick={() => addToOrder(item.id, item.text, item.price)}
-    //     >
-    //         {item.text} ${item.price}
-    //     </button>
-    // )
-    // return (
-    //     <div className='ServerButtonBar'>
-    //         {listItems}
-    //     </div>
-    // );
     return (
         <button className='ServerButton' onClick={() => addToOrder(item)}>
             {item.text} {item.price}
@@ -217,13 +135,13 @@ export default function Server() {
             case "entree":
                 _entree.push(item);
                 break;
-            case "sides":
+            case "side":
                 _sides.push(item);
                 break;
             case "drink":
                 _drinks.push(item);
                 break;
-            case "Extra":
+            case "extra":
                 _extras.push(item);
                 break;
             default:
