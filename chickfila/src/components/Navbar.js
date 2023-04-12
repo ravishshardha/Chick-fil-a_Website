@@ -28,7 +28,6 @@ export default function Navbar (){
                     width={150}
                     height={60}
                 ></img>
-                <button>accessibility</button>
                 <NavLink to="/" activeStyle>
                     Home
                 </NavLink>
