@@ -40,7 +40,10 @@
 .tab-button {
     background-color: #E51636;
     color: #ffffff;
+    align-content: center;
+    align-self: center;
     padding: 10px;
+    height:4vw;
     border: 2px solid #ffffff;
     border-radius: 15px;
     margin: 0;
@@ -168,10 +171,64 @@
     float:left;
 }
 
+.generateButton {
+  padding: 1px 25px;
+  border: none;
+  outline: none;
+  height: 40px;
+  border-radius: 30px;
+  font-size: 1rem;
+  z-index: 1;
+  position: relative;
+  -webkit-box-shadow: 0 5px 15px rgba(33, 33, 33, .2);
+  box-shadow: 0 5px 15px rgba(33, 33, 33, .2);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.generateButton > span {
+  z-index: 2;
+}
+
+.generateButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  background-color: #E51636;
+  z-index: -1;
+  overflow: hidden;
+  -webkit-transform: scaleX(0);
+  -ms-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transform-origin: right;
+  -ms-transform-origin: right;
+  transform-origin: right;
+  -webkit-transition: -webkit-transform 0.2s ease-in;
+  transition: -webkit-transform 0.2s ease-in;
+  transition: transform 0.2s ease-in;
+}
+
+.generateButton:hover {
+  color: #e8e8e8;
+}
+
+.generateButton:hover::before {
+  -webkit-transform: scaleX(1);
+  -ms-transform: scaleX(1);
+  transform: scaleX(1);
+  -webkit-transform-origin: left;
+  -ms-transform-origin: left;
+  transform-origin: left;
+}
+
 /*---------------------managerMenu section----------------------------*/
 
 .managerMenu {
-    height: 40vw;
+    height: 41vw;
 }
 
 .managerMenu.manage {
@@ -227,7 +284,7 @@
     width: 100%;
   }  
 
-  .button {
+  .abutton {
     position: relative;
     margin-left: 40%;
     width: 150px;
@@ -239,17 +296,17 @@
     background-color: #3aa856;
   }
   
-  .button, .button__icon, .button__text {
+  .abutton, .abutton__icon, .abutton__text {
     transition: all 0.3s;
   }
   
-  .button .button__text {
+  .abutton .abutton__text {
     transform: translateX(30px);
     color: #fff;
     font-weight: 600;
   }
   
-  .button .button__icon {
+  .abutton .abutton__icon {
     position: absolute;
     transform: translateX(109px);
     height: 100%;
@@ -260,29 +317,29 @@
     justify-content: center;
   }
   
-  .button .svg {
+  .abutton .svg {
     width: 30px;
     stroke: #fff;
   }
   
-  .button:hover {
+  .abutton:hover {
     background: #34974d;
   }
   
-  .button:hover .button__text {
+  .abutton:hover .abutton__text {
     color: transparent;
   }
   
-  .button:hover .button__icon {
+  .abutton:hover .abutton__icon {
     width: 148px;
     transform: translateX(0);
   }
   
-  .button:active .button__icon {
+  .abutton:active .abutton__icon {
     background-color: #2e8644;
   }
   
-  .button:active {
+  .abutton:active {
     border: 1px solid #2e8644;
   }
 
@@ -320,6 +377,227 @@
     color:white;
     border-color: #E51636;
   }
+
+  /*This ensures the delete button is centered*/
+  .deleteButton {
+    margin-left: 40%;
+  }
+  
+  /* noselect refers to the delete item button in DeleteFromMenu.jsx */
+  .noselect {
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background: red;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+    background: #e62222;
+   }
+   
+   .noselect, .noselect span {
+    transition: 200ms;
+   }
+   
+   .noselect .text {
+    transform: translateX(35px);
+    color: white;
+    font-weight: bold;
+   }
+   
+   .noselect .icon {
+    position: absolute;
+    border-left: 1px solid #c41b1b;
+    transform: translateX(110px);
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   }
+   
+   .noselect svg {
+    width: 15px;
+    fill: #eee;
+   }
+   
+   .noselect:hover {
+    background: #ff3636;
+   }
+   
+   .noselect:hover .text {
+    color: transparent;
+   }
+   
+   .noselect:hover .icon {
+    width: 150px;
+    border-left: none;
+    transform: translateX(0);
+   }
+   
+   .noselect:focus {
+    outline: none;
+   }
+   
+   .noselect:active .icon svg {
+    transform: scale(0.8);
+   }
+
+   .rbutton {
+      margin-left: 40%;
+      margin-top:5%;
+      border-radius: 4%;
+      position: relative;
+      width: 150px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      border: 1px solid #0078E8;
+      background-color: #0082FC;
+      overflow: hidden;
+  }
+  
+  .rbutton, .rbutton__icon, .rbutton__text {
+    transition: all 0.3s;
+  }
+  
+  .rbutton .rbutton__text {
+    transform: translateX(30px);
+    color: white;
+    font-weight: 600;
+  }
+  
+  .rbutton .rbutton__icon {
+    position: absolute;
+    transform: translateX(109px);
+    height: 100%;
+    width: 39px;
+    background-color: #0078E8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .rbutton .rsvg {
+    width: 20px;
+    fill: white;
+  }
+  
+  .rbutton:hover {
+    background: #0078E8;
+  }
+  
+  .rbutton:hover .rbutton__text {
+    color: transparent;
+  }
+  
+  .rbutton:hover .rbutton__icon {
+    width: 148px;
+    transform: translateX(0);
+  }
+  
+  .rbutton:active .rbutton__icon {
+    background-color: #006cd0;
+  }
+  
+  .rbutton:active {
+    border: 1px solid #006cd0;
+  }
+
+  .saveChanges {
+    position: relative;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    outline-offset: 4px;
+    transition: filter 250ms;
+    user-select: none;
+    touch-action: manipulation;
+   }
+   
+   .saveChangesShadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: hsl(0deg 0% 0% / 0.25);
+    will-change: transform;
+    transform: translateY(2px);
+    transition: transform
+       600ms
+       cubic-bezier(.3, .7, .4, 1);
+   }
+   
+   .saveChangesEdge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: linear-gradient(
+       to left,
+       hsl(340deg 100% 16%) 0%,
+       hsl(340deg 100% 32%) 8%,
+       hsl(340deg 100% 32%) 92%,
+       hsl(340deg 100% 16%) 100%
+     );
+   }
+   
+   .saveChangesText {
+    display: block;
+    position: relative;
+    padding: 12px 27px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    color: white;
+    background: hsl(345deg 100% 47%);
+    will-change: transform;
+    transform: translateY(-4px);
+    transition: transform
+       600ms
+       cubic-bezier(.3, .7, .4, 1);
+   }
+   
+   .saveChanges:hover {
+    filter: brightness(110%);
+   }
+   
+   .saveChanges:hover .saveChangesText {
+    transform: translateY(-6px);
+    transition: transform
+       250ms
+       cubic-bezier(.3, .7, .4, 1.5);
+   }
+   
+   .saveChangesText:active .saveChangesText {
+    transform: translateY(-2px);
+    transition: transform 34ms;
+   }
+   
+   .saveChanges:hover .saveChangesShadow {
+    transform: translateY(4px);
+    transition: transform
+       250ms
+       cubic-bezier(.3, .7, .4, 1.5);
+   }
+   
+   .saveChanges:active .saveChangesShadow {
+    transform: translateY(1px);
+    transition: transform 34ms;
+   }
+   
+   .saveChanges:focus:not(:focus-visible) {
+    outline: none;
+   }
+
+  
 
 /*---------------------managerInventory section----------------------------*/
 

@@ -2,6 +2,9 @@ import '../../css/Manager.css'
 import React, { useState } from "react";
 import AddToMenu from './AddToMenu.jsx';
 import RadioInputItem from "./RadioInputItem.jsx";
+import DeleteFromMenu from './DeleteFromMenu';
+import SaveChangesMenu from './SaveChangesMenu';
+
 
 function ManagerMenuNavBar() {
   const [activeTab, setActiveTab] = useState("create");
@@ -55,11 +58,27 @@ function CreateItemTab() {
 }
 
 function DeleteItemTab() {
-  return <div>Delete Existing Item here</div>;
+  return (
+    <div>
+        <label>Item Id: </label><input type="textbox"></input> <br></br> <br></br>
+        <DeleteFromMenu />
+    </div>
+  );
 }
 
 function EditItemTab() {
-  return <div>Edit Existing Item here</div>;
+  return (
+    <div>
+        <label>Item ID: </label><input type="textbox"></input> <br></br> <br></br>
+        <RadioInputItem /> <br></br>
+        <label>Item Name: </label><input type="textbox"></input> <br></br> <br></br>
+        <label>Item Price:</label><input type="textbox"></input> <br></br><br></br>
+        <label>(amount, ingredient id) ex: (1, 0)</label> <br></br>
+        <label>Ingredients: </label><input type="textbox"></input> <br></br><br></br>
+        <label>Image URL: </label><input type="textbox"></input> <br></br><br></br>
+        <SaveChangesMenu />
+    </div>
+  );
 }
 
 export default ManagerMenuNavBar;

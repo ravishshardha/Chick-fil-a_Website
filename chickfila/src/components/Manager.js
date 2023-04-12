@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import '../css/Manager.css'
 import Table from './GeneralTable'
+import Refresh from "./manager-components/Refresh";
 import ManagerMenuNavBar from './manager-components/ManagerMenuNavBar.jsx';
+import ManagerOrderNavBar from "./manager-components/ManagerOrderNavBar";
 
 const orderData = [
     {
@@ -130,15 +132,9 @@ function Orders(){
     return(
         <div className='managerOrders'>
             <div className='managerOrders manage'>
-                <h2>Orders</h2>
-                <p>[TODO: should be able to view x and z reports]</p>
-                <label>Start Date: </label>
-                <input type="datetime-local"></input> <br></br> <br></br>
-                <label>End Date: </label>
-                <input type="datetime-local"></input> <br></br><br></br>
-                <button>Generate z report</button>
-                <button>Generate x report</button>
-                <p>[TODO: should be able to manage orders here]</p>
+                <h2>Order Management</h2>
+                <ManagerOrderNavBar />
+                <hr></hr>
             </div>
                 <div className='managerOrders viewTable'>
                 <p>[TODO: fill with information about orders]</p>
@@ -159,6 +155,8 @@ function Menu(){
             <div className='managerMenu manage'>
                 <h2>Menu Management</h2>
                 <ManagerMenuNavBar />
+                <hr></hr>
+                <Refresh />
             </div>
             <div className='managerMenu viewTable'>
                 <p>[TODO fill with table of menu items, similar to menu view, but populated with more information]</p>
