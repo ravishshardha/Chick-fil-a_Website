@@ -24,16 +24,6 @@ client.connect((err) => {
   }
 });
 
-// client.query('SELECT * FROM menu', (err, res) => {
-//   if (err) {
-//     console.error(err);
-//   } else {
-//     console.log(res.rows);
-//   }
-//   client.end();
-// });
-
-
 // get request for orders
 app.get('/api/retrieveorders', (req, res) => {
   client.query('SELECT * FROM orderslog1', (error, results) => {
@@ -45,8 +35,6 @@ app.get('/api/retrieveorders', (req, res) => {
     res.json(results.rows);
   });
 });
-
-
 
 // get request for menu
 app.get('/api/menu', (req, res) => {
@@ -60,24 +48,59 @@ app.get('/api/menu', (req, res) => {
   });
 });
 
-const router2 = express.Router();
 
-router2.post('/api/postOrder', async (req, res) => {
+app.get('/api/menu1', (req, res) => {
+  client.query('SELECT * FROM menu', (error, results) => {
+    if (error) {
+      console.log("unable to connect");
+      throw error;
+    }
+    console.log("sent");
+    res.json(results.rows);
+  });
+});
 
-  const result = pool.query('SELECT * FROM your_table WHERE id = $1', [req.params.id]);
+// app.get('/api/postOrder', async (req, res) => {
 
-  const { time, employeeid, orderid,itemlist,price } = req.body;
+//   const result = client.query('SELECT orderid FROM orderslog1 ORDER BY orderid DESC LIMIT 1', [req.params.id]);
+
+//   const { time, employeeid, orderid,itemlist,price } = req.body;
+//   const now = new Date();
+//   time = now.toLocaleString('en-US', { hour12: false });
+//   console.log(time);
+//   res.status(201).json({ message: 'User created successfully' });
+//   // try {
+//   //   const result =  client.query('INSERT INTO data (time, employeeid, orderid,itemlist,price) VALUES ($1, $2, $3,$4, $5)', [time, employeeid, orderid,itemlist,price]);
+//   //   res.status(200).json(result.rows[0]);
+//   // } catch (error) {
+//   //   console.error(error);
+//   //   res.status(500).json({ error: 'Something went wrong' });
+//   // }
+// });
+
+app.get('/api/addOrder', (req, res) => {
+  // create time
   const now = new Date();
-  time = now.toLocaleString('en-US', { hour12: false });
+  const time = now.toLocaleString('en-US', { hour12: false });
   console.log(time);
-  res.status(201).json({ message: 'User created successfully' });
-  // try {
-  //   const result =  client.query('INSERT INTO data (time, employeeid, orderid,itemlist,price) VALUES ($1, $2, $3,$4, $5)', [time, employeeid, orderid,itemlist,price]);
-  //   res.status(200).json(result.rows[0]);
-  // } catch (error) {
-  //   console.error(error);
-  //   res.status(500).json({ error: 'Something went wrong' });
-  // }
+  // find id
+  client.query('SELECT orderid FROM orderslog1 ORDER BY orderid DESC LIMIT 1', (error, results) => {
+    if (error) {
+      console.log("unable to connect");
+      throw error;
+    }
+    const myValueString = results.rows[0].orderid;
+    const nextOrderId = parseInt(myValueString, 10) + 1 ; 
+    console.log(nextOrderId)
+    
+    // insert to DB
+    const itemlist = "testItems";
+    const price = 99999;
+    const employeeid  = 9999999;
+    client.query('INSERT INTO orderslog1 (time, employeeid, orderid,itemlist,price) VALUES ($1, $2, $3,$4, $5)', [time, employeeid, nextOrderId,itemlist,price]);
+    console.log('inserted');
+  });
+  
 });
 
 app.listen(5000, () => {
