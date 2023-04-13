@@ -94,14 +94,64 @@ app.get('/api/addOrder', (req, res) => {
     console.log(nextOrderId)
     
     // insert to DB
-    const itemlist = "testItems";
+    const itemlist = ["Chicken Sandwich"];  // TEST INPUTS
+    const itemListString = itemlist.join(", ");
     const price = 99999;
     const employeeid  = 9999999;
-    client.query('INSERT INTO orderslog1 (time, employeeid, orderid,itemlist,price) VALUES ($1, $2, $3,$4, $5)', [time, employeeid, nextOrderId,itemlist,price]);
+    client.query('INSERT INTO orderslog1 (time, employeeid, orderid,itemlist,price) VALUES ($1, $2, $3,$4, $5)', [time, employeeid, nextOrderId,itemListString,price]);
     console.log('inserted');
+
+    // loop through itemlist
+    for (let i = 0; i < itemlist.length; i++) {
+      // updating ingredients table
+      const itemName = itemlist[i];
+      // query to find ingredient list
+      client.query('SELECT ingredients FROM menu where name = $1' ,[itemName], (error1, result1) => {
+        if (error1) {
+          console.log("unable to connect");
+          throw error1;
+        }
+        const ingredientString = result1.rows[0].ingredients;
+        const ingredientMap = parseIngredientList(ingredientString); // create map from ingredient list
+        
+        for (const [key, value] of ingredientMap) {
+          // find current amount
+          client.query('SELECT amount FROM ingredients WHERE id = $1',  [key], (error2, result2) => {
+            if (error2) {
+                console.log("unable to connect");
+                throw error2;
+            }
+            const amountString = result2.rows[0].amount;
+            const currentAmount = parseInt(amountString, 10);
+            console.log(currentAmount);
+             // updating inventory w subtraction
+            client.query('UPDATE ingredients SET amount = $1 WHERE id = $2',  [currentAmount - value, key], (error3, result3) => {
+              if (error3) {
+                  console.log("unable to connect");
+                  throw error3;
+              }
+              console.log(`Updated ${result3.rowCount} row(s)`);
+              });
+          });
+        }
+      });
+    }
   });
-  
 });
+
+// helper function for addOrder
+function parseIngredientList(str) {
+  const pairs = str.match(/\d+,\s*\d+/g); // match all pairs of numbers
+  const arr = pairs.map((pair) => {
+  const [x, y] = pair.split(","); // split each pair into x and y values
+  return [Number(x), Number(y)]; // convert x and y values to numbers and return as array
+});
+const map = new Map();
+arr.forEach((pair) => {
+  map.set(pair[1], pair[0]);
+}); 
+  return map;
+}
 
 app.listen(5000, () => {
   console.log('Server started on port 5000');
