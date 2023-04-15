@@ -9,65 +9,6 @@ import Col from "react-bootstrap/Col";
 import { useEffect } from "react";
 import ShoppingCart from "./customer-components/ShoppingCart";
 
-const menuitems = [
-  {
-    id: 1,
-    text: "Chicken Sandwich",
-    price: 5.99,
-    type: "entree",
-    url: "https://www.cfacdn.com/img/order/menu/Online/Entrees/Jul19_CFASandwich_pdp.png",
-  },
-  {
-    id: 2,
-    text: "Chicken Sandwich",
-    price: 5.99,
-    type: "entree",
-    url: "https://www.cfacdn.com/img/order/menu/Online/Entrees/Jul19_CFASandwich_pdp.png",
-  },
-  {
-    id: 3,
-    text: "Chicken Sandwich",
-    price: 5.99,
-    type: "entree",
-    url: "https://www.cfacdn.com/img/order/menu/Online/Entrees/Jul19_CFASandwich_pdp.png",
-  },
-  {
-    id: 4,
-    text: "Chicken Sandwich",
-    price: 5.99,
-    type: "entree",
-    url: "https://www.cfacdn.com/img/order/menu/Online/Entrees/Jul19_CFASandwich_pdp.png",
-  },
-  {
-    id: 5,
-    text: "Chick-fil-A® Lemonade",
-    price: 6.99,
-    type: "drink",
-    url: "https://www.cfacdn.com/img/order/menu/Online/Drinks/lemonade_pdp.png",
-  },
-  {
-    id: 6,
-    text: "Side salad",
-    price: 3.99,
-    type: "sides",
-    url: "https://www.cfacdn.com/img/order/menu/Online/Salads%26wraps/sswSalad_spicyGrilled_pdp.png",
-  },
-  {
-    id: 7,
-    text: "Brownie",
-    price: 3.99,
-    type: "Extra",
-    url: "https://www.cfacdn.com/img/order/COM/Menu_Refresh/Treats/Treats%20PDP/031717_FudgeChunkBrownie_PDP.png",
-  },
-  {
-    id: 8,
-    text: "Seasonal Item",
-    price: 3.99,
-    type: "seasonal",
-    url: "https://cdn-icons-png.flaticon.com/512/4698/4698319.png",
-  },
-];
-
 
 var showOrderButton = true;
 

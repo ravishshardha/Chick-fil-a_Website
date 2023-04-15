@@ -1,50 +1,3 @@
-// //import logo from './logo.svg';
-// //import './App.css';
-// import React from 'react'
-// import Table from './MenuTable'
-// import '../css/Menu.css';
-
-
-// function Menuheader({title}){
-//     return (
-//         <h1>
-//           {title}
-//         </h1>
-//     );
-// }
-
-// function Menutable({children}){
-//   return (
-//     <div>
-//       {children}
-//     </div>
-//   );
-// }
-
-// function Menu() {
-//   return (
-//     <div className="MenuMain">
-//       <header className="Menu-header">
-//         <Menuheader title={"Chick-fil-a menu"}/>
-//       </header>
-//       <div className='MenuMainContent'>
-//         <h3>Here you can find all items on the chick-fil-a menu</h3>
-//         <Menutable>
-//           {/* This is filler table until we get it hooked up to the backend */}
-//           <Table/>
-//           <Table/>
-//           <Table/>
-//           <Table/>
-//           <Table/>
-//           <Table/>
-//           <Table/>
-//         </Menutable>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Menu;
 
 import React, {useState,useEffect} from 'react'
 import "../css/Customer.css";
@@ -133,6 +86,7 @@ const MenuItem = ({menuTitle, menuItems, menuId, addToOrder}) => {
 };
 
 function Menu() {
+  const [menuitems, setMenuitems] = useState([]);
   const [entree, setEntree] = useState([]);
   const [sides, setSides] = useState([]);
   const [drinks, setDrinks] = useState([]);
@@ -140,38 +94,50 @@ function Menu() {
   const [seasonal, setSeasonal] = useState([]);
 
   useEffect(() => {
-  //my changes
-  var _entree = [];
-  var _sides = [];
-  var _drinks = [];
-  var _extras = [];
-  var _seasonal = [];
+    fetch('http://localhost:5000/api/menu')
+      .then(response => response.json())
+      .then(data => {
+        setMenuitems(data)
+        console.log(data)
+      })
+      .catch(error => console.error(error));
+  }, []);
 
-  menuitems.forEach((item) => {
-    switch (item.type) {
-      case "entree":
-        _entree.push(item);
-        break;
-      case "sides":
-        _sides.push(item);
-        break;
-      case "drink":
-        _drinks.push(item);
-        break;
-      case "Extra":
-        _extras.push(item);
-        break;
-      default:
-        _seasonal.push(item);
+  useEffect(() => {
+    if(menuitems.length>0)
+    {
+        var _entree = [];
+        var _sides = [];
+        var _drinks = [];
+        var _extras = [];
+        var _seasonal = [];
+      
+        menuitems.forEach((item) => {
+          switch (item.type) {
+            case "entree":
+              _entree.push(item);
+              break;
+            case "side":
+              _sides.push(item);
+              break;
+            case "drink":
+              _drinks.push(item);
+              break;
+            case "extra":
+              _extras.push(item);
+              break;
+            default:
+              _seasonal.push(item);
+          }
+        });
+      
+        setEntree(_entree);
+        setSides(_sides);
+        setDrinks(_drinks);
+        setExtras(_extras);
+        setSeasonal(_seasonal);
     }
-  });
-
-  setEntree(_entree);
-  setSides(_sides);
-  setDrinks(_drinks);
-  setExtras(_extras);
-  setSeasonal(_seasonal);
-},[])
+  }, [menuitems]);
 
 
   return (
