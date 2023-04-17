@@ -51,8 +51,8 @@ app.get('/api/menu', (req, res) => {
 
 app.get('/api/addOrder', (req, res) => {
   // create time
-  const now = new Date();
-  const time = now.toLocaleString('en-US', { hour12: false });
+  let date = new Date();
+  let time = date.toISOString().slice(0, 19).replace('T', ' ');
   console.log(time);
   // find id
   client.query('SELECT orderid FROM orderslog1 ORDER BY orderid DESC LIMIT 1', (error, results) => {
@@ -66,8 +66,7 @@ app.get('/api/addOrder', (req, res) => {
     
     // insert to DB
     // parse input  // TEST STRING
-    // const jsonString = req.query.order;
-    const jsonString = '[{"id":0,"name":"Chicken Sandwich","price":4.49,"type":"entree","ingredients":"(2, 7) (1, 0) (3, 11) (2, 53) (1, 72)","url":"https://www.cfacdn.com/img/order/menu/Online/Entrees/Jul19_CFASandwich_pdp.png%22%7D]"},{"id":1,"name":"Milkshake","price":10.49,"type":"entree","ingredients":"(2, 7) (1, 0) (3, 11) (2, 53) (1, 72)","url":"https://www.cfacdn.com/img/order/menu/Online/Entrees/Jul19_CFASandwich_pdp.png%22%7D]"}]';
+    const jsonString = req.query.order;
     const data = JSON.parse(jsonString);
 
     let itemlist = [];
@@ -79,7 +78,8 @@ app.get('/api/addOrder', (req, res) => {
       ingredientList.push(data[i].ingredients);
     }
     console.log(itemlist);
-    console.log(price);
+    const roundedPrice = parseFloat(price.toFixed(2));
+    console.log(roundedPrice);
     console.log(ingredientList);
     // rand employee ID
     const min = 100000;
@@ -88,7 +88,7 @@ app.get('/api/addOrder', (req, res) => {
     console.log(randomInt);
     const employeeid  = randomInt;
     const itemListString = itemlist.join(", ");
-    client.query('INSERT INTO orderslog1 (time, employeeid, orderid,itemlist,price) VALUES ($1, $2, $3,$4, $5)', [time, employeeid, nextOrderId,itemListString,price]);
+    client.query('INSERT INTO orderslog1 (time, employeeid, orderid,itemlist,price) VALUES ($1, $2, $3,$4, $5)', [time, employeeid, nextOrderId,itemListString,roundedPrice]);
     console.log('inserted');
 
     // loop through ingredientList
