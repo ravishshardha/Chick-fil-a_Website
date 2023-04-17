@@ -51,7 +51,7 @@
 }
 
 /*buttons on side panel*/
-.side-panel li a {
+.side-panel li p {
 display: block;
     padding: 2vw;
     margin-bottom: 0px;
@@ -62,7 +62,7 @@ display: block;
     font-size: 1.2em;
 }
 
-.side-panel li a:hover {
+.side-panel li p:hover {
     background-color: #CCCCCC;
 }
 
@@ -80,3 +80,53 @@ display: block;
     margin-top: 2vh;
 }
 
+.deletebutton {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background: red;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+    background: #e62222;
+   }
+   
+   .deletebutton, .deletebutton span {
+    transition: 200ms;
+   }
+   
+   .deletebutton .text {
+    margin: auto;
+    color: white;
+    font-weight: bold;
+   }
+   
+   
+   .deletebutton svg {
+    width: 15px;
+    fill: #eee;
+   }
+   
+   .deletebutton:hover {
+    background: #ff3636;
+   }
+   
+   .deletebutton:hover .icon {
+    width: 150px;
+    border-left: none;
+    transform: translateX(0);
+   }
+   
+   .deletebutton:focus {
+    outline: none;
+   }
+
+   .serverCard {
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Creates two columns of equal width */
+    grid-auto-rows: minmax(70px, auto); /* Specifies the height of each row */
+    grid-gap: 10px; /* Adds a 10px gap between grid items */
+  }

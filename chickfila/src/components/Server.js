@@ -65,34 +65,65 @@ import '../css/Server.css'
 // total & number of items at top
 // display item, individual price, and count on each list item
 
+// servercard
+function ServerCard({item, index, removeItem}){
+    // will have the item, price, and delete button
+    return (
+        <div className='serverCard'> 
+            <div>{item.name}...${item.price}</div>
+            <button class="deletebutton" onClick={() => removeItem(index)}>
+                <span className='text'>X</span>
+            </button>
+            
+        </div>
+    );
+}
 
 
 function SidePanel({setChoice}) {
     return (
         <nav className="side-panel">
             <ul>
-                <li onClick={() => setChoice('all')}><a href="#">All</a></li>
-                <li onClick={() => setChoice('entree')}><a href="#">Entrees</a></li>
-                <li onClick={() => setChoice('side')}><a href="#">Sides</a></li>
-                <li onClick={() => setChoice('drink')}><a href="#">Drinks</a></li>
-                <li onClick={() => setChoice('extra')}><a href="#">Extras</a></li>
-                <li onClick={() => setChoice('seasonal')}><a href="#">Seasonal</a></li>
+                <li onClick={() => setChoice('all')}><p>All</p></li>
+                <li onClick={() => setChoice('entree')}><p>Entrees</p></li>
+                <li onClick={() => setChoice('side')}><p>Sides</p></li>
+                <li onClick={() => setChoice('drink')}><p>Drinks</p></li>
+                <li onClick={() => setChoice('extra')}><p>Extras</p></li>
+                <li onClick={() => setChoice('seasonal')}><p>Seasonal</p></li>
             </ul>
         </nav>
     );
 }
 
 
-function OrderSummary({_order, total}){
+function OrderSummary({_order, total, setOrder, setTotal}){
     const listItems = _order.map(item =>
         <li>
+            <ServerCard item={item} index={item}></ServerCard>
             <p>{item.name}......{item.price}</p>
         </li>
     )
+   
+    const removeItem = (index) => {
+        setTotal(Math.round((total - _order[index].price)*100)/100);
+        const filteredList = _order.filter((_, i) => i !== index);
+        setOrder(filteredList);
+      };
     
     return (
         <div className='ServerOrderSummary'>
-            <ul id='ServerOrderList'>{listItems}</ul>
+            <div>Total = ${total}</div>
+            <div>Number of items={
+                _order.length
+                }</div>
+            
+            {(_order || []).map((item, index) => (
+            <ServerCard
+              item={item}
+              index={index}
+              removeItem={removeItem}
+            />
+            ))}
         </div>
     );
 }
@@ -127,6 +158,8 @@ export default function Server() {
     const [drinks, setDrinks] = useState([]);
     const [extras, setExtras] = useState([]);
     const [seasonal, setSeasonal] = useState([]);
+
+
     
     const handleCheckout = () => {
         const url = `http://localhost:5000/api/postOrder?order=${encodeURIComponent(JSON.stringify(_order))}`;
@@ -217,13 +250,13 @@ export default function Server() {
             <h1>Server</h1>
             <div className='ServerMain orderSummary'>
                 <div>Order Summary:</div>
-                <OrderSummary _order={_order}/>
+                <OrderSummary _order={_order} total={_total} setOrder={setOrder} setTotal={setTotal}/>
                 <p id='OrderTotal'>TOTAL = ${_total}</p>
             </div>
             <div className='ServerMain buttons'>
-                <ScrollingButtons _buttonset={buttonset} addToOrder={addToOrder}/>
                 <button className='ServerClearOrder' onClick={clearOrder}>Clear Order</button>
                 <button className='ServerFinishAndPay' onClick={handleCheckout}>Finish & Pay</button>
+                <ScrollingButtons _buttonset={buttonset} addToOrder={addToOrder}/>
             </div>
             <div className='ServerMain sidePanel'>
                 <SidePanel setChoice={setButtonChoice}/>
