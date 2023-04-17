@@ -70,11 +70,11 @@ function ServerCard({item, index, removeItem}){
     // will have the item, price, and delete button
     return (
         <div className='serverCard'> 
-            <div>{item.name}...${item.price}</div>
-            <button class="deletebutton" onClick={() => removeItem(index)}>
+            <div className='text'>{item.name}</div>
+            <div className='text'>${item.price}</div>
+            <button className="deletebutton" onClick={() => removeItem(index)}>
                 <span className='text'>X</span>
             </button>
-            
         </div>
     );
 }
@@ -97,12 +97,6 @@ function SidePanel({setChoice}) {
 
 
 function OrderSummary({_order, total, setOrder, setTotal}){
-    const listItems = _order.map(item =>
-        <li>
-            <ServerCard item={item} index={item}></ServerCard>
-            <p>{item.name}......{item.price}</p>
-        </li>
-    )
    
     const removeItem = (index) => {
         setTotal(Math.round((total - _order[index].price)*100)/100);
@@ -112,18 +106,17 @@ function OrderSummary({_order, total, setOrder, setTotal}){
     
     return (
         <div className='ServerOrderSummary'>
-            <div>Total = ${total}</div>
-            <div>Number of items={
-                _order.length
-                }</div>
-            
-            {(_order || []).map((item, index) => (
-            <ServerCard
-              item={item}
-              index={index}
-              removeItem={removeItem}
-            />
-            ))}
+            <div className='orderTotal'>Total = ${total}</div>
+            <div>Number of items={_order.length}</div>
+            <div className='orderSummaryGrid'>
+                {(_order || []).map((item, index) => (
+                <ServerCard
+                item={item}
+                index={index}
+                removeItem={removeItem}
+                />
+                ))}
+            </div>
         </div>
     );
 }
@@ -141,7 +134,7 @@ function ScrollingButtons({_buttonset, addToOrder}){
     const listItems = _buttonset.map(item => 
         <ServerButton item={item} addToOrder={addToOrder}></ServerButton>
     )
-    return (<div>{listItems}</div>);
+    return (<div className='buttonGrid'>{listItems}</div>);
 }
 
 export default function Server() {
@@ -171,6 +164,7 @@ export default function Server() {
             console.log(error);
         })
         .finally(() =>{
+            console.log(_order);
             clearOrder();
         })
     }
@@ -249,13 +243,12 @@ export default function Server() {
         <div className='ServerMain'>
             <h1>Server</h1>
             <div className='ServerMain orderSummary'>
-                <div>Order Summary:</div>
+                <h2>Order Summary:</h2>
+                <button className='ServerClearOrder' onClick={clearOrder}>Clear Order</button>
+                <button id='finishandpay' className='ServerFinishAndPay' onClick={handleCheckout}>Finish & Pay</button>
                 <OrderSummary _order={_order} total={_total} setOrder={setOrder} setTotal={setTotal}/>
-                <p id='OrderTotal'>TOTAL = ${_total}</p>
             </div>
             <div className='ServerMain buttons'>
-                <button className='ServerClearOrder' onClick={clearOrder}>Clear Order</button>
-                <button className='ServerFinishAndPay' onClick={handleCheckout}>Finish & Pay</button>
                 <ScrollingButtons _buttonset={buttonset} addToOrder={addToOrder}/>
             </div>
             <div className='ServerMain sidePanel'>

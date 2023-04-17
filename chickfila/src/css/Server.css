@@ -1,6 +1,6 @@
 .ServerMain {
     width: 100%;
-    height: 40vw;
+    height: 85vh;
     overflow-y: scroll;
     background-color: white;
     outline-style: solid;
@@ -8,33 +8,47 @@
     outline-color: black;
 }
 
-.ServerMain.orderSummary {
+h1 {
+    background-color: #bf2222;
+    color: white;
+    padding:1vh;
+    padding-left:1vw;
+    padding-right:1vw;
+}
+
+.ServerMain .orderSummary {
     width: 30%;
     float: right;
     color: black;
-    
+
 }
 
-#OrderTotal {
+
+.orderTotal {
     text-decoration-line: underline;
     text-decoration-color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: larger;
+    margin:5%;
 }
 
-.ServerMain.buttons {
+.ServerMain .buttons {
     width: 50%;
     float:right;
+    
 }
 
 .ServerMain.sidePanel {
     width: 20%;
     float: left;
+    
 }
 
 .side-panel {
     top: 0;
     left: 0;
     width: 25vw;
-    height: 40vw;
+    height: 80vh;
     background-color: #F8F8F8;
     border-right: 1px solid #CCCCCC;
 }
@@ -67,22 +81,31 @@ display: block;
 }
 
 .ServerButton {
-    padding: 10px;
+    
     margin: 0.2%;
     color:white;
-    background-color: #bf2222;
+    background-color: #515151;
     border-radius: 10px;
+    font-weight: bold;
 }
 
 .ServerClearOrder, .ServerFinishAndPay{
     border-radius: 3px;
-    margin: 0.2%;
+    margin: 0.4%;
     margin-top: 2vh;
+    width: 40%;
+    height: 6vh;
+    transition: 200ms;
+}
+
+.ServerClearOrder:hover, .ServerFinishAndPay:hover {
+    transform: scale(1.01);
+    background-color: #cbcbcb;
 }
 
 .deletebutton {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -103,30 +126,63 @@ display: block;
     font-weight: bold;
    }
    
-   
-   .deletebutton svg {
-    width: 15px;
-    fill: #eee;
-   }
-   
    .deletebutton:hover {
     background: #ff3636;
-   }
-   
-   .deletebutton:hover .icon {
-    width: 150px;
-    border-left: none;
-    transform: translateX(0);
    }
    
    .deletebutton:focus {
     outline: none;
    }
 
-   .serverCard {
+   .orderSummaryGrid {
     margin: auto;
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Creates two columns of equal width */
-    grid-auto-rows: minmax(70px, auto); /* Specifies the height of each row */
-    grid-gap: 10px; /* Adds a 10px gap between grid items */
+    width: 98%;
+    grid-template-columns: 1fr; 
+    grid-auto-rows: minmax(5vh, auto); 
+    
+    border-width: 2px;
+    border-style: solid;
+    border-color:rgb(0, 0, 0);
+    justify-items: center;
   }
+
+  .serverCard {
+    margin: auto;
+    display: grid;
+    width: 100%;
+    grid-template-columns: 2fr 0.1fr 1fr; /* Creates two columns of equal width */
+    grid-auto-rows: minmax(5vh, auto); /* Specifies the height of each row */
+    grid-gap: 10px; /* Adds a 10px gap between grid items */
+    border-top-width: 2px;
+    border-top-style: solid;
+    border-top-color:rgb(0, 0, 0);
+    justify-items: center;
+    padding-left: 10px;
+    padding-top:10px;
+  }
+  .serverCard:first-child {
+    border-top-width: 0px;
+  }
+  .serverCard:nth-child(2n){
+    background-color: #cbcbcb;
+  }
+
+  .serverCard text {
+    margin: auto;
+  }
+
+  .buttonGrid{
+    margin:auto;
+    padding:2vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-auto-rows: minmax(70px, auto); /* Specifies the height of each row */
+    grid-gap: 10px; /* Adds a 10px gap between grid items **/
+  }
+
+  .ServerButton:nth-child(2n) {
+    background-color:#6b6b6b;
+  }
+
+   
