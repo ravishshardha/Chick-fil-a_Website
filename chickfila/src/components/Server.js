@@ -242,17 +242,19 @@ export default function Server() {
     return (
         <div className='ServerMain'>
             <h1>Server</h1>
-            <div className='ServerMain orderSummary'>
-                <h2>Order Summary:</h2>
-                <button className='ServerClearOrder' onClick={clearOrder}>Clear Order</button>
-                <button id='finishandpay' className='ServerFinishAndPay' onClick={handleCheckout}>Finish & Pay</button>
-                <OrderSummary _order={_order} total={_total} setOrder={setOrder} setTotal={setTotal}/>
-            </div>
-            <div className='ServerMain buttons'>
-                <ScrollingButtons _buttonset={buttonset} addToOrder={addToOrder}/>
-            </div>
-            <div className='ServerMain sidePanel'>
-                <SidePanel setChoice={setButtonChoice}/>
+            <div className='ServerMainContents'>
+                <div className='ServerMainContents orderSummary'>
+                    <h2>Order Summary:</h2>
+                    <button className='ServerClearOrder' onClick={clearOrder}>Clear Order</button>
+                    <button id='finishandpay' className='ServerFinishAndPay' onClick={handleCheckout}>Finish & Pay</button>
+                    <OrderSummary _order={_order} total={_total} setOrder={setOrder} setTotal={setTotal}/>
+                </div>
+                <div className='ServerMainContents buttons'>
+                    <ScrollingButtons _buttonset={buttonset} addToOrder={addToOrder}/>
+                </div>
+                <div className='ServerMainContents sidePanel'>
+                    <SidePanel setChoice={setButtonChoice}/>
+                </div>
             </div>
         </div>
     );

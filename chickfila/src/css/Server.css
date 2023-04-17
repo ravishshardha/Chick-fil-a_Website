@@ -1,7 +1,7 @@
-.ServerMain {
+.ServerMainContents {
     width: 100%;
-    height: 85vh;
-    overflow-y: scroll;
+    height: 75vh;
+    
     background-color: white;
     outline-style: solid;
     outline-width: 3px;
@@ -16,11 +16,11 @@ h1 {
     padding-right:1vw;
 }
 
-.ServerMain .orderSummary {
+.ServerMainContents .orderSummary {
     width: 30%;
     float: right;
     color: black;
-
+    
 }
 
 
@@ -32,16 +32,16 @@ h1 {
     margin:5%;
 }
 
-.ServerMain .buttons {
+.ServerMainContents .buttons {
     width: 50%;
     float:right;
-    
+    overflow-y: scroll;
 }
 
-.ServerMain.sidePanel {
+.ServerMainContents .sidePanel {
     width: 20%;
     float: left;
-    
+    overflow-y: scroll;
 }
 
 .side-panel {
@@ -51,6 +51,7 @@ h1 {
     height: 80vh;
     background-color: #F8F8F8;
     border-right: 1px solid #CCCCCC;
+    overflow-y: scroll;
 }
 
 .side-panel ul {
@@ -139,21 +140,23 @@ display: block;
     display: grid;
     width: 98%;
     grid-template-columns: 1fr; 
-    grid-auto-rows: minmax(5vh, auto); 
+    grid-auto-rows: 7vh; 
     
     border-width: 2px;
     border-style: solid;
     border-color:rgb(0, 0, 0);
     justify-items: center;
+    overflow-y: scroll;
+    height: 40vh;
   }
 
   .serverCard {
     margin: auto;
     display: grid;
     width: 100%;
-    grid-template-columns: 2fr 0.1fr 1fr; /* Creates two columns of equal width */
-    grid-auto-rows: minmax(5vh, auto); /* Specifies the height of each row */
-    grid-gap: 10px; /* Adds a 10px gap between grid items */
+    grid-template-columns: 2fr 0.1fr 1fr; 
+    grid-auto-rows: minmax(5.5vh, auto); 
+    grid-gap: 10px; 
     border-top-width: 2px;
     border-top-style: solid;
     border-top-color:rgb(0, 0, 0);
@@ -167,6 +170,11 @@ display: block;
   .serverCard:nth-child(2n){
     background-color: #cbcbcb;
   }
+  .serverCard:last-child{
+    border-bottom-width: 2px;
+    border-bottom-color: black;
+    border-bottom-style: solid;
+  }
 
   .serverCard text {
     margin: auto;
@@ -177,12 +185,24 @@ display: block;
     padding:2vw;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-auto-rows: minmax(70px, auto); /* Specifies the height of each row */
-    grid-gap: 10px; /* Adds a 10px gap between grid items **/
+    grid-auto-rows: minmax(70px, auto); 
+    grid-gap: 10px; 
   }
 
   .ServerButton:nth-child(2n) {
     background-color:#6b6b6b;
   }
 
-   
+  
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: rgb(235, 235, 235);
+    box-shadow: inset 0 0 0 1px black;
+  }
+  
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #cbcbcb;
+    
+    box-shadow: inset 0 0 0 1px black;
+  }
