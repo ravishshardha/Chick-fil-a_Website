@@ -2,64 +2,70 @@ import React from 'react'
 import { useState, useEffect } from "react";
 import '../css/Server.css'
 // hardcoded for now
-const menuitems = [
-    {
-      id: 1,
-      text: "Chicken Sandwich",
-      price: 5.99,
-      type: "entree",
-      url: "https://www.cfacdn.com/img/order/menu/Online/Entrees/Jul19_CFASandwich_pdp.png",
-    },
-    {
-      id: 2,
-      text: "Chicken Sandwich",
-      price: 5.99,
-      type: "entree",
-      url: "https://www.cfacdn.com/img/order/menu/Online/Entrees/Jul19_CFASandwich_pdp.png",
-    },
-    {
-      id: 3,
-      text: "Chicken Sandwich",
-      price: 5.99,
-      type: "entree",
-      url: "https://www.cfacdn.com/img/order/menu/Online/Entrees/Jul19_CFASandwich_pdp.png",
-    },
-    {
-      id: 4,
-      text: "Chicken Sandwich",
-      price: 5.99,
-      type: "entree",
-      url: "https://www.cfacdn.com/img/order/menu/Online/Entrees/Jul19_CFASandwich_pdp.png",
-    },
-    {
-      id: 5,
-      text: "Chick-fil-A® Lemonade",
-      price: 6.99,
-      type: "drink",
-      url: "https://www.cfacdn.com/img/order/menu/Online/Drinks/lemonade_pdp.png",
-    },
-    {
-      id: 6,
-      text: "Side salad",
-      price: 3.99,
-      type: "side",
-      url: "https://www.cfacdn.com/img/order/menu/Online/Salads%26wraps/sswSalad_spicyGrilled_pdp.png",
-    },
-    {
-      id: 7,
-      text: "Brownie",
-      price: 3.99,
-      type: "extra",
-      url: "https://www.cfacdn.com/img/order/COM/Menu_Refresh/Treats/Treats%20PDP/031717_FudgeChunkBrownie_PDP.png",
-    },
-    {
-      id: 8,
-      text: "Seasonal Item",
-      price: 3.99,
-      type: "seasonal",
-      url: "https://cdn-icons-png.flaticon.com/512/4698/4698319.png",
-    },
-  ];
+// const menuitems = [
+//     {
+//       id: 1,
+//       text: "Chicken Sandwich",
+//       price: 5.99,
+//       type: "entree",
+//       url: "https://www.cfacdn.com/img/order/menu/Online/Entrees/Jul19_CFASandwich_pdp.png",
+//     },
+//     {
+//       id: 2,
+//       text: "Chicken Sandwich",
+//       price: 5.99,
+//       type: "entree",
+//       url: "https://www.cfacdn.com/img/order/menu/Online/Entrees/Jul19_CFASandwich_pdp.png",
+//     },
+//     {
+//       id: 3,
+//       text: "Chicken Sandwich",
+//       price: 5.99,
+//       type: "entree",
+//       url: "https://www.cfacdn.com/img/order/menu/Online/Entrees/Jul19_CFASandwich_pdp.png",
+//     },
+//     {
+//       id: 4,
+//       text: "Chicken Sandwich",
+//       price: 5.99,
+//       type: "entree",
+//       url: "https://www.cfacdn.com/img/order/menu/Online/Entrees/Jul19_CFASandwich_pdp.png",
+//     },
+//     {
+//       id: 5,
+//       text: "Chick-fil-A® Lemonade",
+//       price: 6.99,
+//       type: "drink",
+//       url: "https://www.cfacdn.com/img/order/menu/Online/Drinks/lemonade_pdp.png",
+//     },
+//     {
+//       id: 6,
+//       text: "Side salad",
+//       price: 3.99,
+//       type: "side",
+//       url: "https://www.cfacdn.com/img/order/menu/Online/Salads%26wraps/sswSalad_spicyGrilled_pdp.png",
+//     },
+//     {
+//       id: 7,
+//       text: "Brownie",
+//       price: 3.99,
+//       type: "extra",
+//       url: "https://www.cfacdn.com/img/order/COM/Menu_Refresh/Treats/Treats%20PDP/031717_FudgeChunkBrownie_PDP.png",
+//     },
+//     {
+//       id: 8,
+//       text: "Seasonal Item",
+//       price: 3.99,
+//       type: "seasonal",
+//       url: "https://cdn-icons-png.flaticon.com/512/4698/4698319.png",
+//     },
+//   ];
+
+// features I wanna add
+// total & number of items at top
+// display item, individual price, and count on each list item
+
+
 
 function SidePanel({setChoice}) {
     return (
@@ -80,7 +86,7 @@ function SidePanel({setChoice}) {
 function OrderSummary({_order, total}){
     const listItems = _order.map(item =>
         <li>
-            <p>{item.text}......{item.price}</p>
+            <p>{item.name}......{item.price}</p>
         </li>
     )
     
@@ -95,7 +101,7 @@ function ServerButton({item, addToOrder}){
     
     return (
         <button className='ServerButton' onClick={() => addToOrder(item)}>
-            {item.text} {item.price}
+            {item.name} {item.price}
         </button>
     );
 }
@@ -111,6 +117,7 @@ export default function Server() {
     const [_total, setTotal] = useState(0.0);
     const [_order, setOrder] = useState([]);
     const clearOrder = () => {setOrder([]); setTotal(0.0);};
+    const [menuitems, setMenuItems] = useState([]);
     const [buttonset, setButtons] = useState([]);
     const addToOrder = (product) => {setOrder([..._order, product]);
         setTotal(Math.round((_total + product.price)*100)/100 );
@@ -121,8 +128,18 @@ export default function Server() {
     const [extras, setExtras] = useState([]);
     const [seasonal, setSeasonal] = useState([]);
     
-
-
+    // change the menuitems
+    useEffect(() => {
+        fetch('http://localhost:5000/api/menu')
+            .then(response => response.json())
+            .then( data => {
+                setMenuItems(data);
+                console.log(data);
+            })
+            .catch(error => console.log(error));
+    }, [])
+    
+    // update on menu change
     useEffect(() => {
         var _entree = [];
         var _sides = [];
@@ -157,7 +174,7 @@ export default function Server() {
 
         setButtons(menuitems);
         
-    },[])
+    },[menuitems])
 
     const setButtonChoice = (_choice) => {
         switch (_choice){
