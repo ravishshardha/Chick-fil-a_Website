@@ -110,7 +110,6 @@ app.get('/api/addOrder', (req, res) => {
     console.log(itemlist);
     console.log(price);
     console.log(ingredientList);
-
     // rand employee ID
     const min = 100000;
     const max = 100100;
@@ -129,7 +128,6 @@ app.get('/api/addOrder', (req, res) => {
         const ingredientMap = parseIngredientList(ingredientString); // create map from ingredient list
 
         for (const [key, value] of ingredientMap) {
-          console.log("here");
           // find current amount
           client.query('SELECT amount FROM ingredients WHERE id = $1',  [key], (error2, result2) => {
             if (error2) {
