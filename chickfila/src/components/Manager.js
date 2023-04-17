@@ -4,31 +4,33 @@ import Table from './GeneralTable'
 import Refresh from "./manager-components/Refresh";
 import ManagerMenuNavBar from './manager-components/ManagerMenuNavBar.jsx';
 import ManagerOrderNavBar from "./manager-components/ManagerOrderNavBar";
+import ManagerIngredientNavBar from "./manager-components/ManagerIngredientNavBar";
+import ManagerExtrasNavBar from "./manager-components/ManagerExtrasNavBar";
 
 const orderData = [
     {
         orderid: 1,
         time: "Monday",
         price: 20.0,
-        star_sign: "Taurus",
+        items: "Chicken Sandwich, Lemonade",
     },
     {
         orderid: 2,
         time: "Tuesday",
         price: 30.0,
-        star_sign: "Cancer",
+        items: "Spicy Chicken Sandwich Sunjoy",
     },
     {
         orderid: 3,
         time: "Wednesday",
         price: 40.0,
-        star_sign: "Pickles"
+        items: "Chicken Sandwich, Lemonade",
     },
     {
         orderid: 3,
         time: "Wednesday",
         price: 40.0,
-        star_sign: "Virgo",
+        items: "Chicken Sandwich, Lemonade",
     },
 ]
 
@@ -137,9 +139,6 @@ function Orders(){
                 <hr></hr>
             </div>
                 <div className='managerOrders viewTable'>
-                <p>[TODO: fill with information about orders]</p>
-                <p>[order table]</p>
-                <p>[Needs a table, and this table will be filled with orders.]</p>
                 <div className='scrollingTable'>
                     <Table data={orderData}/>
                 </div>
@@ -159,8 +158,6 @@ function Menu(){
                 <Refresh />
             </div>
             <div className='managerMenu viewTable'>
-                <p>[TODO fill with table of menu items, similar to menu view, but populated with more information]</p>
-                <p>[Needs a table of menu items.]</p>
                 <div className='scrollingTable'>
                     <Table data={menuItems}/>
                 </div>
@@ -175,11 +172,9 @@ function Inventory(){
         <div className='managerInventory'>
             <div className='managerInventory manage'>
                 <h2>Inventory</h2>
-                <p>[TODO: manager should be able to edit inventory over here]</p>
+                <ManagerIngredientNavBar />
             </div>
             <div className='managerInventory viewTable'>
-                <p>[TODO fill with a table of ingredient information]</p>
-                <p>[Needs a table of menu items.]</p>
                 <div className='scrollingTable'>
                     <Table data={inventory}/>
                 </div>
@@ -191,7 +186,7 @@ function Inventory(){
 
 function Review() {
     return (
-        <div class="card">
+        <div class="rcard">
             <div class="stars">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="star">
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
@@ -230,7 +225,6 @@ function Review() {
             — Claire D
         </div>
         </div>
-
     );
 }
 
@@ -239,9 +233,7 @@ function Extras(){
         <div className='managerExtras'>
             <div className='managerExtras manage'>
                 <h2>Extra Controls</h2>
-                <p>[TODO: Manager has access to extra controls here]</p>
-                <button>Generate What Sales Together</button> <br></br> <br></br>
-                <button>Generate Restock Report</button>
+                <ManagerExtrasNavBar />
             </div>
             <div className='managerExtras viewTable'>
                 <p>Extra controls for manager, on previous project this was What sales together and Excess report.</p>
