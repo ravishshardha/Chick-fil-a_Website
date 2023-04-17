@@ -128,6 +128,19 @@ export default function Server() {
     const [extras, setExtras] = useState([]);
     const [seasonal, setSeasonal] = useState([]);
     
+    const handleCheckout = () => {
+        const url = `http://localhost:5000/api/postOrder?order=${encodeURIComponent(JSON.stringify(_order))}`;
+        fetch(url)
+        .then(response => {
+            console.log(response);
+        })
+        .catch(error => {
+            console.log(error);
+        })
+        .finally(() =>{
+            clearOrder();
+        })
+    }
     // change the menuitems
     useEffect(() => {
         fetch('http://localhost:5000/api/menu')
@@ -210,7 +223,7 @@ export default function Server() {
             <div className='ServerMain buttons'>
                 <ScrollingButtons _buttonset={buttonset} addToOrder={addToOrder}/>
                 <button className='ServerClearOrder' onClick={clearOrder}>Clear Order</button>
-                <button className='ServerFinishAndPay'>Finish & Pay</button>
+                <button className='ServerFinishAndPay' onClick={handleCheckout}>Finish & Pay</button>
             </div>
             <div className='ServerMain sidePanel'>
                 <SidePanel setChoice={setButtonChoice}/>
