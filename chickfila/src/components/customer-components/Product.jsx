@@ -10,10 +10,12 @@ const Product = ({ product, indId, addProduct, flag }) => {
           variant="top"
           src={product.url}
           alt="picture for the menu item"
+          style={{maxWidth: "414px", 
+          maxHeight: "414px"}}
         />
         <Card.Body>
-          <Card.Title>{product.text}</Card.Title>
-          <Card.Text>{product.price}</Card.Text>
+          <Card.Title>{product.name}</Card.Title>
+          <Card.Text>${product.price}</Card.Text>
           {flag && (
             <Button variant="danger" onClick={() => addProduct(product)}>
             Order Now
