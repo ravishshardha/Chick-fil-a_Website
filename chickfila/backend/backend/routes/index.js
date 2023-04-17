@@ -94,27 +94,42 @@ app.get('/api/addOrder', (req, res) => {
     console.log(nextOrderId)
     
     // insert to DB
-    const itemlist = ["Chicken Sandwich"];  // TEST INPUTS
+    // parse input  // TEST STRING
+    // const jsonString = req.query.order;
+    const jsonString = '[{"id":0,"name":"Chicken Sandwich","price":4.49,"type":"entree","ingredients":"(2, 7) (1, 0) (3, 11) (2, 53) (1, 72)","url":"https://www.cfacdn.com/img/order/menu/Online/Entrees/Jul19_CFASandwich_pdp.png%22%7D]"},{"id":1,"name":"Milkshake","price":10.49,"type":"entree","ingredients":"(2, 7) (1, 0) (3, 11) (2, 53) (1, 72)","url":"https://www.cfacdn.com/img/order/menu/Online/Entrees/Jul19_CFASandwich_pdp.png%22%7D]"}]';
+    const data = JSON.parse(jsonString);
+
+    let itemlist = [];
+    let price = 0.0;
+    let ingredientList = [];
+    for (let i = 0; i < data.length; i++) {
+      itemlist.push(data[i].name);
+      price = price + parseFloat(data[i].price);
+      ingredientList.push(data[i].ingredients);
+    }
+    console.log(itemlist);
+    console.log(price);
+    console.log(ingredientList);
+
+    // rand employee ID
+    const min = 100000;
+    const max = 100100;
+    const randomInt = Math.floor(Math.random() * (max - min + 1)) + min;
+    console.log(randomInt);
+    const employeeid  = randomInt;
     const itemListString = itemlist.join(", ");
-    const price = 99999;
-    const employeeid  = 9999999;
     client.query('INSERT INTO orderslog1 (time, employeeid, orderid,itemlist,price) VALUES ($1, $2, $3,$4, $5)', [time, employeeid, nextOrderId,itemListString,price]);
     console.log('inserted');
 
-    // loop through itemlist
-    for (let i = 0; i < itemlist.length; i++) {
+    // loop through ingredientList
+    for (let i = 0; i < ingredientList.length; i++) {
       // updating ingredients table
-      const itemName = itemlist[i];
-      // query to find ingredient list
-      client.query('SELECT ingredients FROM menu where name = $1' ,[itemName], (error1, result1) => {
-        if (error1) {
-          console.log("unable to connect");
-          throw error1;
-        }
-        const ingredientString = result1.rows[0].ingredients;
+        const ingredientString = ingredientList[i];
+        console.log(ingredientString);
         const ingredientMap = parseIngredientList(ingredientString); // create map from ingredient list
-        
+
         for (const [key, value] of ingredientMap) {
+          console.log("here");
           // find current amount
           client.query('SELECT amount FROM ingredients WHERE id = $1',  [key], (error2, result2) => {
             if (error2) {
@@ -124,7 +139,7 @@ app.get('/api/addOrder', (req, res) => {
             const amountString = result2.rows[0].amount;
             const currentAmount = parseInt(amountString, 10);
             console.log(currentAmount);
-             // updating inventory w subtraction
+             //updating inventory w subtraction
             client.query('UPDATE ingredients SET amount = $1 WHERE id = $2',  [currentAmount - value, key], (error3, result3) => {
               if (error3) {
                   console.log("unable to connect");
@@ -132,9 +147,8 @@ app.get('/api/addOrder', (req, res) => {
               }
               console.log(`Updated ${result3.rowCount} row(s)`);
               });
-          });
+           });
         }
-      });
     }
   });
 });
