@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+.bodyHome{
+    overflow-x: hidden;
+}
+/* Navigation bar */
+.navHome {
+    display: inline;
+    background-color: white;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.nav-links {
+    list-style-type: none;
+    text-align: center;
+    background-color: #e8193a;
+    padding: 10px;
+    font-family: 'Bebas Neue';
+    letter-spacing: 3px;
+}
+
+.nav-links li {
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.nav-links li a {
+    color: white;
+    display: block;
+    font-size: 18px;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-links li a:hover {
+    background-color: white;
+    color: #e8193a;
+}
+
+/* Footer cow image */
+.cowFooter img{
+    width: 40vw;   
+    position: absolute;
+    left: 30vw;
+    bottom: 0;
+}
+
+.cowFooter {
+    background-color: white;
+    position: relative;
+    align-content: center;
+    width: 100vw;
+    height: 1000px;
+}
+
+/* Cow Side Image */
+.cowSide img{
+    height:70vh;
+}
+
+.cowSide h1Home{
+    font-size: xx-large;    
+}
+
+
+
+/* Flip card for Log-in info  */
+.cardH {
+    width: 300px;
+    height: 200px;
+    position: relative;
+    perspective: 1000px;
+    border-color: white;
+    transition: 2.5s;
+    transform-style: preserve-3d;
+}
+
+.cardH-front,
+.cardH-back {
+    position: absolute;
+    width:400px;
+    height: 400px;
+    transition: transform 1.0s;
+    backface-visibility: hidden;
+    color: white;
+}
+
+.cardH-front {
+    background-color:#e8193a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 40pt;
+    font-family: 'Bebas Neue';
+    letter-spacing: 3px;
+    backface-visibility: hidden;
+}
+
+.cardH-back {
+    background-color: #e8193a;
+    transform: rotateY(180deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden;
+}
+.cardH label{
+    font-weight: bold;
+    font-size: xx-large;
+    font-family: 'Bebas Neue';
+    letter-spacing: 3px;
+}
+.cardH-back input {
+    margin: 10px;
+    padding: 5px;
+    width: 200px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.cardH:hover .cardH-front {
+    transform: rotateY(180deg);
+}
+
+.cardH:hover .cardH-back {
+    transform: rotateY(0deg);
+}
+
+#leftCard{
+    float:left;
+    margin-left: 22%;
+}
+#rightCard {
+    float: right;
+    margin-right: 28%;
+}
