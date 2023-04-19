@@ -196,6 +196,18 @@ app.get('/api/salesReport', (req, res) => {
   });
 });
 
+//excess for now:
+app.get('/api/excessReport', (req, res) => {
+  client.query('SELECT * FROM ingredients where amount<100;', (error, results) => {
+    if (error) {
+      console.log("unable to connect");
+      throw error;
+    }
+    console.log("sent of excess report");
+    res.json(results.rows);
+  });
+});
+
 
 app.listen(5000, () => {
   console.log('Server started on port 5000');
