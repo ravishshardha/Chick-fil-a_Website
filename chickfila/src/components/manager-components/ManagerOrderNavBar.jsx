@@ -43,13 +43,32 @@ function ManagerOrderNavBar() {
 }
 
 function SalesReportTab() {
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+
+  const handleStartDateChange = (event) => {
+    setStartDate(event.target.value);
+  }
+
+  const handleEndDateChange = (event) => {
+    setEndDate(event.target.value);
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('Start Date:', startDate);
+    console.log('End Date:', endDate);
+  }
+
   return (
     <div>
+      <form onSubmit={handleSubmit}>
         <label>Start Date: </label>
-        <input type="datetime-local"></input> <br></br> <br></br>
+        <input type="datetime-local" value={startDate} onChange={handleStartDateChange}></input> <br></br> <br></br>
         <label>End Date: </label>
-        <input type="datetime-local"></input> <br></br><br></br>
+        <input type="datetime-local" value={endDate} onChange={handleEndDateChange}></input> <br></br><br></br>
         <GenerateSalesReport />
+      </form>
     </div>
   );
 }

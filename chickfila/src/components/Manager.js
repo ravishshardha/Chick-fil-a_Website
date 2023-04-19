@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import '../css/Manager.css'
 import Table from './GeneralTable'
 import Refresh from "./manager-components/Refresh";
@@ -34,49 +34,34 @@ const orderData = [
     },
 ]
 
-const menuItems = [
-    {
-        id: 1,
-        name: "Chicken Sandwich",
-        price: 5.99,
-    },
-    {
-        id: 2,
-        name: "Spicy Chicken Sandwich",
-        price: 7.99,
-    },
-    {
-        id: 3,
-        name: "Chicken Nuggets (5)",
-        price: 4.99,
-    },
-    {
-        id: 4,
-        name: "Side Salad",
-        price: 2.99,
-    },
-]
-
 const inventory = [
     {
         id: 1,
         name: "Chicken patty",
-        stock: 50,
+        vendor: "hello",
+        stock: 4,
+        minstock: 50,
     },
     {
         id: 2,
         name: "Buns",
+        vendor: "hellochicken",
         stock: 70,
+        minstock: 50,
     },
     {
         id: 3,
         name: "Nugget",
+        vendor: "hellochicken",
         stock: 40,
+        minstock: 50,
     },
     {
         id: 4,
         name: "Lettuce",
+        vendor: "hellochicken",
         stock: 80,
+        minstock: 50,
     },
 ]
 
@@ -104,7 +89,7 @@ function setActiveTab(tabName) {
 }
 
 
-function TabMenu() {
+function TabMenu({ menuItems}) {
     // const [activeTab, setActiveTab] = React.useState("orders");
     
       return (
@@ -115,7 +100,7 @@ function TabMenu() {
             </div>
             <button class="tab-button" onClick={() => setActiveTab("menu")}>Menu</button>
             <div class="tab-content" id="menu-content">
-                <Menu/>
+                <Menu menuItems={menuItems} />
             </div>
             <button class="tab-button" onClick={() => setActiveTab("inventory")}>Inventory</button>
             <div class="tab-content" id="inventory-content">
@@ -148,7 +133,7 @@ function Orders(){
     );
 }
 
-function Menu(){
+function Menu({menuItems}){
     return (
         <div className='managerMenu'>
             <div className='managerMenu manage'>
@@ -159,7 +144,7 @@ function Menu(){
             </div>
             <div className='managerMenu viewTable'>
                 <div className='scrollingTable'>
-                    <Table data={menuItems}/>
+                    <Table data={menuItems }/>
                 </div>
             </div>
             <hr></hr>
@@ -244,6 +229,19 @@ function Extras(){
 }
 
 export default function Manager(){
+    const [menuItems, setMenuItems] = useState([]);
+
+    //change the menu items
+    useEffect(() => {
+        fetch('http://localhost:5000/api/menu')
+            .then(response => response.json())
+            .then( data => {
+                setMenuItems(data);
+                console.log(data);
+            })
+            .catch(error => console.log(error));
+    }, [])
+
     return (
         <div className='ManagerMain'>
             <h1 class="ManagerMain header">Manager Dashboard</h1> <br></br>
@@ -257,7 +255,7 @@ export default function Manager(){
                 <img class="managerFoodImage" src="https://www.longislandpress.com/wp-content/uploads/2013/12/Chick-fil-A.png" alt="chickfila food"></img>
             </div>
             <br></br><br></br>
-            <TabMenu/>
+            <TabMenu menuItems={menuItems}/>
         </div>
     );
 }
