@@ -89,7 +89,7 @@ function setActiveTab(tabName) {
 }
 
 
-function TabMenu({ menuItems}) {
+function TabMenu({menuItems}) {
     // const [activeTab, setActiveTab] = React.useState("orders");
     
       return (
@@ -144,7 +144,7 @@ function Menu({menuItems}){
             </div>
             <div className='managerMenu viewTable'>
                 <div className='scrollingTable'>
-                    <Table data={menuItems }/>
+                    <Table data={menuItems}/>
                 </div>
             </div>
             <hr></hr>
@@ -222,6 +222,7 @@ function Extras(){
             </div>
             <div className='managerExtras viewTable'>
                 <p>Extra controls for manager, on previous project this was What sales together and Excess report.</p>
+                
             </div>
             <hr></hr>
         </div>
@@ -229,7 +230,7 @@ function Extras(){
 }
 
 export default function Manager(){
-    const [menuItems, setMenuItems] = useState([]);
+    const [menuItems, setMenuItems] = useState(orderData)
 
     //change the menu items
     useEffect(() => {

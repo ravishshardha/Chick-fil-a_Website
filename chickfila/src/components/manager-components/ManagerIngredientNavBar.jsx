@@ -34,13 +34,13 @@ function ManagerIngredientNavBar() {
 }
 
 function RestockTab() {
+  // TODO: probably add onClick to the button to generate the restock report
   return (
     <div>
       <button class="generateButton">Generate Restock Report</button> <br></br> <br></br>
     </div>
   );
 }
-
 
 // function CreateIngrTab() {
 //   const handleSubmit = (event) => {
@@ -63,7 +63,6 @@ function RestockTab() {
 //       </form>
 //     </div>
 //   );
-
 // }
 
 

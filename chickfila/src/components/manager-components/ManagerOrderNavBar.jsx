@@ -1,7 +1,5 @@
 import '../../css/Manager.css'
 import React, { useState } from "react";
-import GenerateXReport from './GenerateXReport';
-import GenerateZReport from './GenerateZReport';
 import GenerateSalesReport from './GenerateSalesReport';
 
 
@@ -22,22 +20,15 @@ function ManagerOrderNavBar() {
           Sales Report
         </div>
         <div
-          className={activeTab === "View X Report" ? "active" : ""}
-          onClick={() => handleTabClick("View X Report")}
+          className={activeTab === "X & Z Reports" ? "active" : ""}
+          onClick={() => handleTabClick("X & Z Reports")}
         >
-          X Report
-        </div>
-        <div
-          className={activeTab === "View Z Report" ? "active" : ""}
-          onClick={() => handleTabClick("View Z Report")}
-        >
-          Z Report
+          X & Z Reports
         </div>
       </div>
 
       {activeTab === "Sales Report" && <SalesReportTab />}
-      {activeTab === "View X Report" && <XReport />}
-      {activeTab === "View Z Report" && <ZReport />}
+      {activeTab === "X & Z Reports" && <XZReport />}
     </div>
   );
 }
@@ -56,6 +47,7 @@ function SalesReportTab() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    // TODO: pass start and end date to backend
     console.log('Start Date:', startDate);
     console.log('End Date:', endDate);
   }
@@ -73,18 +65,40 @@ function SalesReportTab() {
   );
 }
 
-function XReport() {
-  return (
-    <div>
-        <GenerateXReport />
-    </div>
-  );
-}
+function XZReport() {
+  const [selectedDate, setSelectedDate] = useState("");
 
-function ZReport() {
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
+  };
+
+  const handleGenerateZReport = () => {
+    // handle generating Z report with selectedDate
+    console.log('z:',selectedDate);
+  };
+
+  const handleGenerateXReport = () => {
+    // TODO: handle generating X report with selectedDate
+    console.log('x:',selectedDate);
+  };
+
   return (
     <div>
-        <GenerateZReport />
+      <label>Date: </label>
+      <input type="datetime-local" value={selectedDate} onChange={handleDateChange}></input> <br/><br/>
+      <button type="submit" onClick={handleGenerateZReport} class="generateButton">
+        <span>
+            Generate Z Report
+        </span>
+      </button>
+
+      <br/><br/>
+
+      <button type="submit" onClick={handleGenerateXReport} class="generateButton">
+        <span>
+            Generate X Report
+        </span>
+      </button>
     </div>
   );
 }

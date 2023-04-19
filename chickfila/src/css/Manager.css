@@ -13,8 +13,8 @@
 
 
 .scrollingTable {
-    width:70%;
-    height: 20vw;
+    width:100%;
+    height: 40vw;
     overflow-y: scroll;
     margin: auto;
 }
@@ -171,6 +171,26 @@
   }
   
   .managertable-row:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  .table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .table th,
+  .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .table th {
+    background-color: #f2f2f2;
+  }
+  
+  .table-row:nth-child(even) {
     background-color: #f2f2f2;
   }
 
