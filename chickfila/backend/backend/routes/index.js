@@ -166,6 +166,37 @@ app.get('/api/addItem', (req, res) => {
   });
 });
 
+
+
+//new RAVISH changes:
+
+//restock:
+app.get('/api/restockReport', (req, res) => {
+  client.query('SELECT * FROM ingredients where amount<300;', (error, results) => {
+    if (error) {
+      console.log("unable to connect");
+      throw error;
+    }
+    console.log("sent of restock report");
+    res.json(results.rows);
+  });
+});
+
+//sales report:
+app.get('/api/salesReport', (req, res) => {
+  const startDate = req.query.startDate;
+  const endDate = req.query.endDate;
+  client.query('SELECT * FROM orderslog1 WHERE time BETWEEN $1 AND $2;', [startDate, endDate], (error, results) => {
+    if (error) {
+      console.log("unable to connect");
+      throw error;
+    }
+    console.log("sent of sales report");
+    res.json(results.rows);
+  });
+});
+
+
 app.listen(5000, () => {
   console.log('Server started on port 5000');
 });
