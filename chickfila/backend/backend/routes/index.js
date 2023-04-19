@@ -136,6 +136,7 @@ arr.forEach((pair) => {
   return map;
 }
 
+// seaonsal item*
 app.get('/api/addItem', (req, res) => {
   // find id
   client.query('SELECT id FROM menu ORDER BY id DESC LIMIT 1', (error, results) => {
@@ -150,19 +151,56 @@ app.get('/api/addItem', (req, res) => {
   });
 });
 
+app.get('/api/Xreport', (req, res) => {
+  //const inputTime = req.time;
+  const inputTime = '2022-03-07 09:13:53';
+  let newDate = new Date(inputTime);
+  newDate.setHours(newDate.getHours() + 24);
+  console.log(newDate);
 
-// seaonsal item*
-app.get('/api/addItem', (req, res) => {
-  // find id
-  client.query('SELECT id FROM menu ORDER BY id DESC LIMIT 1', (error, results) => {
+  client.query('SELECT * FROM orderslog1 WHERE time between $1 and $2', [inputTime, newDate], (error, results) => {
     if (error) {
       console.log("unable to connect");
       throw error;
     }
-    const myValueString = results.rows[0].id;
-    const nextOrderId = parseInt(myValueString, 10) + 1; 
-    console.log(nextOrderId);
-    //client.query('INSERT INTO Menu (id,name ,price ,type, ingredients,url) VALUES ($1, $2, $3,$4, $5)', [id,itemName ,price ,type, ingredients,url]);
+    console.log("sent");
+    res.json(results.rows);
+  });
+});
+
+app.get('/api/Zreport', (req, res) => {
+
+
+  client.query('SELECT * FROM menu', (error, results) => {
+    if (error) {
+      console.log("unable to connect");
+      throw error;
+    }
+    console.log("sent");
+    res.json(results.rows);
+  });
+});
+
+// inventory query
+app.get('/api/viewInventory', (req, res) => {
+  client.query('SELECT * FROM ingredients', (error, results) => {
+    if (error) {
+      console.log("unable to connect");
+      throw error;
+    }
+    console.log("sent inventry");
+    res.json(results.rows);
+  });
+});
+
+app.get('/api/updateInventory', (req, res) => {
+  client.query('SELECT * FROM menu', (error, results) => {
+    if (error) {
+      console.log("unable to connect");
+      throw error;
+    }
+    console.log("sent");
+    res.json(results.rows);
   });
 });
 
