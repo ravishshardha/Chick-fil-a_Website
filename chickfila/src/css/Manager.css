@@ -16,7 +16,16 @@
     width:100%;
     height: 40vw;
     overflow-y: scroll;
+    overflow-x: scroll;
     margin: auto;
+}
+
+.scrollingTableRestock {
+  width:80%;
+  height: 25vw;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  margin: auto;
 }
 
 .managerdashboardright {
@@ -197,7 +206,7 @@
 /*---------------------managerOrders section----------------------------*/
 
 .managerOrders {
-    height: 30vw;
+    height: 40vw;
 }
 
 .managerOrders.manage {
@@ -642,7 +651,7 @@
 /*---------------------managerInventory section----------------------------*/
 
 .managerInventory {
-    height: 30vw;
+    height: 40vw;
 }
 
 .managerInventory.manage {

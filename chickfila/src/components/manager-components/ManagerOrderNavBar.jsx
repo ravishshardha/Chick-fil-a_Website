@@ -1,6 +1,7 @@
 import '../../css/Manager.css'
 import React, { useState } from "react";
 import GenerateSalesReport from './GenerateSalesReport';
+import Table from '../GeneralTable';
 
 
 function ManagerOrderNavBar() {
@@ -47,9 +48,27 @@ function SalesReportTab() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const startDateObj = new Date(startDate);
+    const endDateObj = new Date(endDate);
+    const timezoneOffset = startDateObj.getTimezoneOffset() * 60000; // in milliseconds
+    const formattedStartDate = new Date(startDateObj.getTime() - timezoneOffset).toISOString().replace('T', ' ').substring(0, 19);
+    const formattedEndDate = new Date(endDateObj.getTime() - timezoneOffset).toISOString().replace('T', ' ').substring(0, 19);
     // TODO: pass start and end date to backend
-    console.log('Start Date:', startDate);
-    console.log('End Date:', endDate);
+    console.log('Start Date:', formattedStartDate);
+    console.log('End Date:', formattedEndDate);
+
+    const url = `http://localhost:5000/api/salesReport?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
+    fetch(url)
+    .then(response => {
+      console.log(response)
+      response.json()
+    })
+    .then(data => {
+      console.log(data)
+    })
+    .catch(error => {
+      console.error(error)
+    })
   }
 
   return (

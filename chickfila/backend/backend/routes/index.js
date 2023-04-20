@@ -26,7 +26,7 @@ client.connect((err) => {
 
 // get request for orders
 app.get('/api/retrieveorders', (req, res) => {
-  client.query('SELECT * FROM orderslog1', (error, results) => {
+  client.query('SELECT * FROM orderslog1 LIMIT 30', (error, results) => {
     if (error) {
       console.log("unable to connect");
       throw error;
@@ -39,6 +39,18 @@ app.get('/api/retrieveorders', (req, res) => {
 // get request for menu
 app.get('/api/menu', (req, res) => {
   client.query('SELECT * FROM menu', (error, results) => {
+    if (error) {
+      console.log("unable to connect");
+      throw error;
+    }
+    console.log("sent");
+    res.json(results.rows);
+  });
+});
+
+// get request for ingredients
+app.get('/api/ingredients', (req, res) => {
+  client.query('SELECT * FROM ingredients', (error, results) => {
     if (error) {
       console.log("unable to connect");
       throw error;
@@ -147,6 +159,19 @@ app.get('/api/addItem', (req, res) => {
     const nextOrderId = parseInt(myValueString, 10) + 1; 
     console.log(nextOrderId);
     //client.query('INSERT INTO Menu (id,name ,price ,type, ingredients,url) VALUES ($1, $2, $3,$4, $5)', [id,itemName ,price ,type, ingredients,url]);
+  });
+});
+
+app.get('/api/salesReport', (req, res) => {
+  const startDate = req.query.startDate;
+  const endDate = req.query.endDate;
+  client.query('SELECT * FROM orderslog1 WHERE time BETWEEN $1 AND $2;', [startDate, endDate], (error, results) => {
+    if (error) {
+      console.log("unable to connect");
+      throw error;
+    }
+    console.log("sent of sales report");
+    res.json(results.rows);
   });
 });
 

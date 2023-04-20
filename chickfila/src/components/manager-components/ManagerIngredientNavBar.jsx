@@ -1,6 +1,17 @@
 import '../../css/Manager.css'
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Table from '../GeneralTable';
 import SaveChangesMenu from './SaveChangesMenu';
+
+
+const defaultData = [
+  {
+      orderid: 1,
+      time: "Monday",
+      price: 20.0,
+      items: "Chicken Sandwich, Lemonade",
+  },
+]
 
 
 function ManagerIngredientNavBar() {
@@ -34,11 +45,34 @@ function ManagerIngredientNavBar() {
 }
 
 function RestockTab() {
+  const [ingredients, setIngredients] = useState(defaultData);
+
+  useEffect(() => {
+    // TODO: CHANGE NAME IF BACKEND CHANGES
+    fetch('http://localhost:5000/api/ingredients')
+    .then(response => response.json())
+    .then( data => {
+            setIngredients(data);
+            const filteredIng = data.filter(function(item){return item.amount < 300;});
+
+            if (filteredIng != null){
+              console.log("filtered" + filteredIng);
+              setIngredients(filteredIng);
+            }
+            // console.log(data);
+        })
+        .catch(error => console.log(error));
+}, [])
+
   // TODO: probably add onClick to the button to generate the restock report
   return (
     <div>
-      <button class="generateButton">Generate Restock Report</button> <br></br> <br></br>
+      {/* <button class="generateButton">Generate Restock Report</button> <br></br> <br></br> */}
+      <div className='scrollingTableRestock'>
+        <Table data={ingredients}/>
+      </div>
     </div>
+    
   );
 }
 

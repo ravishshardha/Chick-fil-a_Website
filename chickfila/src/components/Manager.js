@@ -89,14 +89,14 @@ function setActiveTab(tabName) {
 }
 
 
-function TabMenu({menuItems}) {
+function TabMenu({menuItems, orderItems, ingredients}) {
     // const [activeTab, setActiveTab] = React.useState("orders");
     
       return (
         <div class="tab-container">
             <button class="tab-button" onClick={() => setActiveTab("orders")}>Orders</button>
             <div class="tab-content" id="orders-content">
-                <Orders/>
+                <Orders orderItems={orderItems}/>
             </div>
             <button class="tab-button" onClick={() => setActiveTab("menu")}>Menu</button>
             <div class="tab-content" id="menu-content">
@@ -104,7 +104,7 @@ function TabMenu({menuItems}) {
             </div>
             <button class="tab-button" onClick={() => setActiveTab("inventory")}>Inventory</button>
             <div class="tab-content" id="inventory-content">
-                <Inventory/>
+                <Inventory ingredients={ingredients}/>
             </div>
             <button class="tab-button" onClick={() => setActiveTab("extras")}>Extras</button>
             <div class="tab-content" id="extras-content">
@@ -115,7 +115,7 @@ function TabMenu({menuItems}) {
       );
 }
 
-function Orders(){
+function Orders({orderItems}){
     return(
         <div className='managerOrders'>
             <div className='managerOrders manage'>
@@ -125,7 +125,7 @@ function Orders(){
             </div>
                 <div className='managerOrders viewTable'>
                 <div className='scrollingTable'>
-                    <Table data={orderData}/>
+                    <Table data={orderItems}/>
                 </div>
             </div>
             <hr></hr>
@@ -152,7 +152,7 @@ function Menu({menuItems}){
     );
 }
 
-function Inventory(){
+function Inventory({ingredients}){
     return (
         <div className='managerInventory'>
             <div className='managerInventory manage'>
@@ -161,7 +161,7 @@ function Inventory(){
             </div>
             <div className='managerInventory viewTable'>
                 <div className='scrollingTable'>
-                    <Table data={inventory}/>
+                    <Table data={ingredients}/>
                 </div>
             </div>
             <hr></hr>
@@ -222,7 +222,7 @@ function Extras(){
             </div>
             <div className='managerExtras viewTable'>
                 <p>Extra controls for manager, on previous project this was What sales together and Excess report.</p>
-                
+
             </div>
             <hr></hr>
         </div>
@@ -230,7 +230,9 @@ function Extras(){
 }
 
 export default function Manager(){
-    const [menuItems, setMenuItems] = useState(orderData)
+    const [menuItems, setMenuItems] = useState(orderData);
+    const [orderItems, setOrderItems] = useState(orderData);
+    const [ingredients, setIngredients] = useState(orderData);
 
     //change the menu items
     useEffect(() => {
@@ -238,6 +240,27 @@ export default function Manager(){
             .then(response => response.json())
             .then( data => {
                 setMenuItems(data);
+                console.log(data);
+            })
+            .catch(error => console.log(error));
+    }, [])
+
+    useEffect(() => {
+        fetch('http://localhost:5000/api/retrieveorders')
+            .then(response => response.json())
+            .then( data => {
+                setOrderItems(data);
+                console.log(data);
+            })
+            .catch(error => console.log(error));
+    }, [])
+
+    useEffect(() => {
+        // TODO: CHANGE NAME IF BACKEND CHANGES
+        fetch('http://localhost:5000/api/ingredients')
+            .then(response => response.json())
+            .then( data => {
+                setIngredients(data);
                 console.log(data);
             })
             .catch(error => console.log(error));
@@ -256,7 +279,7 @@ export default function Manager(){
                 <img class="managerFoodImage" src="https://www.longislandpress.com/wp-content/uploads/2013/12/Chick-fil-A.png" alt="chickfila food"></img>
             </div>
             <br></br><br></br>
-            <TabMenu menuItems={menuItems}/>
+            <TabMenu menuItems={menuItems} orderItems={orderItems} ingredients={ingredients}/>
         </div>
     );
 }
