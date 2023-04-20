@@ -693,17 +693,13 @@
 /*---------------------managerExtras section----------------------------*/
 
 .managerExtras {
-    height: 30vw;
+    height: 100vh;
+
 }
 
-.managerExtras.manage {
-    width:50%;
-    float:right;
+.managerExtras.salesTogether {
+    width:100%;
     background-color:rgba(200, 200, 200, .6)
 }
 
-.managerExtras.viewTable {
-    width:50%;
-    float:left;
-}
 

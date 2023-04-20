@@ -216,13 +216,9 @@ function Review() {
 function Extras(){
     return (
         <div className='managerExtras'>
-            <div className='managerExtras manage'>
+            <div className='managerExtras salesTogether'>
                 <h2>Extra Controls</h2>
                 <ManagerExtrasNavBar />
-            </div>
-            <div className='managerExtras viewTable'>
-                <p>Extra controls for manager, on previous project this was What sales together and Excess report.</p>
-
             </div>
             <hr></hr>
         </div>

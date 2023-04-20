@@ -16,6 +16,18 @@ const defaultData = [
 
 function ManagerIngredientNavBar() {
   const [activeTab, setActiveTab] = useState("create");
+  const [ingredients, setIngredients] = useState(defaultData);
+
+  useEffect(() => {
+    // TODO: CHANGE NAME IF BACKEND CHANGES
+    fetch('http://localhost:5000/api/ingredients')
+    .then(response => response.json())
+    .then( data => {
+            setIngredients(data);
+            // console.log(data);
+        })
+        .catch(error => console.log(error));
+}, [])
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -38,7 +50,7 @@ function ManagerIngredientNavBar() {
         </div>
       </div>
 
-      {activeTab === "edit" && <EditIngrTab />}
+      {activeTab === "edit" && <EditIngrTab ingredients={ingredients}/>}
       {activeTab === "restock" && <RestockTab />}
     </div>
   );
@@ -62,12 +74,12 @@ function RestockTab() {
             // console.log(data);
         })
         .catch(error => console.log(error));
-}, [])
+  }, [])
 
   // TODO: probably add onClick to the button to generate the restock report
   return (
     <div>
-      {/* <button class="generateButton">Generate Restock Report</button> <br></br> <br></br> */}
+      <button class="generateButton">Generate Restock Report</button> <br></br> <br></br>
       <div className='scrollingTableRestock'>
         <Table data={ingredients}/>
       </div>
@@ -100,14 +112,21 @@ function RestockTab() {
 // }
 
 
-function EditIngrTab() {
+function EditIngrTab({ingredients}) {
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const vendor = document.getElementById('vendor').value;
     const stock = document.getElementById('stock').value;
     const minStock = document.getElementById('minStock').value;
+    
     // TODO: change this to send to db
     console.log(selectedIngredient, vendor, stock, minStock);
+
+    document.getElementById('vendor').value = '';
+    document.getElementById('stock').value = '';
+    document.getElementById('minStock').value = '';
+    
   }
   const [selectedIngredient, setSelectedIngredient] = React.useState("");
 
@@ -115,14 +134,16 @@ function EditIngrTab() {
     setSelectedIngredient(event.target.value);
   };
 
+  const options = ingredients.map(item =>
+    <option value={item.id}>{item.id} {item.name}</option> 
+  );
+
   return (
     <div>
       <div>
           <select className="ingredientDropdown" value={selectedIngredient} onChange={handleChange}>
             <option value="">-- Select an ingredient --</option>
-            <option value="chicken patty">Chicken Patty</option>
-            <option value="nugget">Nugget</option>
-            <option value="lettuce">Lettuce</option>
+            {options}
           </select>
           <p>Selected Ingredient: {selectedIngredient}</p>
         </div>
