@@ -151,7 +151,7 @@ app.get('/api/addItem', (req, res) => {
   });
 });
 
-app.get('/api/Xreport', (req, res) => {
+app.get('/api/Zreport', (req, res) => {
   //const inputTime = req.time;
   const inputTime = '2022-03-07 09:13:53';
   let newDate = new Date(inputTime);
@@ -163,21 +163,30 @@ app.get('/api/Xreport', (req, res) => {
       console.log("unable to connect");
       throw error;
     }
-    console.log("sent");
+    console.log("sentZreport");
     res.json(results.rows);
   });
 });
 
-app.get('/api/Zreport', (req, res) => {
-
-
-  client.query('SELECT * FROM menu', (error, results) => {
+app.get('/api/Xreport', (req, res) => {
+  client.query('SELECT date FROM zreports ORDER BY date DESC LIMIT 1', (error, results) => {
     if (error) {
       console.log("unable to connect");
       throw error;
     }
-    console.log("sent");
-    res.json(results.rows);
+    const mostRecentDate = results.rows[0].date;
+    console.log("most recent report", mostRecentDate);
+    let date = new Date();
+    let currTime = date.toISOString().slice(0, 19).replace('T', ' ');
+    console.log("current time",currTime);
+    client.query('SELECT * FROM orderslog1 WHERE time between $1 and $2',[mostRecentDate,currTime], (error, results) => {
+      if (error) {
+        console.log("unable to connect");
+        throw error;
+      }
+      console.log("sentXreport");
+      res.json(results.rows);
+  });
   });
 });
 
@@ -193,15 +202,12 @@ app.get('/api/viewInventory', (req, res) => {
   });
 });
 
-app.get('/api/updateInventory', (req, res) => {
-  client.query('SELECT * FROM menu', (error, results) => {
-    if (error) {
-      console.log("unable to connect");
-      throw error;
-    }
-    console.log("sent");
-    res.json(results.rows);
-  });
+app.get('/api/addInventory', (req, res) => {
+  const name = "newItem";
+  const vendor = "newVendor";
+  const stock = 0;
+  const restock = 0;
+  client.query('INSERT INTO inventory (id,name,amount,vendor) VALUES ($1, $2, $3,$4,)',[name,vendor,stock,restock]);
 });
 
 app.listen(5000, () => {
