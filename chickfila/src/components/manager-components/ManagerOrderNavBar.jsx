@@ -5,7 +5,7 @@ import Table from '../GeneralTable';
 
 
 function ManagerOrderNavBar({data}) {
-  const [activeTab, setActiveTab] = useState("create");
+  const [activeTab, setActiveTab] = useState("AllOrders");
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);

@@ -15,7 +15,7 @@ const defaultData = [
 
 
 function ManagerIngredientNavBar() {
-  const [activeTab, setActiveTab] = useState("create");
+  const [activeTab, setActiveTab] = useState("edit");
   const [ingredients, setIngredients] = useState(defaultData);
 
   useEffect(() => {

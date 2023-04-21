@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 
 function ManagerExtrasNavBar() {
-  const [activeTab, setActiveTab] = useState("create");
+  const [activeTab, setActiveTab] = useState("What Sales Together");
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
