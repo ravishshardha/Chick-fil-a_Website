@@ -4,7 +4,7 @@ import GenerateSalesReport from './GenerateSalesReport';
 import Table from '../GeneralTable';
 
 
-function ManagerOrderNavBar() {
+function ManagerOrderNavBar({data}) {
   const [activeTab, setActiveTab] = useState("create");
 
   const handleTabClick = (tab) => {
@@ -14,6 +14,12 @@ function ManagerOrderNavBar() {
   return (
     <div>
       <div className="tab-menu">
+        <div
+          className={activeTab === "AllOrders" ? "active" : ""}
+          onClick={() => handleTabClick("AllOrders")}
+        >
+          All Orders
+        </div>
         <div
           className={activeTab === "Sales Report" ? "active" : ""}
           onClick={() => handleTabClick("Sales Report")}
@@ -30,6 +36,7 @@ function ManagerOrderNavBar() {
 
       {activeTab === "Sales Report" && <SalesReportTab />}
       {activeTab === "X & Z Reports" && <XZReport />}
+      {activeTab === "AllOrders" && <OrdersTab data={data}/>}
     </div>
   );
 }
@@ -37,6 +44,7 @@ function ManagerOrderNavBar() {
 function SalesReportTab() {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+  const [reply, setReply] = useState(["default"]);
 
   const handleStartDateChange = (event) => {
     setStartDate(event.target.value);
@@ -59,16 +67,13 @@ function SalesReportTab() {
 
     const url = `http://localhost:5000/api/salesReport?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
     fetch(url)
-    .then(response => {
-      console.log(response)
-      response.json()
-    })
+    .then(response => response.json()) // <-- parse response as JSON
     .then(data => {
-      console.log(data)
+      setReply(data); // <-- set state with parsed JSON data
     })
     .catch(error => {
-      console.error(error)
-    })
+      console.error(error);
+    });
   }
 
   return (
@@ -78,26 +83,53 @@ function SalesReportTab() {
         <input type="datetime-local" value={startDate} onChange={handleStartDateChange}></input> <br></br> <br></br>
         <label>End Date: </label>
         <input type="datetime-local" value={endDate} onChange={handleEndDateChange}></input> <br></br><br></br>
-        <GenerateSalesReport />
+        <GenerateSalesReport response={reply}/>
       </form>
     </div>
   );
 }
 
+function OrdersTab({data}) {
+  return (
+    <div className='scrollingTableOrders'>
+    <Table data={data}/>
+    </div>
+  );
+  
+}
+
 function XZReport() {
   const [selectedDate, setSelectedDate] = useState("");
+  const [reply, setReply] = useState(["hello"]);
 
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
   };
 
-  const handleGenerateZReport = () => {
+  const handleGenerateZReport = (event) => {
+    event.preventDefault();
+    const zDateObj = new Date(selectedDate);
+    const timezoneOffset = zDateObj.getTimezoneOffset() * 60000; // in milliseconds
+    const formattedDate = new Date(zDateObj.getTime() - timezoneOffset).toISOString().replace('T', ' ').substring(0, 19);
     // handle generating Z report with selectedDate
-    console.log('z:',selectedDate);
+    const url = `http://localhost:5000/api/Zreport?zTime=${formattedDate}`;
+
+    console.log('sent zdate to backend:',formattedDate);
+
+    fetch(url)
+    .then(response => response.json()) 
+    .then(data => {
+      setReply(data); 
+    })
+    .catch(error => {
+      console.error(error);
+    });
+
+    console.log('reply: ',reply)
   };
 
   const handleGenerateXReport = () => {
-    // TODO: handle generating X report with selectedDate
+    // TODO: handle generating X report 
     console.log('x:',selectedDate);
   };
 
@@ -118,6 +150,13 @@ function XZReport() {
             Generate X Report
         </span>
       </button>
+
+
+      <div className='scrollingTableSmaller'>
+        <Table data={reply} />
+      </div>
+      <br></br><br></br>
+      
     </div>
   );
 }

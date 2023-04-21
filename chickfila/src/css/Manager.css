@@ -20,9 +20,19 @@
     margin: auto;
 }
 
-.scrollingTableRestock {
+
+
+.scrollingTableSmaller {
   width:80%;
   height: 25vw;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  margin: auto;
+}
+
+.scrollingTableSmallest {
+  width:95%;
+  height: 20vw;
   overflow-y: scroll;
   overflow-x: scroll;
   margin: auto;
@@ -206,11 +216,19 @@
 /*---------------------managerOrders section----------------------------*/
 
 .managerOrders {
-    height: 40vw;
+    height: 50vw;
+}
+
+.scrollingTableOrders {
+  width:100%;
+  height: 40vw;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  margin: auto;
 }
 
 .managerOrders.manage {
-    width:50%;
+    width:99%;
     float:right;
     background-color:rgba(200, 200, 200, .6);
 }

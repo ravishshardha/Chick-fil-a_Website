@@ -80,7 +80,7 @@ function RestockTab() {
   return (
     <div>
       <button class="generateButton">Generate Restock Report</button> <br></br> <br></br>
-      <div className='scrollingTableRestock'>
+      <div className='scrollingTableSmall'>
         <Table data={ingredients}/>
       </div>
     </div>

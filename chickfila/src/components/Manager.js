@@ -120,15 +120,13 @@ function Orders({orderItems}){
         <div className='managerOrders'>
             <div className='managerOrders manage'>
                 <h2>Order Management</h2>
-                <ManagerOrderNavBar />
-                <hr></hr>
-            </div>
-                <div className='managerOrders viewTable'>
-                <div className='scrollingTable'>
-                    <Table data={orderItems}/>
-                </div>
-            </div>
-            <hr></hr>
+                <ManagerOrderNavBar data={orderItems}/>
+              {/* </div>
+                 <div className='managerOrders viewTable'>
+                 <div className='scrollingTable'>
+                     <Table data={orderItems}/>
+                 </div> */}
+             </div> 
         </div> 
     );
 }

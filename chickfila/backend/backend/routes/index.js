@@ -165,7 +165,7 @@ app.get('/api/addItem', (req, res) => {
 
 app.get('/api/Zreport', (req, res) => {
   //const inputTime = req.time;
-  const inputTime = '2022-03-07 09:13:53';
+  const inputTime = req.query.zTime;
   let newDate = new Date(inputTime);
   newDate.setHours(newDate.getHours() + 24);
   console.log(newDate);
