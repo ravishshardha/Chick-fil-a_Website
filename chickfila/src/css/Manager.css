@@ -226,6 +226,13 @@
   overflow-x: scroll;
   margin: auto;
 }
+.scrollingTableSalesRep {
+  width:100%;
+  height: 35vw;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  margin: auto;
+}
 
 .managerOrders.manage {
     width:99%;

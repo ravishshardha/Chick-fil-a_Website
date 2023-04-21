@@ -79,8 +79,8 @@ function RestockTab() {
   // TODO: probably add onClick to the button to generate the restock report
   return (
     <div>
-      <button class="generateButton">Generate Restock Report</button> <br></br> <br></br>
-      <div className='scrollingTableSmall'>
+      {/* <button class="generateButton">Generate Restock Report</button> <br></br> <br></br> */}
+      <div className='scrollingTableSmaller'>
         <Table data={ingredients}/>
       </div>
     </div>

@@ -10,7 +10,7 @@ function GenerateSalesReport ({response}) {
                 Generate Sales Report
             </span>
         </button>
-        <div className='scrollingTableSmaller'>
+        <div className='scrollingTableSalesRep'>
             <Table data={response} />
         </div>
         </div>

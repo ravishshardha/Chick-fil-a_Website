@@ -44,7 +44,7 @@ function ManagerOrderNavBar({data}) {
 function SalesReportTab() {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [reply, setReply] = useState(["default"]);
+  const [reply, setReply] = useState([""]);
 
   const handleStartDateChange = (event) => {
     setStartDate(event.target.value);
@@ -80,8 +80,8 @@ function SalesReportTab() {
     <div>
       <form onSubmit={handleSubmit}>
         <label>Start Date: </label>
-        <input type="datetime-local" value={startDate} onChange={handleStartDateChange}></input> <br></br> <br></br>
-        <label>End Date: </label>
+        <input type="datetime-local" value={startDate} onChange={handleStartDateChange}></input>
+        <label>&nbsp; End Date: </label>
         <input type="datetime-local" value={endDate} onChange={handleEndDateChange}></input> <br></br><br></br>
         <GenerateSalesReport response={reply}/>
       </form>
@@ -100,7 +100,7 @@ function OrdersTab({data}) {
 
 function XZReport() {
   const [selectedDate, setSelectedDate] = useState("");
-  const [reply, setReply] = useState(["hello"]);
+  const [reply, setReply] = useState([""]);
 
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
@@ -128,9 +128,22 @@ function XZReport() {
     console.log('reply: ',reply)
   };
 
-  const handleGenerateXReport = () => {
+  const handleGenerateXReport = (event) => {
     // TODO: handle generating X report 
     console.log('x:',selectedDate);
+
+    event.preventDefault();
+    // handle generating Z report with selectedDate
+    const url = `http://localhost:5000/api/Xreport`;
+
+    fetch(url)
+    .then(response => response.json()) 
+    .then(data => {
+      setReply(data); 
+    })
+    .catch(error => {
+      console.error(error);
+    });
   };
 
   return (
@@ -142,17 +155,15 @@ function XZReport() {
             Generate Z Report
         </span>
       </button>
-
-      <br/><br/>
-
+      &nbsp; &nbsp; &nbsp;
       <button type="submit" onClick={handleGenerateXReport} class="generateButton">
         <span>
-            Generate X Report
+        Generate X Report
         </span>
       </button>
 
 
-      <div className='scrollingTableSmaller'>
+      <div className='scrollingTableSalesRep'>
         <Table data={reply} />
       </div>
       <br></br><br></br>
