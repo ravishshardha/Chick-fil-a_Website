@@ -191,7 +191,7 @@ app.get('/api/Xreport', (req, res) => {
 });
 
 // inventory query
-app.get('/api/viewInventory', (req, res) => {
+app.get('/api/ingredients', (req, res) => {
   client.query('SELECT * FROM ingredients', (error, results) => {
     if (error) {
       console.log("unable to connect");
@@ -209,6 +209,50 @@ app.get('/api/addInventory', (req, res) => {
   const restock = 0;
   client.query('INSERT INTO inventory (id,name,amount,vendor) VALUES ($1, $2, $3,$4,)',[name,vendor,stock,restock]);
 });
+
+app.get('/api/whatSalesTogether', (req, res) => {
+  client.query('SELECT * FROM menu', (error, results) => {
+    if (error) {
+      console.log("unable to connect");
+      throw error;
+    }
+    console.log("sent");
+    res.json(results.rows);
+  });
+});
+
+app.get('/api/excessReport', (req, res) => {
+  const inputDate = " 2023-03-09 00:00:00";
+
+  let date = new Date();
+  let currTime = date.toISOString().slice(0, 19).replace('T', ' ');
+  console.log("current time",currTime);
+
+  client.query('SELECT * FROM orderslog1 WHERE time between $1 and $2',[inputDate,currTime], (error, results) => {
+    if (error) {
+      console.log("unable to connect");
+      throw error;
+    }
+
+    // Map to store amounts
+    const map = new Map();
+
+
+    for (let i = 0; i < results.rows.length; i++) {
+      const itemListString = results.rows[i].itemlist;
+      const itemList = itemListString.split(", ");
+      for (let i = 0; i < itemList.length; i++) {
+       // map[itemList[i]] =
+      }
+      console.log(row);
+    }
+    console.log("sent excess report");
+    res.json(results.rows);
+  });
+});
+
+
+
 
 app.listen(5000, () => {
   console.log('Server started on port 5000');
