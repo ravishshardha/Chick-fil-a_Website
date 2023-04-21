@@ -26,7 +26,7 @@ client.connect((err) => {
 
 // get request for orders
 app.get('/api/retrieveorders', (req, res) => {
-  client.query('SELECT * FROM orderslog1 LIMIT 30', (error, results) => {
+  client.query('SELECT * FROM orderslog1 LIMIT 1000', (error, results) => {
     if (error) {
       console.log("unable to connect");
       throw error;
@@ -165,7 +165,7 @@ app.get('/api/addItem', (req, res) => {
 
 app.get('/api/Zreport', (req, res) => {
   //const inputTime = req.time;
-  const inputTime = req.query.zTime;
+  const inputTime = req.query.Time;
   let newDate = new Date(inputTime);
   newDate.setHours(newDate.getHours() + 24);
   console.log(newDate);
