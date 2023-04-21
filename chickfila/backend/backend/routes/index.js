@@ -63,8 +63,8 @@ app.get('/api/ingredients', (req, res) => {
 
 app.get('/api/addOrder', (req, res) => {
   // create time
-  const now = new Date();
-  const time = now.toLocaleString('en-US', { hour12: false });
+  let date = new Date();
+  let time = date.toISOString().slice(0, 19).replace('T', ' ');
   console.log(time);
   // find id
   client.query('SELECT orderid FROM orderslog1 ORDER BY orderid DESC LIMIT 1', (error, results) => {
@@ -78,8 +78,7 @@ app.get('/api/addOrder', (req, res) => {
     
     // insert to DB
     // parse input  // TEST STRING
-    // const jsonString = req.query.order;
-    const jsonString = '[{"id":0,"name":"Chicken Sandwich","price":4.49,"type":"entree","ingredients":"(2, 7) (1, 0) (3, 11) (2, 53) (1, 72)","url":"https://www.cfacdn.com/img/order/menu/Online/Entrees/Jul19_CFASandwich_pdp.png%22%7D]"},{"id":1,"name":"Milkshake","price":10.49,"type":"entree","ingredients":"(2, 7) (1, 0) (3, 11) (2, 53) (1, 72)","url":"https://www.cfacdn.com/img/order/menu/Online/Entrees/Jul19_CFASandwich_pdp.png%22%7D]"}]';
+    const jsonString = req.query.order;
     const data = JSON.parse(jsonString);
 
     let itemlist = [];
@@ -91,7 +90,8 @@ app.get('/api/addOrder', (req, res) => {
       ingredientList.push(data[i].ingredients);
     }
     console.log(itemlist);
-    console.log(price);
+    const roundedPrice = parseFloat(price.toFixed(2));
+    console.log(roundedPrice);
     console.log(ingredientList);
     // rand employee ID
     const min = 100000;
@@ -100,7 +100,7 @@ app.get('/api/addOrder', (req, res) => {
     console.log(randomInt);
     const employeeid  = randomInt;
     const itemListString = itemlist.join(", ");
-    client.query('INSERT INTO orderslog1 (time, employeeid, orderid,itemlist,price) VALUES ($1, $2, $3,$4, $5)', [time, employeeid, nextOrderId,itemListString,price]);
+    client.query('INSERT INTO orderslog1 (time, employeeid, orderid,itemlist,price) VALUES ($1, $2, $3,$4, $5)', [time, employeeid, nextOrderId,itemListString,roundedPrice]);
     console.log('inserted');
 
     // loop through ingredientList
@@ -148,6 +148,7 @@ arr.forEach((pair) => {
   return map;
 }
 
+// seaonsal item*
 app.get('/api/addItem', (req, res) => {
   // find id
   client.query('SELECT id FROM menu ORDER BY id DESC LIMIT 1', (error, results) => {
@@ -159,6 +160,23 @@ app.get('/api/addItem', (req, res) => {
     const nextOrderId = parseInt(myValueString, 10) + 1; 
     console.log(nextOrderId);
     //client.query('INSERT INTO Menu (id,name ,price ,type, ingredients,url) VALUES ($1, $2, $3,$4, $5)', [id,itemName ,price ,type, ingredients,url]);
+  });
+});
+
+app.get('/api/Zreport', (req, res) => {
+  //const inputTime = req.time;
+  const inputTime = '2022-03-07 09:13:53';
+  let newDate = new Date(inputTime);
+  newDate.setHours(newDate.getHours() + 24);
+  console.log(newDate);
+
+  client.query('SELECT * FROM orderslog1 WHERE time between $1 and $2', [inputTime, newDate], (error, results) => {
+    if (error) {
+      console.log("unable to connect");
+      throw error;
+    }
+    console.log("sentZreport");
+    res.json(results.rows);
   });
 });
 
@@ -175,21 +193,91 @@ app.get('/api/salesReport', (req, res) => {
   });
 });
 
-
-// seaonsal item*
-app.get('/api/addItem', (req, res) => {
-  // find id
-  client.query('SELECT id FROM menu ORDER BY id DESC LIMIT 1', (error, results) => {
+app.get('/api/Xreport', (req, res) => {
+  client.query('SELECT date FROM zreports ORDER BY date DESC LIMIT 1', (error, results) => {
     if (error) {
       console.log("unable to connect");
       throw error;
     }
-    const myValueString = results.rows[0].id;
-    const nextOrderId = parseInt(myValueString, 10) + 1; 
-    console.log(nextOrderId);
-    //client.query('INSERT INTO Menu (id,name ,price ,type, ingredients,url) VALUES ($1, $2, $3,$4, $5)', [id,itemName ,price ,type, ingredients,url]);
+    const mostRecentDate = results.rows[0].date;
+    console.log("most recent report", mostRecentDate);
+    let date = new Date();
+    let currTime = date.toISOString().slice(0, 19).replace('T', ' ');
+    console.log("current time",currTime);
+    client.query('SELECT * FROM orderslog1 WHERE time between $1 and $2',[mostRecentDate,currTime], (error, results) => {
+      if (error) {
+        console.log("unable to connect");
+        throw error;
+      }
+      console.log("sentXreport");
+      res.json(results.rows);
+  });
   });
 });
+
+// inventory query
+app.get('/api/ingredients', (req, res) => {
+  client.query('SELECT * FROM ingredients', (error, results) => {
+    if (error) {
+      console.log("unable to connect");
+      throw error;
+    }
+    console.log("sent inventry");
+    res.json(results.rows);
+  });
+});
+
+app.get('/api/addInventory', (req, res) => {
+  const name = "newItem";
+  const vendor = "newVendor";
+  const stock = 0;
+  const restock = 0;
+  client.query('INSERT INTO inventory (id,name,amount,vendor) VALUES ($1, $2, $3,$4,)',[name,vendor,stock,restock]);
+});
+
+app.get('/api/whatSalesTogether', (req, res) => {
+  client.query('SELECT * FROM menu', (error, results) => {
+    if (error) {
+      console.log("unable to connect");
+      throw error;
+    }
+    console.log("sent");
+    res.json(results.rows);
+  });
+});
+
+app.get('/api/excessReport', (req, res) => {
+  const inputDate = " 2023-03-09 00:00:00";
+
+  let date = new Date();
+  let currTime = date.toISOString().slice(0, 19).replace('T', ' ');
+  console.log("current time",currTime);
+
+  client.query('SELECT * FROM orderslog1 WHERE time between $1 and $2',[inputDate,currTime], (error, results) => {
+    if (error) {
+      console.log("unable to connect");
+      throw error;
+    }
+
+    // Map to store amounts
+    const map = new Map();
+
+
+    for (let i = 0; i < results.rows.length; i++) {
+      const itemListString = results.rows[i].itemlist;
+      const itemList = itemListString.split(", ");
+      for (let i = 0; i < itemList.length; i++) {
+       // map[itemList[i]] =
+      }
+      console.log(row);
+    }
+    console.log("sent excess report");
+    res.json(results.rows);
+  });
+});
+
+
+
 
 app.listen(5000, () => {
   console.log('Server started on port 5000');
