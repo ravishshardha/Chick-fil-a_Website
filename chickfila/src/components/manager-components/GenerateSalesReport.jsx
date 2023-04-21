@@ -3,7 +3,7 @@ import '../../css/Manager.css'
 
 function GenerateSalesReport () {
     return (
-        <button class="generateButton">
+        <button type='submit' class="generateButton">
             <span>
                 Generate Sales Report
             </span>

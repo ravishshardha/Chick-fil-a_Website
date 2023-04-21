@@ -33,23 +33,64 @@ function ManagerExtrasNavBar() {
 }
 
 function SalesTogether() {
+  const [startDate, setStartDate] = React.useState("");
+  const [endDate, setEndDate] = React.useState("");
+
+  const handleStartDateChange = (event) => {
+    setStartDate(event.target.value);
+  };
+
+  const handleEndDateChange = (event) => {
+    setEndDate(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // TODO: send dates to backend logic
+    console.log("Start date:", startDate);
+    console.log("End date:", endDate);
+  };
+
   return (
     <div>
+      <form onSubmit={handleSubmit}>
         <label>Start Date: </label>
-        <input type="datetime-local"></input> <br></br> <br></br>
+        <input type="datetime-local" value={startDate} onChange={handleStartDateChange} />
+        <br />
+        <br />
         <label>End Date: </label>
-        <input type="datetime-local"></input> <br></br><br></br>
-        <button class="generateButton">Generate What Sales Together</button> <br></br> <br></br>
+        <input type="datetime-local" value={endDate} onChange={handleEndDateChange} />
+        <br />
+        <br />
+        <button class="generateButton">Generate What Sales Together</button>
+        <br />
+        <br />
+      </form>
     </div>
   );
 }
 
 function ExcessReport() {
+  const [timestamp, setTimestamp] = React.useState("");
+
+  const handleTimestampChange = event => {
+    setTimestamp(event.target.value);
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    // TODO: send timestamp to backend logic
+    console.log("Timestamp: ", timestamp);
+  };
+
   return (
     <div>
-      <label>Timestamp: </label>
-        <input type="datetime-local"></input> <br></br> <br></br>
-      <button class="generateButton">Generate Excess Report</button> <br></br> <br></br>
+      <form onSubmit={handleSubmit}>
+        <label>Timestamp: </label>
+        <input type="datetime-local" value={timestamp} onChange={handleTimestampChange} />
+        <br /><br />
+        <button class="generateButton" type="submit">Generate Excess Report</button>
+      </form>
     </div>
   );
 }
