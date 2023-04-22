@@ -9,6 +9,61 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/auth/Login";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
+import {useEffect, useState} from "react";
+import Weather from "./components/Weather";
+
+function Footer(){
+  return (
+    <footer className='appFooter'>
+      <div>[TODO: Insert anything related to chickfila here that would be on a footer]</div>
+      <GoogleElement _check={true}/>
+      <Weather />
+    </footer>
+  );
+}
+
+function GoogleElement({_check}){
+  const [check, setCheck] = useState(false);
+
+  useEffect(() => {
+    setCheck(_check);
+  }, []);
+
+   //adding google translate
+   const googleTranslateElementInit = () => {
+    new window.google.translate.TranslateElement(
+      {
+        pageLanguage: "en",
+        autoDisplay: false
+      },
+      "google_translate_element"
+    );
+    console.log("new g init");
+  };
+
+  
+  useEffect(() => {
+    if (check){
+
+      var addScript = document.createElement("script");
+      addScript.setAttribute(
+        "src",
+        "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+      );
+      document.body.appendChild(addScript);
+      console.log("new useeffect");
+      window.googleTranslateElementInit = googleTranslateElementInit;
+    }
+  }, [check]);
+
+  return (
+    <div>
+      <div id="google_translate_element"></div>
+    </div>
+  );
+}
+
+
 const clientId =
   "556037042748-tdol6mrh13hn7709j3k8v2f4tptf7gha.apps.googleusercontent.com";
   
@@ -27,6 +82,7 @@ function App() {
           <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
+      <Footer/>
       </GoogleOAuthProvider>
       {/* <div> <Navbar/> </div>
       <div className= "Menupage">

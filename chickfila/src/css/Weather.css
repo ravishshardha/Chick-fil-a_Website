@@ -13,18 +13,18 @@
 .weathericon {
     margin-right: 20px;
     font-size: 2rem;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
   }
   
   .weather-description {
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 5px;
   }
   
   .weather-temperature {
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     font-size: 1.5rem;
     display: flex;
     flex-direction: row;
