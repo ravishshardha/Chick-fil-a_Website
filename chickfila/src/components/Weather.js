@@ -73,7 +73,7 @@ class Weather extends Component {
             
             {/* <p>{description}</p> */}
             <p className="weather-temperature">
-            {temperature ? `${temperature}<sup>o</sup>C` : ''}
+            {temperature ? <span>{temperature}<sup>o</sup>C</span> : ''}
             </p>
             <FontAwesomeIcon icon={icon} size='2x' className='weathericon'/>
           </div>

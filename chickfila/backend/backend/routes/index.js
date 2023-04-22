@@ -240,31 +240,6 @@ app.get('/api/salesTogether', (req, res) => {
   });
 });
 
-// function countPairs(str) {
-//   const arr = str.split(',');
-//   const pairs = {};
-//   for (let i = 0; i < arr.length - 1; i++) {
-//     for (let j = i + 1; j < arr.length; j++) {
-//       if (arr[i].trim() !== arr[j].trim()) {
-//         const pair = [arr[i].trim(), arr[j].trim()].sort().join(',');
-//         if (pair in pairs) {
-//           pairs[pair]++;
-//         } else {
-//           pairs[pair] = 1;
-//         }
-//       }
-//     }
-//   }
-//   return pairs;
-// }
-
-// function printPairs(str) {
-//   const pairs = countPairs(str.substr(0,str.length-1));
-//   const sortedPairs = Object.entries(pairs).sort((a, b) => b[1] - a[1]);
-//   for (const [pair, count] of sortedPairs) {
-//     console.log(`${pair}: ${count}`);
-//   }
-// }
 
 app.listen(5000, () => {
   console.log('Server started on port 5000');
