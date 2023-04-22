@@ -209,6 +209,63 @@ app.get('/api/excessReport', (req, res) => {
 });
 
 
+//sales together:
+app.get('/api/salesTogether', (req, res) => {
+  const startDate = req.query.startDate;
+  const endDate = req.query.endDate;
+  client.query('SELECT * FROM orderslog1 WHERE time BETWEEN $1 AND $2;', [startDate, endDate], (error, results) => {
+    if (error) {
+      console.log("unable to connect");
+      throw error;
+    }
+    
+    const orders = results.rows;
+    const pairs = {};
+
+    for (let i = 0; i < orders.length; i++) {
+      const items = orders[i].itemlist.substr(0,orders[i].itemlist.length-1).split(',');
+      const uniqueItems = [...new Set(items)];
+      for (let j = 0; j < uniqueItems.length; j++) {
+        for (let k = j + 1; k < uniqueItems.length; k++) {
+          const pair = [uniqueItems[j], uniqueItems[k]].sort().join(',');
+          pairs[pair] = (pairs[pair] || 0) + 1;
+        }
+      }
+    }
+
+    const sortedPairs = Object.keys(pairs).sort((a, b) => pairs[b] - pairs[a]).reduce((acc, key) => ({...acc, [key]: pairs[key]}), {});
+
+    console.log("sent sales together report");
+    res.json(sortedPairs);
+  });
+});
+
+// function countPairs(str) {
+//   const arr = str.split(',');
+//   const pairs = {};
+//   for (let i = 0; i < arr.length - 1; i++) {
+//     for (let j = i + 1; j < arr.length; j++) {
+//       if (arr[i].trim() !== arr[j].trim()) {
+//         const pair = [arr[i].trim(), arr[j].trim()].sort().join(',');
+//         if (pair in pairs) {
+//           pairs[pair]++;
+//         } else {
+//           pairs[pair] = 1;
+//         }
+//       }
+//     }
+//   }
+//   return pairs;
+// }
+
+// function printPairs(str) {
+//   const pairs = countPairs(str.substr(0,str.length-1));
+//   const sortedPairs = Object.entries(pairs).sort((a, b) => b[1] - a[1]);
+//   for (const [pair, count] of sortedPairs) {
+//     console.log(`${pair}: ${count}`);
+//   }
+// }
+
 app.listen(5000, () => {
   console.log('Server started on port 5000');
 });
