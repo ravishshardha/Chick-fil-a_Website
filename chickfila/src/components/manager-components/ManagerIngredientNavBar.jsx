@@ -116,16 +116,11 @@ function EditIngrTab({ingredients}) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const vendor = document.getElementById('vendor').value;
     const stock = document.getElementById('stock').value;
-    const minStock = document.getElementById('minStock').value;
     
     // TODO: change this to send to db
-    console.log(selectedIngredient, vendor, stock, minStock);
-
-    document.getElementById('vendor').value = '';
+    console.log(selectedIngredient, stock);
     document.getElementById('stock').value = '';
-    document.getElementById('minStock').value = '';
     
   }
   const [selectedIngredient, setSelectedIngredient] = React.useState("");
@@ -147,9 +142,7 @@ function EditIngrTab({ingredients}) {
           </select>
           <p>Selected Ingredient: {selectedIngredient}</p>
         </div>
-        <label>Vendor:</label><input type="textbox" id="vendor"></input> <br></br><br></br>
         <label>Stock:</label><input type="textbox" id="stock"></input> <br></br><br></br>
-        <label>Min Stock:</label><input type="textbox" id="minStock"></input> <br></br><br></br>
         
         <button type="button" onClick={handleSubmit} class="saveChanges">
             <span class="saveChangesShadow"></span>
