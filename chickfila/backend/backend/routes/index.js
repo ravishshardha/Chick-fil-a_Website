@@ -269,13 +269,15 @@ app.get('/api/salesTogether', (req, res) => {
 
 // todo
 app.get('/api/addItem', (req, res) => {
-  const id = req.query.ingredient;
+  const id = req.query.id;
   const name = req.query.name;
   const price = req.query.price;
   const type = req.query.type;
   const ingredient = req.query.ingredient;
   const url = req.query.url;
+  console.log("before menu query")
   client.query('INSERT INTO menu (id,name,price,type,ingredient,url) VALUES ($1, $2, $3,$4,$5,$6)',[id,name,price,type,ingredient,url]);
+  console.log("menu query sent")
 });
 
 // todo
@@ -299,7 +301,7 @@ app.get('/api/deleteMenuItem', (req, res) => {
 app.get('/api/updateInventory', (req, res) => {
   const currentId = req.query.id;
   const newAmount = req.query.stock;
-  client.query('UPDATE inventory SET amount = $1 WHERE id = $2',[currentId, newAmount]);
+  client.query('UPDATE ingredients SET amount = $1 WHERE id = $2',[currentId, newAmount]);
 });
 
 // todo

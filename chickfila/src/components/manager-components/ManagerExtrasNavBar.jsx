@@ -83,6 +83,9 @@ function SalesTogether() {
 
   const [formattedStartDate, setFormattedStartDate] = React.useState("");
   const [formattedEndDate, setFormattedEndDate] = React.useState("");
+  
+  // add a state variable to keep track of submit button click
+  const [submitClicked, setSubmitClicked] = React.useState(false);
 
   const handleStartDateChange = (event) => {
     setStartDate(event.target.value);
@@ -109,6 +112,8 @@ function SalesTogether() {
     .then(text => {
       console.log(text);
       setReply(text);
+      // update the state variable when the submit button is clicked
+      setSubmitClicked(true);
     })
     .catch(error => {
       console.error(error);
@@ -128,9 +133,12 @@ function SalesTogether() {
         <br />
         <button type="submit" class="generateButton">Generate What Sales Together</button>
         <hr></hr>
-        <div class="scrollingTableExtras">
-          <FormatOrders reply={reply}></FormatOrders>
-        </div>
+        {/* conditionally render the scrollingTableExtras div */}
+        {submitClicked && (
+          <div class="scrollingTableExtras">
+            <FormatOrders reply={reply}></FormatOrders>
+          </div>
+        )}
         <br />
         <br />
       </form>
@@ -141,6 +149,7 @@ function SalesTogether() {
 function ExcessReport() {
   // /api/excessReport
   const [timestamp, setTimestamp] = React.useState("");
+  const [report, setReport] = React.useState([""]);
 
   const handleTimestampChange = event => {
     setTimestamp(event.target.value);
@@ -153,14 +162,13 @@ function ExcessReport() {
 
     const url = `http://localhost:5000/api/excessReport`;
     fetch(url)
-    .then(response => response.text())
-    .then(text => {
-      console.log(text);
-    })
-    .catch(error => {
-      console.error(error);
-    });
-  };
+    .then(response => response.json())
+    .then( data => {
+            setReport(data);
+            // console.log(data);
+        })
+        .catch(error => console.log(error));
+      }
 
   return (
     <div>
@@ -169,6 +177,9 @@ function ExcessReport() {
         <input type="datetime-local" value={timestamp} onChange={handleTimestampChange} />
         <br /><br />
         <button class="generateButton" type="submit">Generate Excess Report</button>
+        <div className='scrollingTableSmaller'>
+        <Table data={report}/>
+      </div>
       </form>
     </div>
   );

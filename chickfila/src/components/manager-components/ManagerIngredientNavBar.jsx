@@ -88,31 +88,9 @@ function RestockTab() {
   );
 }
 
-// function CreateIngrTab() {
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//     const name = document.getElementById('name').value;
-//     const vendor = document.getElementById('vendor').value;
-//     const stock = document.getElementById('stock').value;
-//     const minStock = document.getElementById('minStock').value;
-//     console.log(name, vendor, stock, minStock);
-//   }
-
-//   return (
-//     <div>
-//       <form onSubmit={handleSubmit}>
-//         <label>Name: </label><input type="text" id="name" /><br/><br/>
-//         <label>Vendor:</label><input type="text" id="vendor" /><br/><br/>
-//         <label>Stock:</label><input type="text" id="stock" /><br/><br/>
-//         <label>Min Stock:</label><input type="text" id="minStock" /><br/><br/>
-//         <AddIngredient />
-//       </form>
-//     </div>
-//   );
-// }
-
-
 function EditIngrTab({ingredients}) {
+
+  const [newStock, setnewStock] = useState(defaultData);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -120,6 +98,16 @@ function EditIngrTab({ingredients}) {
     
     // TODO: change this to send to db
     console.log(selectedIngredient, stock);
+
+    const url = `http://localhost:5000/api/updateInventory?id=${selectedIngredient}&stock=${newStock}`;
+    fetch(url)
+    .then(response => response.json())
+    .then( data => {
+            setnewStock(data);
+            // console.log(data);
+        })
+        .catch(error => console.log(error));
+
     document.getElementById('stock').value = '';
     
   }
