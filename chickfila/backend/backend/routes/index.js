@@ -301,7 +301,8 @@ app.get('/api/deleteMenuItem', (req, res) => {
 app.get('/api/updateInventory', (req, res) => {
   const currentId = req.query.id;
   const newAmount = req.query.stock;
-  client.query('UPDATE ingredients SET amount = $1 WHERE id = $2',[currentId, newAmount]);
+  console.log("updating item id: " + currentId + ", new stock = " + newAmount);
+  client.query('UPDATE ingredients SET amount = $1 WHERE id = $2',[newAmount, currentId]);
 });
 
 // todo

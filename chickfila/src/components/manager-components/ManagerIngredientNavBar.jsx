@@ -90,8 +90,6 @@ function RestockTab() {
 
 function EditIngrTab({ingredients}) {
 
-  const [newStock, setnewStock] = useState(defaultData);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const stock = document.getElementById('stock').value;
@@ -99,11 +97,10 @@ function EditIngrTab({ingredients}) {
     // TODO: change this to send to db
     console.log(selectedIngredient, stock);
 
-    const url = `http://localhost:5000/api/updateInventory?id=${selectedIngredient}&stock=${newStock}`;
+    const url = `http://localhost:5000/api/updateInventory?id=${selectedIngredient}&stock=${stock}`;
     fetch(url)
     .then(response => response.json())
     .then( data => {
-            setnewStock(data);
             // console.log(data);
         })
         .catch(error => console.log(error));
