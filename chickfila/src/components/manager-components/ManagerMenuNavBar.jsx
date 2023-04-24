@@ -44,9 +44,9 @@ function ManagerMenuNavBar() {
 
 function CreateItemTab() {
   const [selectedOption, setSelectedOption] = React.useState("entree");
-  const [Id, setId] = React.useState("");
+  const [Id, setId] = React.useState(0);
   const [itemName, setItemName] = React.useState("");
-  const [itemPrice, setItemPrice] = React.useState("");
+  const [itemPrice, setItemPrice] = React.useState(0.0);
   const [ingredients, setIngredients] = React.useState("");
   const [imageUrl, setImageUrl] = React.useState("");
 
