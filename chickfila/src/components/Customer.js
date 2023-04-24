@@ -8,6 +8,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useEffect } from "react";
 import ShoppingCart from "./customer-components/ShoppingCart";
+import Weather from "./Weather";
 
 
 var showOrderButton = true;

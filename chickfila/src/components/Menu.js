@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "../css/Customer.css";
-import NavBar from "./customer-components/NavBar";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Product from "./customer-components/Product";
@@ -14,7 +13,7 @@ const MenuItem = ({ menuTitle, menuItems, menuId, addToOrder }) => {
       </Row>
       <Row className="row-style">
         {menuItems.map((item) => (
-          <Col key={item.id} sm={4} className="col-style">
+          <Col key={item.id} sm={2} className="col-style">
             <Product
               product={item}
               indId={menuId}
@@ -36,7 +35,6 @@ function Menu() {
   const [extras, setExtras] = useState([]);
   const [seasonal, setSeasonal] = useState([]);
   const [menuId, setMenuId] = useState("entree");
-  const handleClick = (tempMenuId) => setMenuId(tempMenuId);
 
   useEffect(() => {
     fetch("http://localhost:5000/api/menu")
@@ -85,6 +83,28 @@ function Menu() {
     }
   }, [menuitems]);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      switch (menuId) {
+        case "entree":
+          setMenuId("sides");
+          break;
+        case "sides":
+          setMenuId("drinks");
+          break;
+        case "drinks":
+          setMenuId("extras");
+          break;
+        case "extras":
+          setMenuId("seasonal");
+          break;
+        default:
+          setMenuId("entree");
+      }
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [menuId]);
+
   const getSelectedMenu = () => {
     switch (menuId) {
       case "sides":
@@ -113,7 +133,6 @@ function Menu() {
   };
   return (
     <div>
-      <NavBar onClick={handleClick} />
       <Container className="mt-5">{getSelectedMenu()}</Container>
     </div>
   );
