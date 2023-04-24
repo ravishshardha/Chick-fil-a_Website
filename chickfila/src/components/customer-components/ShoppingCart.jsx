@@ -32,6 +32,7 @@ function ShoppingCart({ order, setOrder, setShowModal }) {
     .catch(error => {
       console.error(error)
     })
+
   };
 
   return (

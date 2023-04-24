@@ -26,7 +26,7 @@ client.connect((err) => {
 
 // get request for orders
 app.get('/api/retrieveorders', (req, res) => {
-  client.query('SELECT * FROM orderslog1', (error, results) => {
+  client.query('SELECT * FROM orderslog1 LIMIT 1000', (error, results) => {
     if (error) {
       console.log("unable to connect");
       throw error;
@@ -48,11 +48,23 @@ app.get('/api/menu', (req, res) => {
   });
 });
 
+// get request for ingredients
+app.get('/api/ingredients', (req, res) => {
+  client.query('SELECT * FROM ingredients', (error, results) => {
+    if (error) {
+      console.log("unable to connect");
+      throw error;
+    }
+    console.log("sent");
+    res.json(results.rows);
+  });
+});
+
 
 app.get('/api/addOrder', (req, res) => {
   // create time
-  const now = new Date();
-  const time = now.toLocaleString('en-US', { hour12: false });
+  let date = new Date();
+  let time = date.toISOString().slice(0, 19).replace('T', ' ');
   console.log(time);
   // find id
   client.query('SELECT orderid FROM orderslog1 ORDER BY orderid DESC LIMIT 1', (error, results) => {
@@ -66,8 +78,7 @@ app.get('/api/addOrder', (req, res) => {
     
     // insert to DB
     // parse input  // TEST STRING
-    // const jsonString = req.query.order;
-    const jsonString = '[{"id":0,"name":"Chicken Sandwich","price":4.49,"type":"entree","ingredients":"(2, 7) (1, 0) (3, 11) (2, 53) (1, 72)","url":"https://www.cfacdn.com/img/order/menu/Online/Entrees/Jul19_CFASandwich_pdp.png%22%7D]"},{"id":1,"name":"Milkshake","price":10.49,"type":"entree","ingredients":"(2, 7) (1, 0) (3, 11) (2, 53) (1, 72)","url":"https://www.cfacdn.com/img/order/menu/Online/Entrees/Jul19_CFASandwich_pdp.png%22%7D]"}]';
+    const jsonString = req.query.order;
     const data = JSON.parse(jsonString);
 
     let itemlist = [];
@@ -79,7 +90,8 @@ app.get('/api/addOrder', (req, res) => {
       ingredientList.push(data[i].ingredients);
     }
     console.log(itemlist);
-    console.log(price);
+    const roundedPrice = parseFloat(price.toFixed(2));
+    console.log(roundedPrice);
     console.log(ingredientList);
     // rand employee ID
     const min = 100000;
@@ -88,7 +100,7 @@ app.get('/api/addOrder', (req, res) => {
     console.log(randomInt);
     const employeeid  = randomInt;
     const itemListString = itemlist.join(", ");
-    client.query('INSERT INTO orderslog1 (time, employeeid, orderid,itemlist,price) VALUES ($1, $2, $3,$4, $5)', [time, employeeid, nextOrderId,itemListString,price]);
+    client.query('INSERT INTO orderslog1 (time, employeeid, orderid,itemlist,price) VALUES ($1, $2, $3,$4, $5)', [time, employeeid, nextOrderId,itemListString,roundedPrice]);
     console.log('inserted');
 
     // loop through ingredientList
@@ -136,21 +148,6 @@ arr.forEach((pair) => {
   return map;
 }
 
-app.get('/api/addItem', (req, res) => {
-  // find id
-  client.query('SELECT id FROM menu ORDER BY id DESC LIMIT 1', (error, results) => {
-    if (error) {
-      console.log("unable to connect");
-      throw error;
-    }
-    const myValueString = results.rows[0].id;
-    const nextOrderId = parseInt(myValueString, 10) + 1; 
-    console.log(nextOrderId);
-    //client.query('INSERT INTO Menu (id,name ,price ,type, ingredients,url) VALUES ($1, $2, $3,$4, $5)', [id,itemName ,price ,type, ingredients,url]);
-  });
-});
-
-
 // seaonsal item*
 app.get('/api/addItem', (req, res) => {
   // find id
@@ -166,23 +163,23 @@ app.get('/api/addItem', (req, res) => {
   });
 });
 
+app.get('/api/Zreport', (req, res) => {
+  //const inputTime = req.time;
+  const inputTime = req.query.Time;
+  let newDate = new Date(inputTime);
+  newDate.setHours(newDate.getHours() + 24);
+  console.log(newDate);
 
-
-//new RAVISH changes:
-
-//restock:
-app.get('/api/restockReport', (req, res) => {
-  client.query('SELECT * FROM ingredients where amount<300;', (error, results) => {
+  client.query('SELECT * FROM orderslog1 WHERE time between $1 and $2', [inputTime, newDate], (error, results) => {
     if (error) {
       console.log("unable to connect");
       throw error;
     }
-    console.log("sent of restock report");
+    console.log("sentZreport");
     res.json(results.rows);
   });
 });
 
-//sales report:
 app.get('/api/salesReport', (req, res) => {
   const startDate = req.query.startDate;
   const endDate = req.query.endDate;
@@ -196,20 +193,50 @@ app.get('/api/salesReport', (req, res) => {
   });
 });
 
-//excess for now:
-app.get('/api/excessReport', (req, res) => {
-  client.query('SELECT * FROM ingredients where amount<100;', (error, results) => {
+app.get('/api/Xreport', (req, res) => {
+  client.query('SELECT date FROM zreports ORDER BY date DESC LIMIT 1', (error, results) => {
     if (error) {
       console.log("unable to connect");
       throw error;
     }
-    console.log("sent of excess report");
+    const mostRecentDate = results.rows[0].date;
+    console.log("most recent report", mostRecentDate);
+    let date = new Date();
+    let currTime = date.toISOString().slice(0, 19).replace('T', ' ');
+    console.log("current time",currTime);
+    client.query('SELECT * FROM orderslog1 WHERE time between $1 and $2',[mostRecentDate,currTime], (error, results) => {
+      if (error) {
+        console.log("unable to connect");
+        throw error;
+      }
+      console.log("sentXreport");
+      res.json(results.rows);
+  });
+  });
+});
+
+// inventory query
+app.get('/api/ingredients', (req, res) => {
+  client.query('SELECT * FROM ingredients', (error, results) => {
+    if (error) {
+      console.log("unable to connect");
+      throw error;
+    }
+    console.log("sent inventry");
     res.json(results.rows);
   });
 });
 
+// todo
+app.get('/api/addInventory', (req, res) => {
+  const name = "newItem";
+  const vendor = "newVendor";
+  const stock = 0;
+  const restock = 0;
+  client.query('INSERT INTO inventory (id,name,amount,vendor) VALUES ($1, $2, $3,$4,)',[name,vendor,stock,restock]);
+});
 
-//sales together:
+// todo
 app.get('/api/salesTogether', (req, res) => {
   const startDate = req.query.startDate;
   const endDate = req.query.endDate;
@@ -218,7 +245,7 @@ app.get('/api/salesTogether', (req, res) => {
       console.log("unable to connect");
       throw error;
     }
-    
+
     const orders = results.rows;
     const pairs = {};
 
@@ -237,6 +264,55 @@ app.get('/api/salesTogether', (req, res) => {
 
     console.log("sent sales together report");
     res.json(sortedPairs);
+  });
+});
+
+// todo
+app.get('/api/addItem', (req, res) => {
+  const id = req.query.id;
+  const name = req.query.name;
+  const price = req.query.price;
+  const type = req.query.type;
+  const ingredient = req.query.ingredient;
+  const url = req.query.url;
+  console.log("before menu query")
+  client.query('INSERT INTO menu (id,name,price,type,ingredient,url) VALUES ($1, $2, $3,$4,$5,$6)',[id,name,price,type,ingredient,url]);
+  console.log("menu query sent")
+});
+
+// todo
+app.get('/api/updateItem', (req, res) => {
+  const id = req.query.ingredient;
+  const name = req.query.name;
+  const price = req.query.price;
+  const type = req.query.type;
+  const ingredient = req.query.ingredient;
+  const url = req.query.url;
+  client.query('UPDATE menu SET name = $2 price = $3 type = $4 ingredient = $5 url = $6 WHERE id = $1',[id,name,price,type,ingredient,url]);
+});
+
+// todo
+app.get('/api/deleteMenuItem', (req, res) => {
+  const currentId = req.query.id;
+  client.query('DELETE FROM menu WHERE id = $1',[currentId]);
+});
+
+// todo
+app.get('/api/updateInventory', (req, res) => {
+  const currentId = req.query.id;
+  const newAmount = req.query.stock;
+  client.query('UPDATE ingredients SET amount = $1 WHERE id = $2',[currentId, newAmount]);
+});
+
+// todo
+app.get('/api/excessReport', (req, res) => {
+  client.query('SELECT * FROM ingredients where amount<100;', (error, results) => {
+    if (error) {
+      console.log("unable to connect");
+      throw error;
+    }
+    console.log("sent of excess report");
+    res.json(results.rows);
   });
 });
 
