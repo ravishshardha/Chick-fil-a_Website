@@ -72,7 +72,7 @@ function App() {
     <div className="App">
       <GoogleOAuthProvider clientId={clientId}>
       <Router>
-        <Navbar />
+        <Navbar/>
         <Routes>
           <Route exact path="/" element={<HomePage />} />
           <Route path="/customer" element={<Customer />} />
