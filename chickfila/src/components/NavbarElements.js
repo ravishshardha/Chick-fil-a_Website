@@ -12,7 +12,8 @@ export const Nav = styled.nav`
 `;
   
 export const NavLink = styled(Link)`
-  color: #808080;
+
+  color: blue;
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -51,4 +52,18 @@ white-space: nowrap; */
   @media screen and (max-width: 768px) {
     display: none;
   }
+`;
+
+export const HomeLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  height: 100%;
+  cursor: pointer;
+  justify-content:center;
+  margin-top: 1%;
+  img {
+        width: 180px;
+        height: 80px;
+      };
 `;

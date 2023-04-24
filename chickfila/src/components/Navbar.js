@@ -1,6 +1,6 @@
 import React from 'react'
 import chickfilalogo from '../resources/chickfilalogo.png'
-import { Nav, NavLink, NavMenu } 
+import { HomeLink} 
     from "./NavbarElements";
 // import {
 //     Nav,
@@ -22,15 +22,13 @@ export default function Navbar (){
     return(
         <nav>
             <div>
-                <img 
-                    src= {chickfilalogo}
-                    alt='Chick fil a logo'
-                    width={150}
-                    height={60}
-                ></img>
-                <NavLink to="/" activeStyle>
-                    Home
-                </NavLink>
+                <HomeLink to="/" activeStyle>
+                    <img
+                        src={chickfilalogo}
+                        alt='Chick fil a logo'
+                    ></img>
+                </HomeLink>
+
             </div> 
         </nav>
     );
