@@ -60,7 +60,7 @@ function RestockTab() {
   const [ingredients, setIngredients] = useState(defaultData);
 
   useEffect(() => {
-    // TODO: CHANGE NAME IF BACKEND CHANGES
+    // HANGE NAME IF BACKEND CHANGES
     fetch('http://localhost:5000/api/ingredients')
     .then(response => response.json())
     .then( data => {

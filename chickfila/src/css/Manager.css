@@ -1,4 +1,9 @@
+body {
+  font-family: Helvetica;
+}
+
 .ManagerMain {
+    font-family: Helvetica;
     height: 40vw;
     background-color: white;
 }
@@ -226,6 +231,19 @@
   overflow-x: scroll;
   margin: auto;
 }
+
+.scrollingTableExtras {
+  width:40%;
+  height: 33vw;
+  border:#000000;
+  border-width: 2px;
+  border-style: solid;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  margin: auto;
+  background:white;
+}
+
 .scrollingTableSalesRep {
   width:100%;
   height: 35vw;
