@@ -155,17 +155,15 @@ export default function Server() {
 
     
     const handleCheckout = () => {
-        const url = `http://localhost:5000/api/postOrder?order=${encodeURIComponent(JSON.stringify(_order))}`;
+        const url = `http://localhost:5000/api/addOrder?order=${encodeURIComponent(JSON.stringify(_order))}`;
+        console.log(_order);
+        clearOrder();
         fetch(url)
         .then(response => {
             console.log(response);
         })
         .catch(error => {
             console.log(error);
-        })
-        .finally(() =>{
-            console.log(_order);
-            clearOrder();
         })
     }
     // change the menuitems
