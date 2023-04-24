@@ -8,7 +8,7 @@ function ShoppingCartElement({orderItem, index, removeItem}) {
       <img alt="menu description" className="shopping-element-img" src={orderItem.url} />
       <div className="d-flex flex-row justify-content-between w-100">
         <div>
-          <div>{orderItem.text}</div>
+          <div>{orderItem.name}</div>
           <div>${orderItem.price}</div>
         </div>
         <div>

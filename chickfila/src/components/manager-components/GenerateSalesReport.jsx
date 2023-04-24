@@ -1,13 +1,19 @@
 import React from "react";
 import '../../css/Manager.css'
+import Table from '../GeneralTable';
 
-function GenerateSalesReport () {
+function GenerateSalesReport ({response}) {
     return (
-        <button class="generateButton">
+        <div>
+        <button type='submit' class="generateButton">
             <span>
                 Generate Sales Report
             </span>
         </button>
+        <div className='scrollingTableSalesRep'>
+            <Table data={response} />
+        </div>
+        </div>
     );
 }
 

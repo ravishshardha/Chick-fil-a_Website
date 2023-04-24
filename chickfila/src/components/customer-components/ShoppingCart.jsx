@@ -22,8 +22,17 @@ function ShoppingCart({ order, setOrder, setShowModal }) {
   const handleClose = () => setShowModal(false);
   const handleCheckout = () => {
     //TODO: This will first send the total and order list to backend
+    const url = `http://localhost:5000/api/addOrder?order=${encodeURIComponent(JSON.stringify(order))}`;
     setOrder([]);
     handleClose();
+    fetch(url)
+    .then(response => {
+      console.log(response)
+    })
+    .catch(error => {
+      console.error(error)
+    })
+
   };
 
   return (

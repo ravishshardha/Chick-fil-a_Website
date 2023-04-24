@@ -1,4 +1,9 @@
+body {
+  font-family: Helvetica;
+}
+
 .ManagerMain {
+    font-family: Helvetica;
     height: 40vw;
     background-color: white;
 }
@@ -13,10 +18,29 @@
 
 
 .scrollingTable {
-    width:70%;
-    height: 20vw;
+    width:100%;
+    height: 40vw;
     overflow-y: scroll;
+    overflow-x: scroll;
     margin: auto;
+}
+
+
+
+.scrollingTableSmaller {
+  width:80%;
+  height: 25vw;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  margin: auto;
+}
+
+.scrollingTableSmallest {
+  width:95%;
+  height: 20vw;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  margin: auto;
 }
 
 .managerdashboardright {
@@ -107,17 +131,17 @@
     }
 }
 
-.card {
+
+ .rcard {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background-color: rgba(255, 255, 255, 1);
-    /* padding: 20px; */
     max-height: 300px;
     margin-left: 15%;
     max-width: 80%;
   }
-  
+
   .stars {
     display: flex;
     grid-gap: 0.125rem;
@@ -154,14 +178,82 @@
     color: rgba(107, 114, 128, 1);
   }
 
+  .managertable {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .managertable th,
+  .managertable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .managertable th {
+    background-color: #f2f2f2;
+  }
+  
+  .managertable-row:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  .table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .table th,
+  .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .table th {
+    background-color: #f2f2f2;
+  }
+  
+  .table-row:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
 /*---------------------managerOrders section----------------------------*/
 
 .managerOrders {
-    height: 30vw;
+    height: 50vw;
+}
+
+.scrollingTableOrders {
+  width:100%;
+  height: 40vw;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  margin: auto;
+}
+
+.scrollingTableExtras {
+  width:40%;
+  height: 33vw;
+  border:#000000;
+  border-width: 2px;
+  border-style: solid;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  margin: auto;
+  background:white;
+}
+
+.scrollingTableSalesRep {
+  width:100%;
+  height: 35vw;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  margin: auto;
 }
 
 .managerOrders.manage {
-    width:50%;
+    width:99%;
     float:right;
     background-color:rgba(200, 200, 200, .6);
 }
@@ -602,7 +694,7 @@
 /*---------------------managerInventory section----------------------------*/
 
 .managerInventory {
-    height: 30vw;
+    height: 40vw;
 }
 
 .managerInventory.manage {
@@ -616,20 +708,41 @@
     float:left;
 }
 
+.ingredientDropdown {
+  font-size: 1rem;
+  padding: 10px;
+  border: 1px solid #E51636;
+  border-radius: 5px;
+  width: 250px;
+  appearance: none;
+  background-color: #FFFFFF;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23E51636' d='M10 14.5l-6-6 1.41-1.41L10 11.68l4.59-4.59L16 8.5l-6 6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px 20px;
+  cursor: pointer;
+}
+
+.ingredientDropdown:focus {
+  outline: none;
+  box-shadow: 0px 0px 3px 3px rgba(229, 22, 54, 0.3);
+}
+
+.ingredientDropdown option {
+  background-color: #FFFFFF;
+  color: #000000;
+}
+
 /*---------------------managerExtras section----------------------------*/
 
 .managerExtras {
-    height: 30vw;
+    height: 100vh;
+
 }
 
-.managerExtras.manage {
-    width:50%;
-    float:right;
+.managerExtras.salesTogether {
+    width:100%;
     background-color:rgba(200, 200, 200, .6)
 }
 
-.managerExtras.viewTable {
-    width:50%;
-    float:left;
-}
 

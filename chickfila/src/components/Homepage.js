@@ -6,6 +6,7 @@ import cowSide from '../resources/cow.png'
 import fullMeal from '../resources/chickenMeal.jpg'
 import drinkPic from '../resources/drinkPic.jpg'
 import sandwitchVideo from '../resources/clubSandwitchVid.mp4'
+import Login from "./auth/Login";
 
 
 export default function HomePage(){

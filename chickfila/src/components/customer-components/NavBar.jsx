@@ -33,9 +33,9 @@ function NavBar() {
         <div className="customer-nav-bar-menu-items">
           {menuItems.map((it) => (
             <span key={it.name} className="customer-nav-bar-menu-item">
-              <Link to={it.link} smooth={true} duration={1000}>
-                {it.name}
-              </Link>
+                <Link to={it.link} smooth={true} duration={1000}>
+                  {it.name}
+                </Link>
             </span>
           ))}
         </div>
