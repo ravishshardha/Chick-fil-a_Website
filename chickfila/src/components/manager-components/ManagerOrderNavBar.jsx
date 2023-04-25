@@ -56,24 +56,33 @@ function SalesReportTab() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const startDateObj = new Date(startDate);
     const endDateObj = new Date(endDate);
-    const timezoneOffset = startDateObj.getTimezoneOffset() * 60000; // in milliseconds
-    const formattedStartDate = new Date(startDateObj.getTime() - timezoneOffset).toISOString().replace('T', ' ').substring(0, 19);
-    const formattedEndDate = new Date(endDateObj.getTime() - timezoneOffset).toISOString().replace('T', ' ').substring(0, 19);
-    // TODO: pass start and end date to backend
-    console.log('Start Date:', formattedStartDate);
-    console.log('End Date:', formattedEndDate);
 
-    const url = `http://localhost:5000/api/salesReport?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
-    fetch(url)
-    .then(response => response.json()) // <-- parse response as JSON
-    .then(data => {
-      setReply(data); // <-- set state with parsed JSON data
-    })
-    .catch(error => {
-      console.error(error);
-    });
+    if (isNaN(startDateObj) && isNaN(endDateObj)) {
+      console.log('Invalid date(s)');
+    } else {
+      console.log('Valid dates');
+
+      const timezoneOffset = startDateObj.getTimezoneOffset() * 60000; // in milliseconds
+      const formattedStartDate = new Date(startDateObj.getTime() - timezoneOffset).toISOString().replace('T', ' ').substring(0, 19);
+      const formattedEndDate = new Date(endDateObj.getTime() - timezoneOffset).toISOString().replace('T', ' ').substring(0, 19);
+      // TODO: pass start and end date to backend
+      console.log('Start Date:', startDate);
+      console.log('End Date:', endDate);
+
+      const url = `http://localhost:5000/api/salesReport?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
+      fetch(url)
+      .then(response => response.json()) // <-- parse response as JSON
+      .then(data => {
+        setReply(data); // <-- set state with parsed JSON data
+      })
+      .catch(error => {
+        console.log("hi");
+        console.error(error);
+      });
+    }
   }
 
   return (
