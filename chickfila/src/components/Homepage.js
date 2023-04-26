@@ -15,8 +15,6 @@ export default function HomePage(){
             <header>
                 <nav className="navHome">
                     <ul className="nav-links">
-                        <li><a href="/manager">MANAGER</a></li>
-                        <li><a href="/server">SERVER</a></li>
                         <li><a href="/customer">ORDER NOW</a></li>
                         <li><a href="/menu">MENU</a></li>
                     </ul>
@@ -40,16 +38,22 @@ export default function HomePage(){
     {/* drink pic  */}
             <div className='drinkPic'>
                 <img src={drinkPic} alt='tea picture'/>
-                <teaHeading>
-                    It's <b>THE</b> tea.
-                </teaHeading>
-                <a href="/customer">
-                    <button class="comic-button">Grab that Sunjoy!</button>
-                </a>
+                <div className='drinkbox'>
+                    <br></br><br></br><br></br><br></br><br></br><br></br>
+                    <teaHeading>
+                        It's <b>THE</b> tea.
+                    </teaHeading>
+                    <a href="/customer">
+                        <button class="comic-button">Grab that Sunjoy!</button>
+                    </a>
+                </div>
             </div>
 
             <br></br><br></br><br></br><br></br><br></br><br></br>
             <br></br><br></br><br></br><br></br><br></br><br></br>
+            <br></br><br></br><br></br><br></br><br></br><br></br>
+            <br></br><br></br><br></br><br></br><br></br><br></br>
+            <br></br><br></br><br></br>
 
             <div className='clubBox'>
                 <video className='clubSandVid' controls muted autoPlay playsinline loop>
@@ -88,11 +92,9 @@ export default function HomePage(){
                     </div>
                     <div class="cardH-back">
                         <form>
-                            <label for="Username">Username:</label>
-                            <input type="text" id="username-manager" name="username" placeholder="Enter your username" />
-                            <label for="Password">Password:</label>
-                            <input type="password" id="password-manager" name="password" placeholder="Enter your password" />
-                            <input type="submit" value="Submit" />
+                            <label for="Log-in">Please 
+                            <br></br>sign in:<br></br><br></br></label>
+                            <Login/>
                         </form>
                     </div>
                 </div>
@@ -103,11 +105,9 @@ export default function HomePage(){
                     </div>
                     <div class="cardH-back">
                         <form>
-                            <label for="Username">Username:</label>
-                            <input type="text" id="username-server" name="username" placeholder="Enter your username" />
-                            <label for="Password">Password:</label>
-                            <input type="password" id="password-server" name="password" placeholder="Enter your password" />
-                            <input type="submit" value="Submit" />
+                            <label for="Log-in">Please
+                                <br></br>sign in:<br></br><br></br></label>
+                            <Login />
                         </form>
                     </div>
                 </div>
