@@ -56,24 +56,33 @@ function SalesReportTab() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const startDateObj = new Date(startDate);
     const endDateObj = new Date(endDate);
-    const timezoneOffset = startDateObj.getTimezoneOffset() * 60000; // in milliseconds
-    const formattedStartDate = new Date(startDateObj.getTime() - timezoneOffset).toISOString().replace('T', ' ').substring(0, 19);
-    const formattedEndDate = new Date(endDateObj.getTime() - timezoneOffset).toISOString().replace('T', ' ').substring(0, 19);
-    // TODO: pass start and end date to backend
-    console.log('Start Date:', formattedStartDate);
-    console.log('End Date:', formattedEndDate);
 
-    const url = `http://localhost:5000/api/salesReport?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
-    fetch(url)
-    .then(response => response.json()) // <-- parse response as JSON
-    .then(data => {
-      setReply(data); // <-- set state with parsed JSON data
-    })
-    .catch(error => {
-      console.error(error);
-    });
+    if (isNaN(startDateObj) && isNaN(endDateObj)) {
+      console.log('Invalid date(s)');
+    } else {
+      console.log('Valid dates');
+
+      const timezoneOffset = startDateObj.getTimezoneOffset() * 60000; // in milliseconds
+      const formattedStartDate = new Date(startDateObj.getTime() - timezoneOffset).toISOString().replace('T', ' ').substring(0, 19);
+      const formattedEndDate = new Date(endDateObj.getTime() - timezoneOffset).toISOString().replace('T', ' ').substring(0, 19);
+      // TODO: pass start and end date to backend
+      console.log('Start Date:', startDate);
+      console.log('End Date:', endDate);
+
+      const url = `http://localhost:5000/api/salesReport?startDate=${formattedStartDate}&endDate=${formattedEndDate}`;
+      fetch(url)
+      .then(response => response.json()) // <-- parse response as JSON
+      .then(data => {
+        setReply(data); // <-- set state with parsed JSON data
+      })
+      .catch(error => {
+        console.log("hi");
+        console.error(error);
+      });
+    }
   }
 
   return (
@@ -101,6 +110,7 @@ function OrdersTab({data}) {
 function XZReport() {
   const [selectedDate, setSelectedDate] = useState("");
   const [reply, setReply] = useState([""]);
+  const [totalSales, setTotalSales] = useState(0);
 
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
@@ -120,8 +130,14 @@ function XZReport() {
     .then(response => response.json()) 
     .then(data => {
       setReply(data); 
+      let sum = 0;
+      reply.forEach((value, key) => {
+        sum += value.price;
+      });
+      setTotalSales(sum);
     })
     .catch(error => {
+      setTotalSales(0);
       console.error(error);
     });
 
@@ -140,8 +156,14 @@ function XZReport() {
     .then(response => response.json()) 
     .then(data => {
       setReply(data); 
+      let sum = 0;
+      reply.forEach((value, key) => {
+        sum += value.price;
+      });
+      setTotalSales(Math.round((sum)*100)/100);
     })
     .catch(error => {
+      setTotalSales(0);
       console.error(error);
     });
   };
@@ -164,6 +186,7 @@ function XZReport() {
 
 
       <div className='scrollingTableSalesRep'>
+        <p>Total: ${totalSales}</p>
         <Table data={reply} />
       </div>
       <br></br><br></br>

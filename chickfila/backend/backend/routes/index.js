@@ -8,6 +8,12 @@ dotenv.config();
 const cors = require('cors');
 app.use(cors());
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 const client = new Client({
   user: process.env.PSQL_USER,
   host: process.env.PSQL_HOST,
@@ -148,20 +154,20 @@ arr.forEach((pair) => {
   return map;
 }
 
-// seaonsal item*
-app.get('/api/addItem', (req, res) => {
-  // find id
-  client.query('SELECT id FROM menu ORDER BY id DESC LIMIT 1', (error, results) => {
-    if (error) {
-      console.log("unable to connect");
-      throw error;
-    }
-    const myValueString = results.rows[0].id;
-    const nextOrderId = parseInt(myValueString, 10) + 1; 
-    console.log(nextOrderId);
-    //client.query('INSERT INTO Menu (id,name ,price ,type, ingredients,url) VALUES ($1, $2, $3,$4, $5)', [id,itemName ,price ,type, ingredients,url]);
-  });
-});
+// // seaonsal item*
+// app.get('/api/addItem', (req, res) => {
+//   // find id
+//   client.query('SELECT id FROM menu ORDER BY id DESC LIMIT 1', (error, results) => {
+//     if (error) {
+//       console.log("unable to connect");
+//       throw error;
+//     }
+//     const myValueString = results.rows[0].id;
+//     const nextOrderId = parseInt(myValueString, 10) + 1; 
+//     console.log(nextOrderId);
+//     //client.query('INSERT INTO Menu (id,name ,price ,type, ingredients,url) VALUES ($1, $2, $3,$4, $5)', [id,itemName ,price ,type, ingredients,url]);
+//   });
+// });
 
 app.get('/api/Zreport', (req, res) => {
   //const inputTime = req.time;
@@ -269,14 +275,26 @@ app.get('/api/salesTogether', (req, res) => {
 
 // todo
 app.get('/api/addItem', (req, res) => {
+  console.log("got here")
   const id = req.query.id;
   const name = req.query.name;
   const price = req.query.price;
   const type = req.query.type;
-  const ingredient = req.query.ingredient;
+  const ingredients = req.query.ingredients;
   const url = req.query.url;
+  // const jsonString = req.query._newitem;
+  // const data = JSON.parse(jsonString);
+
   console.log("before menu query")
-  client.query('INSERT INTO menu (id,name,price,type,ingredient,url) VALUES ($1, $2, $3,$4,$5,$6)',[id,name,price,type,ingredient,url]);
+  client.query("INSERT INTO menu (id, name, price, type, ingredients, url) VALUES ($1, $2, $3, $4, $5, $6);",[id, name, price, type, ingredients, url])
+  .then(() => {
+    console.log("menu query sent");
+    res.sendStatus(200); // respond with a success status code
+  })
+  .catch(error => {
+    console.error(error);
+    res.sendStatus(500); // respond with an error status code
+  });
   console.log("menu query sent")
 });
 

@@ -42,16 +42,20 @@ function ManagerMenuNavBar() {
   );
 }
 
+window.addEventListener('unhandledrejection', event => {
+  console.log('Unhandled rejection:', event.reason);
+});
+
 function CreateItemTab() {
   const [selectedOption, setSelectedOption] = React.useState("entree");
-  const [Id, setId] = React.useState(0);
+  const [id, setid] = React.useState(0);
   const [itemName, setItemName] = React.useState("");
   const [itemPrice, setItemPrice] = React.useState(0.0);
   const [ingredients, setIngredients] = React.useState("");
   const [imageUrl, setImageUrl] = React.useState("");
 
-  const handleIdChange = event => {
-    setId(event.target.value);
+  const handleidChange = event => {
+    setid(event.target.value);
   };
 
   const handleOptionChange = event => {
@@ -80,23 +84,39 @@ function CreateItemTab() {
     event.preventDefault();
     
     // TODO: change this to send to db
-    console.log(Id, selectedOption, itemName, itemPrice, ingredients, imageUrl);
+    console.log(id, selectedOption, itemName, itemPrice, ingredients, imageUrl);
     
     // const id = req.query.id;
     // const name = req.query.name;
     // const price = req.query.price;
     // const type = req.query.type;
-    // const ingredient = req.query.ingredient;
+    // const ingredient = req.query.ingredients;
     // const url = req.query.url;
+    console.log("going to fetch")
 
-    const url = `http://localhost:5000/api/addItem?id=${Id}&name=${itemName}&price=${itemPrice}&type=${selectedOption}&ingredient=${ingredients}&url=${imageUrl}`;
-    fetch(url)
+    // const _newitem  = [
+    //   {
+    //     id: id,
+    //     name: itemName,
+    //     price: itemPrice,
+    //     type: selectedOption,
+    //     ingredients: ingredients,
+    //     url: imageUrl,
+    //   }
+    // ]
+    // const url = `http://localhost:5000/api/deleteMenuItem?id=${itemId}`;
+    const url = `http://localhost:5000/api/addItem?id=${id}&name=${itemName}&price=${itemPrice}&type=${selectedOption}&ingredients=${ingredients}&url=${imageUrl}`;
+    // const url = `http://localhost:5000/api/addItem?item=${encodeURIComponent(JSON.stringify(_newitem))}}`;
+
+    fetch(url, { mode: 'cors' })
     .then(response => response.json())
     .then( data => {
-            console.log(data);
+      console.log(data);
+      console.log("made it this far")
     })
     .catch(error => console.log(error));
 
+    console.log("Fetched")
   }
 
   return (
@@ -111,7 +131,7 @@ function CreateItemTab() {
       <br />
       <form onSubmit={handleSubmit}>
         <label>Item Id:</label>
-        <input type="text" id="menutextbox" value={Id} onChange={handleIdChange} />
+        <input type="text" id="menutextbox" value={id} onChange={handleidChange} />
         <br />
         <br />
         <label>Item Name:</label>
