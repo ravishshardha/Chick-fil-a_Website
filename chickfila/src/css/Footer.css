@@ -1,0 +1,21 @@
+.appFooter {
+    color: white;
+    background-color: #ad0f27;
+    margin-top: 100vh;
+    height: calc(30vh + 10px);
+  }
+  
+  .footer-elements
+  {
+    list-style: none;
+    display: flex;
+    margin-bottom: 0%;
+  }
+  
+  .footer-indv-element {
+    margin:2% 2% 0% 2%;
+  }
+  
+  .footer-policies{
+    margin:0% 2% 0% 3%;
+  }
