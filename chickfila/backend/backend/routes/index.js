@@ -300,13 +300,25 @@ app.get('/api/addItem', (req, res) => {
 
 // todo
 app.get('/api/updateItem', (req, res) => {
-  const id = req.query.ingredient;
+  const id = req.query.id;
   const name = req.query.name;
   const price = req.query.price;
   const type = req.query.type;
-  const ingredient = req.query.ingredient;
+  const ingredients = req.query.ingredients;
   const url = req.query.url;
-  client.query('UPDATE menu SET name = $2 price = $3 type = $4 ingredient = $5 url = $6 WHERE id = $1',[id,name,price,type,ingredient,url]);
+
+  console.log(id + ", " + name + ", " + price + ", " + type + ", " + ingredients + ", " + url);
+
+  client.query('UPDATE menu SET name = $2, price = $3, type = $4, ingredients = $5, url = $6 WHERE id = $1',[id,name,price,type,ingredients,url])
+  .then(() => {
+    console.log("updateItem query sent");
+    res.sendStatus(200); // respond with a success status code
+  })
+  .catch(error => {
+    console.error(error);
+    res.sendStatus(500); // respond with an error status code
+  });
+  console.log("updateItem query sent")
 });
 
 // todo

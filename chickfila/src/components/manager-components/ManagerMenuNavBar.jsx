@@ -234,17 +234,33 @@ function EditItemTab() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    const formData = {
-      selectedOption,
-      itemId,
-      itemName,
-      itemPrice,
-      ingredients,
-      imageUrl
-    };
+    // const formData = {
+    //   selectedOption,
+    //   itemId,
+    //   itemName,
+    //   itemPrice,
+    //   ingredients,
+    //   imageUrl
+    // };
     // TODO: send formData to backend
     // order is selectedOption, itemId, itemName, itemPrice, ingredients, imageUrl
-    console.log(formData);
+    // console.log(formData);
+
+    console.log(itemId + ", " + itemName + ", " + itemPrice + ", " + selectedOption + ", " + ingredients + ", " + imageUrl);
+
+    // send to backend
+    const url = `http://localhost:5000/api/updateItem?id=${itemId}&name=${itemName}&price=${itemPrice}&type=${selectedOption}&ingredients=${ingredients}&url=${imageUrl}`;
+    // const url = `http://localhost:5000/api/addItem?item=${encodeURIComponent(JSON.stringify(_newitem))}}`;
+
+    fetch(url, { mode: 'cors' })
+    .then(response => response.json())
+    .then( data => {
+      console.log(data);
+      console.log("sent the item update to the backend.")
+    })
+    .catch(error => console.log(error));
+
+    console.log("Fetched")
   };
 
   return (
