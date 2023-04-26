@@ -8,16 +8,37 @@ import HomePage from "./components/Homepage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/auth/Login";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-
+import './css/Footer.css';
 import {useEffect, useState} from "react";
 import Weather from "./components/Weather";
+import googleStorePic from './resources/google-play.png';
+import { ReactComponent as Logo } from './resources/app-store.svg';
+
 
 function Footer(){
   return (
     <footer className='appFooter'>
-      <div>[TODO: Insert anything related to chickfila here that would be on a footer]</div>
-      <GoogleElement _check={true}/>
+      <div>
+      <h4 style={{paddingTop: '1%'}}>Chick-fil-a Access</h4>
+        <ul className="footer-elements">
+          <li className="footer-indv-element"><a style={{color: 'white'}} href="https://www.chick-fil-a.com/nutrition-allergens" target="_blank">Nutrition & Allergens</a></li>
+          <li className="footer-indv-element"><a style={{color: 'white'}} href="https://www.chick-fil-a.com/customer-support" target="_blank">Customer Support</a></li>
+          <li className="footer-indv-element"><a style={{color: 'white'}} href="https://www.chick-fil-a.com/franchising" target="_blank">Franchising</a></li>
+          <li className="footer-indv-element"><a style={{color: 'white'}} href="https://shop.chick-fil-a.com/?_gl=1*zytmxo*_ga*MTgzOTU3NDQwOC4xNjgwOTczNjMy*_ga_W1ZL54JC7M*MTY4MjQ2Mjg3Mi4xNC4xLjE2ODI0NjMwNTguNDkuMC4w" target="_blank">Merchandise</a></li>
+          <li style={{marginLeft: '40%', marginTop: '2%'}}><a href='https://play.google.com/store/apps/details?id=com.chickfila.cfaflagship&pli=1' target="_blank"><img style={{width: '85%'}} src={googleStorePic} alt="play Store" /></a></li>
+          <li style={{marginTop: '2%'}}><a href='https://apps.apple.com/us/app/chick-fil-a/id488818252' target="_blank"><Logo/></a></li>
+        </ul>
+        <ul className="footer-elements">
+          <li className="footer-policies"><a style={{color: 'lightgrey'}} href="https://www.chick-fil-a.com/legal#privacy_policy" target="_blank">Privacy Policy</a></li>
+          <li className="footer-policies" style={{marginLeft: '6%'}}><a style={{color: 'lightgrey'}} href="https://www.chick-fil-a.com/legal#chick-fil-a_cookie_and_interest-based_advertising_policy" target="_blank">Cookie</a></li>
+          <li className="footer-policies" style={{marginLeft: '5.23%'}}><a style={{color: 'lightgrey'}} href="https://www.chick-fil-a.com/locations/browse" target="_blank">Listing</a></li>
+          <li className="footer-policies" style={{marginLeft: '4.2%'}}><a style={{color: 'lightgrey'}} href="https://www.chick-fil-a.com/legal" target="_blank">Legal</a></li>
+        </ul>
+      </div>
+
       <Weather />
+      <GoogleElement _check={true}/>
+
     </footer>
   );
 }

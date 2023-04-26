@@ -18,9 +18,3 @@
   color: white;
 }
 
-.appFooter {
-  color: white;
-  background-color: rgba(139, 0, 0, 0.892);
-  margin-top: 100vh;
-  height: calc(30vh + 10px);
-}
