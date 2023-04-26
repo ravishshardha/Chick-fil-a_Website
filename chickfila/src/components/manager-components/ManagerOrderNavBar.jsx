@@ -110,6 +110,7 @@ function OrdersTab({data}) {
 function XZReport() {
   const [selectedDate, setSelectedDate] = useState("");
   const [reply, setReply] = useState([""]);
+  const [totalSales, setTotalSales] = useState(0);
 
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
@@ -129,8 +130,14 @@ function XZReport() {
     .then(response => response.json()) 
     .then(data => {
       setReply(data); 
+      let sum = 0;
+      reply.forEach((value, key) => {
+        sum += value.price;
+      });
+      setTotalSales(sum);
     })
     .catch(error => {
+      setTotalSales(0);
       console.error(error);
     });
 
@@ -149,8 +156,14 @@ function XZReport() {
     .then(response => response.json()) 
     .then(data => {
       setReply(data); 
+      let sum = 0;
+      reply.forEach((value, key) => {
+        sum += value.price;
+      });
+      setTotalSales(Math.round((sum)*100)/100);
     })
     .catch(error => {
+      setTotalSales(0);
       console.error(error);
     });
   };
@@ -173,6 +186,7 @@ function XZReport() {
 
 
       <div className='scrollingTableSalesRep'>
+        <p>Total: ${totalSales}</p>
         <Table data={reply} />
       </div>
       <br></br><br></br>
