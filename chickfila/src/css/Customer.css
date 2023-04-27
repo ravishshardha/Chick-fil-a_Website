@@ -5,6 +5,7 @@
 
 .header-container {
     position: relative;
+    background-color: rgba(139, 0, 0, 0.892);
     margin: 2% 2% 6% 2%;
     border-radius: 30px;
 }
