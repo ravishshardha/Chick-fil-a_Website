@@ -126,6 +126,17 @@ export default function Server() {
         var _seasonal = [];
         var _combo = [];
 
+        // sort menuitems by type
+        var order = ["combo", "entree", "side", "drink", "extra", "seasonal"];
+        const sortedMenu = menuitems.sort((a, b) => {
+            const typeOrder = order.indexOf(a.type) - order.indexOf(b.type);
+            if (typeOrder !== 0){
+                return typeOrder;
+            }
+            return a.name.localeCompare(b.name);
+            });
+        console.log(sortedMenu);
+
         menuitems.forEach((item) => {
             switch (item.type) {
             case "entree":
@@ -155,13 +166,7 @@ export default function Server() {
         setSeasonal(_seasonal);
         setCombos(_combo);
 
-        // sort menuitems by type
-        var order = ["combo", "entree", "side", "drink", "extra", "seasonal"];
-        const sortedMenu = menuitems.sort((a, b) => {
-            return order.indexOf(a.type) - order.indexOf(b.type);
-          });
-        
-        console.log(sortedMenu);
+
 
         setButtons(menuitems);
         
