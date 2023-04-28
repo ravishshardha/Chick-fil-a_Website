@@ -1,69 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from "react";
 import '../css/Server.css'
-// hardcoded for now
-// const menuitems = [
-//     {
-//       id: 1,
-//       text: "Chicken Sandwich",
-//       price: 5.99,
-//       type: "entree",
-//       url: "https://www.cfacdn.com/img/order/menu/Online/Entrees/Jul19_CFASandwich_pdp.png",
-//     },
-//     {
-//       id: 2,
-//       text: "Chicken Sandwich",
-//       price: 5.99,
-//       type: "entree",
-//       url: "https://www.cfacdn.com/img/order/menu/Online/Entrees/Jul19_CFASandwich_pdp.png",
-//     },
-//     {
-//       id: 3,
-//       text: "Chicken Sandwich",
-//       price: 5.99,
-//       type: "entree",
-//       url: "https://www.cfacdn.com/img/order/menu/Online/Entrees/Jul19_CFASandwich_pdp.png",
-//     },
-//     {
-//       id: 4,
-//       text: "Chicken Sandwich",
-//       price: 5.99,
-//       type: "entree",
-//       url: "https://www.cfacdn.com/img/order/menu/Online/Entrees/Jul19_CFASandwich_pdp.png",
-//     },
-//     {
-//       id: 5,
-//       text: "Chick-fil-A® Lemonade",
-//       price: 6.99,
-//       type: "drink",
-//       url: "https://www.cfacdn.com/img/order/menu/Online/Drinks/lemonade_pdp.png",
-//     },
-//     {
-//       id: 6,
-//       text: "Side salad",
-//       price: 3.99,
-//       type: "side",
-//       url: "https://www.cfacdn.com/img/order/menu/Online/Salads%26wraps/sswSalad_spicyGrilled_pdp.png",
-//     },
-//     {
-//       id: 7,
-//       text: "Brownie",
-//       price: 3.99,
-//       type: "extra",
-//       url: "https://www.cfacdn.com/img/order/COM/Menu_Refresh/Treats/Treats%20PDP/031717_FudgeChunkBrownie_PDP.png",
-//     },
-//     {
-//       id: 8,
-//       text: "Seasonal Item",
-//       price: 3.99,
-//       type: "seasonal",
-//       url: "https://cdn-icons-png.flaticon.com/512/4698/4698319.png",
-//     },
-//   ];
 
-// features I wanna add
-// total & number of items at top
-// display item, individual price, and count on each list item
 
 // servercard
 function ServerCard({item, index, removeItem}){
@@ -85,6 +23,7 @@ function SidePanel({setChoice}) {
         <nav className="side-panel">
             <ul>
                 <li onClick={() => setChoice('all')}><p>All</p></li>
+                <li onClick={() => setChoice('combo')}><p>Meals</p></li>
                 <li onClick={() => setChoice('entree')}><p>Entrees</p></li>
                 <li onClick={() => setChoice('side')}><p>Sides</p></li>
                 <li onClick={() => setChoice('drink')}><p>Drinks</p></li>
@@ -124,8 +63,8 @@ function OrderSummary({_order, total, setOrder, setTotal}){
 function ServerButton({item, addToOrder}){
     
     return (
-        <button className='ServerButton' onClick={() => addToOrder(item)}>
-            {item.name} {item.price}
+        <button className={'ServerButton' + item.type} onClick={() => addToOrder(item)} >
+            {item.name} ${item.price}
         </button>
     );
 }
@@ -150,6 +89,7 @@ export default function Server() {
     const [sides, setSides] = useState([]);
     const [drinks, setDrinks] = useState([]);
     const [extras, setExtras] = useState([]);
+    const [combos, setCombos] = useState([]);
     const [seasonal, setSeasonal] = useState([]);
 
 
@@ -184,6 +124,18 @@ export default function Server() {
         var _drinks = [];
         var _extras = [];
         var _seasonal = [];
+        var _combo = [];
+
+        // sort menuitems by type
+        var order = ["combo", "entree", "side", "drink", "extra", "seasonal"];
+        const sortedMenu = menuitems.sort((a, b) => {
+            const typeOrder = order.indexOf(a.type) - order.indexOf(b.type);
+            if (typeOrder !== 0){
+                return typeOrder;
+            }
+            return a.name.localeCompare(b.name);
+            });
+        console.log(sortedMenu);
 
         menuitems.forEach((item) => {
             switch (item.type) {
@@ -199,6 +151,9 @@ export default function Server() {
             case "extra":
                 _extras.push(item);
                 break;
+            case "combo":
+                _combo.push(item);
+                break;
             default:
                 _seasonal.push(item);
             }
@@ -209,6 +164,9 @@ export default function Server() {
         setDrinks(_drinks);
         setExtras(_extras);
         setSeasonal(_seasonal);
+        setCombos(_combo);
+
+
 
         setButtons(menuitems);
         
@@ -230,6 +188,9 @@ export default function Server() {
                 break;
             case 'extra':
                 setButtons(extras);
+                break;
+            case 'combo':
+                setButtons(combos);
                 break;
             default:
                 setButtons(seasonal);
