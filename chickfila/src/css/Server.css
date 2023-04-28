@@ -68,7 +68,7 @@
 /*buttons on side panel*/
 .side-panel li p {
 display: block;
-    padding: 2vw;
+    padding: 1.5vw;
     margin-bottom: 0px;
     width: 25vw;
     text-align: center;
@@ -81,14 +81,62 @@ display: block;
     background-color: #CCCCCC;
 }
 
-.ServerButton {
+/* COLOR CODING SERVER BUTTONS */
+.ServerButtoncombo{
     
     margin: 0.2%;
     color:white;
-    background-color: #515151;
+    background-color: #e44141;
     border-radius: 10px;
     font-weight: bold;
 }
+
+.ServerButtondrink{
+    
+  margin: 0.2%;
+  color:white;
+  background-color: #84c4ee;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.ServerButtonside{
+    
+  margin: 0.2%;
+  color:white;
+  background-color: #64de62;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.ServerButtonentree{
+    
+  margin: 0.2%;
+  color:white;
+  background-color: #db9f39;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.ServerButtonseasonal{
+    
+  margin: 0.2%;
+  color:white;
+  background-color: #dfd743;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.ServerButtonextra {
+    
+  margin: 0.2%;
+  color:white;
+  background-color: #c93351;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+/* ------------------------------- */
 
 .ServerClearOrder, .ServerFinishAndPay{
     border-radius: 3px;
