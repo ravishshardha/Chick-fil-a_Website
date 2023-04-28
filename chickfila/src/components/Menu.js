@@ -35,6 +35,7 @@ function Menu() {
   const [extras, setExtras] = useState([]);
   const [seasonal, setSeasonal] = useState([]);
   const [menuId, setMenuId] = useState("entree");
+  const [combos, setCombos] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:5000/api/menu")
@@ -55,6 +56,7 @@ function Menu() {
       var _drinks = [];
       var _extras = [];
       var _seasonal = [];
+      var _combos = [];
 
       menuitems.forEach((item) => {
         switch (item.type) {
@@ -70,6 +72,9 @@ function Menu() {
           case "extra":
             _extras.push(item);
             break;
+          case "combo":
+            _combos.push(item);
+            break;
           default:
             _seasonal.push(item);
         }
@@ -80,6 +85,7 @@ function Menu() {
       setDrinks(_drinks);
       setExtras(_extras);
       setSeasonal(_seasonal);
+      setCombos(_combos);
     }
   }, [menuitems]);
 
@@ -97,6 +103,9 @@ function Menu() {
           break;
         case "extras":
           setMenuId("seasonal");
+          break;
+        case "seasonal":
+          setMenuId("combo");
           break;
         default:
           setMenuId("entree");
@@ -124,6 +133,10 @@ function Menu() {
             menuItems={seasonal}
             menuId="seasonal"
           />
+        );
+      case "combo":
+        return (
+          <MenuItem menuTitle="Meals" menuItems={combos} menuId="combo" />
         );
       default:
         return (

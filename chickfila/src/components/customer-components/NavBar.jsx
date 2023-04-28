@@ -25,6 +25,10 @@ function NavBar() {
       name: "Seasonal",
       link: "seasonal",
     },
+    {
+      name: "Meals",
+      link: "combo",
+    }
   ];
 
   return (

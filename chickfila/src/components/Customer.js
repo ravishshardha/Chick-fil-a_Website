@@ -8,8 +8,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useEffect } from "react";
 import ShoppingCart from "./customer-components/ShoppingCart";
-import Weather from "./Weather";
-
 
 var showOrderButton = true;
 
@@ -40,6 +38,7 @@ function Customer() {
   const [drinks, setDrinks] = useState([]);
   const [extras, setExtras] = useState([]);
   const [seasonal, setSeasonal] = useState([]);
+  const [combos, setCombos] = useState([]);
 
   useEffect(() => {
     fetch('http://localhost:5000/api/menu')
@@ -59,6 +58,7 @@ function Customer() {
         var _drinks = [];
         var _extras = [];
         var _seasonal = [];
+        var _combos = [];
       
         menuitems.forEach((item) => {
           switch (item.type) {
@@ -74,6 +74,9 @@ function Customer() {
             case "extra":
               _extras.push(item);
               break;
+            case "combo":
+              _combos.push(item);
+              break;
             default:
               _seasonal.push(item);
           }
@@ -84,6 +87,7 @@ function Customer() {
         setDrinks(_drinks);
         setExtras(_extras);
         setSeasonal(_seasonal);
+        setCombos(_combos);
     }
   }, [menuitems]);
 
@@ -109,6 +113,7 @@ function Customer() {
         <Menu menuTitle="Drinks" menuItems={drinks} menuId="drinks" addToOrder={addToOrder} />
         <Menu menuTitle="Extras" menuItems={extras} menuId="extras" addToOrder={addToOrder} />
         <Menu menuTitle="Seasonal" menuItems={seasonal} menuId="seasonal" addToOrder={addToOrder} />
+        <Menu menuTitle="Meals" menuItems={combos} menuId="combo" addToOrder={addToOrder} />
       </Container>
       {showShoppingCart && (
         <ShoppingCart
