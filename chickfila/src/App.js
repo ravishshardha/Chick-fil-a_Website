@@ -5,6 +5,7 @@ import Manager from "./components/Manager";
 import Server from "./components/Server";
 import Navbar from "./components/Navbar";
 import HomePage from "./components/Homepage";
+import UserwayWidget from "./components/UserwayWidget";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/auth/Login";
 import { GoogleOAuthProvider } from "@react-oauth/google";
@@ -105,6 +106,8 @@ function App() {
       </Router>
       <Footer/>
       </GoogleOAuthProvider>
+      <UserwayWidget/>
+      
       {/* <div> <Navbar/> </div>
       <div className= "Menupage">
         <div>
