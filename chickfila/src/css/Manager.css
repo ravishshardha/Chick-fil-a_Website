@@ -6,6 +6,7 @@ body {
     font-family: Helvetica;
     height: 40vw;
     background-color: white;
+    margin-bottom: 150vh;
 }
 
 .ManagerMain.header {
