@@ -170,20 +170,31 @@ arr.forEach((pair) => {
 // });
 
 app.get('/api/Zreport', (req, res) => {
-  //const inputTime = req.time;
+  //const inputTime = "2023-05-01 14:55:41";
   const inputTime = req.query.Time;
-  let newDate = new Date(inputTime);
-  newDate.setHours(newDate.getHours() + 24);
-  console.log(newDate);
-
-  client.query('SELECT * FROM orderslog1 WHERE time between $1 and $2', [inputTime, newDate], (error, results) => {
-    if (error) {
+  client.query('Select MAX(date) from zreports' , (error1, result1)  => {
+    if (error1) {
       console.log("unable to connect");
-      throw error;
+      throw error1;
     }
-    console.log("sentZreport");
-    res.json(results.rows);
+    let prevDate = result1.rows[0].max;
+    client.query('SELECT * FROM orderslog1 WHERE time between $1 and $2', [prevDate, inputTime], (error, results) => {
+      if (error) {
+        console.log("unable to connect");
+        throw error;
+      }
+      console.log("sentZreport between times", prevDate, inputTime);
+      res.json(results.rows);
+      let sale_total = 0;
+      for (let i = 0; i < results.rows.length; i++) {
+        sale_total = sale_total + results.rows[i].price;
+      }
+      sale_total = sale_total.toFixed(2);
+      console.log(sale_total);
+      client.query('INSERT INTO zreports (date,sale_total) values ($1,$2)', [inputTime, sale_total]);
+      });
   });
+
 });
 
 app.get('/api/salesReport', (req, res) => {
