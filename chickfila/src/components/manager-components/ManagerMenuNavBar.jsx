@@ -127,6 +127,7 @@ function CreateItemTab() {
           <input value="drink" name="product" id="drink" type="radio" label="drink" checked={selectedOption === "drink"} onChange={handleOptionChange} />
           <input value="extra" name="product" id="extra" type="radio" label="extra" checked={selectedOption === "extra"} onChange={handleOptionChange} />
           <input value="seasonal" name="product" id="seasonal" type="radio" label="seasonal" checked={selectedOption === "seasonal"} onChange={handleOptionChange} />
+          <input value="combo" name="product" id="combo" type="radio" label="combo" checked={selectedOption === "combo"} onChange={handleOptionChange} />
       </div>
       <br />
       <form onSubmit={handleSubmit}>
@@ -271,6 +272,7 @@ function EditItemTab() {
           <input value="drink" name="product" id="drink" type="radio" label="drink" checked={selectedOption === "drink"} onChange={handleOptionChange} />
           <input value="extra" name="product" id="extra" type="radio" label="extra" checked={selectedOption === "extra"} onChange={handleOptionChange} />
           <input value="seasonal" name="product" id="seasonal" type="radio" label="seasonal" checked={selectedOption === "seasonal"} onChange={handleOptionChange} />
+          <input value="combo" name="product" id="combo" type="radio" label="combo" checked={selectedOption === "combo"} onChange={handleOptionChange} />
       </div>
       <br />
       <form onSubmit={handleSubmit}>
