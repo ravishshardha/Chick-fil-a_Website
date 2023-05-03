@@ -44,7 +44,7 @@ app.get('/api/retrieveorders', (req, res) => {
 
 // get request for menu
 app.get('/api/menu', (req, res) => {
-  client.query('SELECT * FROM menu', (error, results) => {
+  client.query('SELECT * FROM menu ORDER BY id', (error, results) => {
     if (error) {
       console.log("unable to connect");
       throw error;
@@ -56,7 +56,7 @@ app.get('/api/menu', (req, res) => {
 
 // get request for ingredients
 app.get('/api/ingredients', (req, res) => {
-  client.query('SELECT * FROM ingredients', (error, results) => {
+  client.query('SELECT * FROM ingredients ORDER BY id', (error, results) => {
     if (error) {
       console.log("unable to connect");
       throw error;
