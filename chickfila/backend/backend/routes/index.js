@@ -32,7 +32,7 @@ client.connect((err) => {
 
 // get request for orders
 app.get('/api/retrieveorders', (req, res) => {
-  client.query('SELECT * FROM orderslog1 LIMIT 1000', (error, results) => {
+  client.query('SELECT * FROM orderslog1 ORDER BY time DESC LIMIT 1000', (error, results) => {
     if (error) {
       console.log("unable to connect");
       throw error;
