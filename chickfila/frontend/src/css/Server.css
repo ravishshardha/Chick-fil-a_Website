@@ -1,0 +1,256 @@
+.ServerMainContents {
+    width: 100%;
+    height: 75vh;
+    
+    background-color: white;
+    outline-style: solid;
+    outline-width: 3px;
+    outline-color: black;
+}
+
+.ServerMain h1 {
+    background-color: #bf2222;
+    color: white;
+    padding:1vh;
+    padding-left:1vw;
+    padding-right:1vw;
+}
+
+.ServerMainContents .orderSummary {
+    width: 30%;
+    float: right;
+    color: black;
+    
+}
+
+
+.orderTotal {
+    text-decoration-line: underline;
+    text-decoration-color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: larger;
+    margin:5%;
+}
+
+.ServerMainContents .buttons {
+    width: 50%;
+    float:right;
+    overflow-y: scroll;
+}
+
+.ServerMainContents .sidePanel {
+    width: 20%;
+    float: left;
+    overflow-y: scroll;
+}
+
+.side-panel {
+    top: 0;
+    left: 0;
+    width: 25vw;
+    height: 80vh;
+    background-color: #F8F8F8;
+    border-right: 1px solid #CCCCCC;
+    overflow-y: scroll;
+}
+
+.side-panel ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.side-panel li {
+    margin: 0;
+    padding: 0;
+}
+
+/*buttons on side panel*/
+.side-panel li p {
+display: block;
+    padding: 1.5vw;
+    margin-bottom: 0px;
+    width: 25vw;
+    text-align: center;
+    color: #333333;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.side-panel li p:hover {
+    background-color: #CCCCCC;
+}
+
+/* COLOR CODING SERVER BUTTONS */
+.ServerButtoncombo{
+    
+    margin: 0.2%;
+    color:white;
+    background-color: #e44141;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.ServerButtondrink{
+    
+  margin: 0.2%;
+  color:white;
+  background-color: #84c4ee;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.ServerButtonside{
+    
+  margin: 0.2%;
+  color:white;
+  background-color: #64de62;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.ServerButtonentree{
+    
+  margin: 0.2%;
+  color:white;
+  background-color: #db9f39;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.ServerButtonseasonal{
+    
+  margin: 0.2%;
+  color:white;
+  background-color: #df6743;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.ServerButtonextra {
+    
+  margin: 0.2%;
+  color:white;
+  background-color: #8a33c9;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+/* ------------------------------- */
+
+.ServerClearOrder, .ServerFinishAndPay{
+    border-radius: 3px;
+    margin: 0.4%;
+    margin-top: 2vh;
+    width: 40%;
+    height: 6vh;
+    transition: 200ms;
+}
+
+.ServerClearOrder:hover, .ServerFinishAndPay:hover {
+    transform: scale(1.01);
+    background-color: #cbcbcb;
+}
+
+.deletebutton {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background: red;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+    background: #e62222;
+   }
+   
+   .deletebutton, .deletebutton span {
+    transition: 200ms;
+   }
+   
+   .deletebutton .text {
+    margin: auto;
+    color: white;
+    font-weight: bold;
+   }
+   
+   .deletebutton:hover {
+    background: #ff3636;
+   }
+   
+   .deletebutton:focus {
+    outline: none;
+   }
+
+   .orderSummaryGrid {
+    margin: auto;
+    display: grid;
+    width: 98%;
+    grid-template-columns: 1fr; 
+    grid-auto-rows: 7vh; 
+    
+    border-width: 2px;
+    border-style: solid;
+    border-color:rgb(0, 0, 0);
+    justify-items: center;
+    overflow-y: scroll;
+    height: 40vh;
+  }
+
+  .serverCard {
+    margin: auto;
+    display: grid;
+    width: 100%;
+    grid-template-columns: 2fr 0.1fr 1fr; 
+    grid-auto-rows: minmax(5.5vh, auto); 
+    grid-gap: 10px; 
+    border-top-width: 2px;
+    border-top-style: solid;
+    border-top-color:rgb(0, 0, 0);
+    justify-items: center;
+    padding-left: 10px;
+    padding-top:10px;
+  }
+  .serverCard:first-child {
+    border-top-width: 0px;
+  }
+  .serverCard:nth-child(2n){
+    background-color: #cbcbcb;
+  }
+  .serverCard:last-child{
+    border-bottom-width: 2px;
+    border-bottom-color: black;
+    border-bottom-style: solid;
+  }
+
+  .serverCard text {
+    margin: auto;
+  }
+
+  .buttonGrid{
+    margin:auto;
+    padding:2vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-auto-rows: minmax(70px, auto); 
+    grid-gap: 10px; 
+  }
+
+  .ServerButton:nth-child(2n) {
+    background-color:#6b6b6b;
+  }
+
+  
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: rgb(235, 235, 235);
+    box-shadow: inset 0 0 0 1px black;
+  }
+  
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #cbcbcb;
+    
+    box-shadow: inset 0 0 0 1px black;
+  }

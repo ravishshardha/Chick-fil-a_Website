@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+/* go to font */
+@import url('https://fonts.googleapis.com/css2?family=Mynerve&display=swap');
+
+
+.bodyHome{
+    overflow-x: hidden;
+}
+/* Navigation bar */
+.navHome {
+    display: inline;
+    background-color: white;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.nav-links {
+    list-style-type: none;
+    text-align: center;
+    background-color: #e8193a;
+    padding: 10px;
+    font-family: 'Plus Jakarta Sans';
+    letter-spacing: 3px;
+}
+
+.nav-links li {
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.nav-links li a {
+    color: white;
+    display: block;
+    font-size: 18px;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-links li a:hover {
+    background-color: white;
+    color: #e8193a;
+}
+
+/* Footer cow image */
+.cowFooter img{
+    width: 40vw;   
+    position: absolute;
+    left: 30vw;
+    bottom: 0;
+}
+
+.cowFooter {
+    background-color: white;
+    position: relative;
+    align-content: center;
+    width: 100vw;
+    height: 400px;
+}
+
+.byeMessage{
+    font-family: 'Mynerve', cursive;
+    font-weight: bold;
+    font-size: 40pt;
+}
+
+/* Cow Side Image */
+.cowSide img{
+    height:70vh;
+}
+
+.cowSide cowSideWords{
+    font-size: 40pt;
+    font-family: 'Mynerve', cursive;
+    font-weight: bold;
+}
+
+/* drink link */
+.drinkPic img{
+    float: right;
+    width: 40%;
+    margin-right: 10%;
+    border-radius: 5%;
+}
+
+.drinkPic teaHeading{
+    font-size: 40pt;
+    font-family: 'Plus Jakarta Sans';
+    float:left;
+    margin-top: 15%;
+    margin-left: 25%;
+    color: #004f71;
+}
+.drinkbox{
+    background-color: #f4f8f9;
+    border-radius: 5%;
+    max-width: 60%;
+    float: left;
+    margin-left: 10%;
+    width:37%;
+    height:82vh;
+}
+
+/* Full meal image */
+.fullMeal img {
+    width: 100%;
+    height: 100%;
+    position:relative;
+}
+
+/* Flip card for Log-in info  */
+.cardH {
+    width: 300px;
+    height: 200px;
+    position: relative;
+    perspective: 1000px;
+    border-color: white;
+    transition: 2.5s;
+    transform-style: preserve-3d;
+}
+
+.cardH-front,
+.cardH-back {
+    position: absolute;
+    width:400px;
+    height: 400px;
+    transition: transform 1.0s;
+    backface-visibility: hidden;
+    color: white;
+}
+
+.cardH-front {
+    background-color:#e8193a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 40pt;
+    font-family: 'Plus Jakarta Sans';
+    letter-spacing: 2px;
+    backface-visibility: hidden;
+}
+
+.cardH-back {
+    background-color: #e8193a;
+    transform: rotateY(180deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden;
+}
+.cardH label{
+    font-weight: bold;
+    font-size: 40pt;
+    font-family: 'Plus Jakarta Sans';    
+    letter-spacing: 3px;
+}
+
+
+.cardH:hover .cardH-front {
+    transform: rotateY(180deg);
+}
+
+.cardH:hover .cardH-back {
+    transform: rotateY(0deg);
+}
+
+#leftCard{
+    float:left;
+    margin-left: 22%;
+}
+#rightCard {
+    float: right;
+    margin-right: 28%;
+}
+
+/* container for club sandwitch video */
+.clubBox{
+    margin: 2%;
+    padding-right: 7%;
+}
+.clubSandVid{
+    float: left;
+    width:33.8%;
+    margin-left: 8%;
+    border-radius: 5%;
+}
+/* text box next to club sandwich video */
+.rightclubBox{
+    font-family: 'Plus Jakarta Sans';
+    font-size:30pt;
+    orientation: center;
+    margin-right: 10%;
+    margin-left: 10%;
+    color:#004f71;
+}
+.clubBoxBackground{
+    background-color: #f4f8f9;
+    border-radius: 5%;
+    max-width: 55%;
+    float:right;
+}
+
+/* red button */
+.comic-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #ff5252;
+    border: 2px solid #004f71;
+    border-radius: 10px;
+    box-shadow: 5px 5px 0px #004f71;
+    transition: all 0.3s ease;
+}
+
+.comic-button:hover {
+    background-color: #fff;
+    color: #ff5252;
+    border: 2px solid #ff5252;
+    box-shadow: 5px 5px 0px #ff5252;
+}
+
+.comic-button:active {
+    background-color: #f4f8f9;
+    box-shadow: none;
+    transform: translateY(4px);
+}
+
+.titleForMerch{
+    margin-top: 25%;
+    font-weight: bold;
+    font-size: 30pt;
+    font-family: 'Plus Jakarta Sans';
+    letter-spacing: 1px;
+}
+

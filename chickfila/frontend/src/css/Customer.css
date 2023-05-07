@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+
+
+.header-container {
+    position: relative;
+    background-color: rgba(139, 0, 0, 0.892);
+    margin: 2% 2% 6% 2%;
+    border-radius: 30px;
+}
+
+.header-image {
+    width: 80%;
+    height: 100vh;
+}
+
+.header-heading {
+    font-family: 'Montserrat';
+    width: 60%;
+    position: absolute;
+    left: 25%;
+    top: 40%;
+    text-align: left;
+    transform: translate(-25%, -55%);
+    padding-left: 3%;
+}
+
+.header-heading .details {
+    font-size: 40px;
+    color: #de3131;
+    font-family: 'Alfa Slab One';
+    margin-top: 80px;
+}
+
+.header-heading h3 {
+    font-family: 'Bebas Neue';
+    font-size: 1.6rem;
+    margin: 0px;
+    letter-spacing: 2px;
+    color: #3d2514;
+}
+
+.header-heading h1 {
+    font-family: 'Alfa Slab One';
+    font-size: 4rem;
+    margin: 0px;
+    letter-spacing: 2px;
+    color: #3d2514;
+}
+
+.customer-nav-bar {
+    width: 100%;
+}
+
+.customer-nav-bar-menu-items {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.customer-nav-bar-menu-item {
+    font-family: 'Bebas Neue';
+    letter-spacing: 1px;
+    color: #3d2514;
+    font-size: 1.5rem;
+    padding: 1%;
+}
+
+.customer-nav-bar-menu-item:hover {
+    background-color: #bf2222;
+    border-radius: 10%;
+    color: #ffffff;
+    transition: all ease 0.5s;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.689);
+    cursor: pointer;
+}
+
+.row-style {
+    padding-top: 3%;
+    padding-bottom: 4%;
+}
+
+.col-style {
+    padding: 1%;
+}
+
+.col-style:hover {
+    transition: all ease 0.5s;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.689);
+    cursor: pointer;
+    border: #bf2222;
+    border-style: solid;
+    transition: all 0.4s ease-in-out;
+    border-width: 5px;
+}
+
+.menu-item-heading {
+    font-family: 'Bebas Neue';
+    font-size: 3rem;
+    margin: 0px;
+    letter-spacing: 2px;
+    color: white;
+    text-decoration: underline;
+    background-color: #bf2222;
+    border-radius: 25px;
+
+}
+
+::before.heading-span{
+    background-color: blue;
+}
+
+.heading-span {
+    color: #bf2222;
+}
+
+.button-effect {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background: #f44242;
+    font-family: "Montserrat", sans-serif;
+    box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    border: none;
+}
+
+.button-effect::after {
+    content: " ";
+    width: 0%;
+    height: 100%;
+    background: red;
+    position: absolute;
+    transition: all 0.4s ease-in-out;
+    right: 0;
+}
+
+.button-effect:hover::after {
+    right: auto;
+    left: 0;
+    width: 100%;
+}
+
+.button-effect span {
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+    padding: 7%;
+    color: #000000;
+    font-size: 1.125em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    z-index: 20;
+    transition: all 0.3s ease-in-out;
+}
+
+.button-effect:hover span {
+    color: white;
+    animation: scaleUp 0.3s ease-in-out;
+}
+
+@keyframes scaleUp {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(0.95);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.button-inactive {
+    display: none;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 2% 5% 0;
+}
+
+.shopping-cart-body {
+    max-height: 70vh;
+    overflow-y: scroll;
+}
+
+.shopping-element-card {
+    padding: 2%;
+    margin: 3% 0;
+}
+
+.shopping-element-img {
+    width: 5vw;
+    height: 12vh;
+    padding: 3%;
+}

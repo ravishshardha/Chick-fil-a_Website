@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans&family=Shrikhand&display=swap');
+
+
+.carousel-item img people{
+    object-fit: cover;
+    height: 500px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(100%);
+}
+

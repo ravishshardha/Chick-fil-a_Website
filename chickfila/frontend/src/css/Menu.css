@@ -1,0 +1,22 @@
+.MenuMain {
+    height: 40vw;
+    overflow-y: scroll;
+    background-color: white;
+    outline-style: solid;
+    outline-width: 3px;
+    outline-color: black;
+}
+
+.MenuMainContent {
+    margin: auto;
+    margin-left: 20vw;
+    margin-right: 20vw;
+    outline-style: solid;
+    outline-color: black;
+    outline-width: 2px;
+}
+
+.MenuTable {
+    padding-left: 15vw;
+    padding-right: 15vw;
+}
